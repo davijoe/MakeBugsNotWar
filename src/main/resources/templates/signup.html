@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/signup" method="post">
+    <span th:if="${errorMessageEmailUsername != null}" th:text="${errorMessageEmailUsername}"></span>
+
+    <label for="firstname">First Name</label>
+    <input id="firstname" name="u_firstname" type="text">
+    <br>
+    <label for="lastname">Last name</label>
+    <input id="lastname" name="u_lastname" type="text">
+    <br>
+    <label for="username">Username</label>
+    <input id="username" name="u_username" type="text">
+    <span th:if="${errorMessageUserName != null}" th:text="${errorMessageUserName}"></span>
+    <br>
+    <label for="password">Password</label>
+    <input id="password" name="u_password" type="text">
+    <span th:if="${errorMessagePassword != null}" th:text="${errorMessagePassword}"></span>
+    <br>
+    <label for="passwordRepeat">Repeat password</label>
+    <input id="passwordRepeat" name="u_passwordRepeat" type="text">
+    <span th:if="${errorMessagePasswordRepeat != null}" th:text="${errorMessagePasswordRepeat}"></span>
+    <br>
+    <label for="email">Email adress</label>
+    <input id="email" name="u_email" type="text">
+    <br>
+    <label for="jobtitle">Job title</label>
+    <input id="jobtitle" name="u_jobtitle" type="text">
+    <br>
+    <input type="submit" id="signup_button" class="button_signup" value="Create User">
+</form>
+</body>
+</html>
