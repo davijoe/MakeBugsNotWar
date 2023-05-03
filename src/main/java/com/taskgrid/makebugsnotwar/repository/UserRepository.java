@@ -1,4 +1,4 @@
-package com.taskgrid.makebugsnotwar.respository;
+package com.taskgrid.makebugsnotwar.repository;
 
 import com.taskgrid.makebugsnotwar.model.User;
 import com.taskgrid.makebugsnotwar.utility.ConnectionManager;

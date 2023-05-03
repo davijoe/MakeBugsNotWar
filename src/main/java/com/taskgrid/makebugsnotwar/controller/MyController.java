@@ -1,9 +1,10 @@
 package com.taskgrid.makebugsnotwar.controller;
 
+import com.taskgrid.makebugsnotwar.model.Project;
 import com.taskgrid.makebugsnotwar.model.User;
-import com.taskgrid.makebugsnotwar.respository.ProjectRepository;
-import com.taskgrid.makebugsnotwar.respository.TaskRepository;
-import com.taskgrid.makebugsnotwar.respository.UserRepository;
+import com.taskgrid.makebugsnotwar.repository.ProjectRepository;
+import com.taskgrid.makebugsnotwar.repository.TaskRepository;
+import com.taskgrid.makebugsnotwar.repository.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,7 @@ public class MyController {
 
     @GetMapping("/")
     public String landingSite(){
-        return "landingSite";
+        return "index";
     }
     @GetMapping("/login")
     public String login(){
@@ -88,4 +89,21 @@ public class MyController {
         }
         return "redirect:/";
     }
+
+    @GetMapping("/create-project")
+    public String showCreateProject(){
+        return "create-project";
+    }
+
+    @PostMapping("/create-project")
+    public String createProject(@RequestParam("project-name") String name,
+                                @RequestParam("project-description") String description){
+        Project project = new Project();
+        project.setProjectName(name);
+        project.setProjectDescription(description);
+        projectRepository.addProject(project);
+
+        return "redirect:/";
+    }
+
 }
