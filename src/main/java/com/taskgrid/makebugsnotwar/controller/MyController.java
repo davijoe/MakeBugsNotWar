@@ -96,15 +96,17 @@ public class MyController {
     @PostMapping("/login")
     public String enterLoginInfo(@RequestParam("u_username") String username,
                                  @RequestParam("u_password") String password,
-                                 HttpSession session) {
+                                 HttpSession session, Model model) {
         int user_id = userRepository.checkLogin(username, password);
         if (user_id!=0) {
             session.setAttribute("user_id", user_id);
             return "redirect:/profilePage";
         }
-
-        return "login";
-
+        else {
+            model.addAttribute("loginErrorMessage",
+                    "Could not login. Username does not exist or password was incorrect.");
+            return "login";
+        }
     }
     @GetMapping("/profilePage")
     public String profilePage(HttpSession session, User user, Project project) {

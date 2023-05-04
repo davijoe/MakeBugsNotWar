@@ -11,6 +11,8 @@
         <label for="password">Password</label>
         <input id="password" name="u_password" type="text">
         <input type="submit" value="Login">
+        <br>
+        <span th:if="${loginErrorMessage} != null") th:text="${loginErrorMessage}"></span>
     </form>
     <p>Do you want to sign up as new user?</p>
     <a class="login-page" th:href="@{/signup}">Signup</a>
