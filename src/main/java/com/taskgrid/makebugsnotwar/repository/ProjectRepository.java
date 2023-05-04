@@ -1,11 +1,5 @@
 package com.taskgrid.makebugsnotwar.repository;
 
-
-import org.springframework.stereotype.Repository;
-
-@Repository
-public class ProjectRepository {
-
 import com.taskgrid.makebugsnotwar.model.Project;
 import com.taskgrid.makebugsnotwar.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import org.springframework.stereotype.Repository;
+
 
 @Repository
 public class ProjectRepository {
