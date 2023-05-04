@@ -86,4 +86,29 @@ public class UserRepository {
             sqle.printStackTrace();
         }
     }
+
+
+    public int checkLogin(String username, String password) {
+        int user_id = 0;
+        final String CHECKLOGIN_QUERY = "SELECT user_id FROM taskgrid.users WHERE username = ? AND user_password = ?";
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL,DB_UID,DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(CHECKLOGIN_QUERY);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            resultSet.getInt(1);
+            if (!(resultSet.wasNull())) {
+                user_id = resultSet.getInt(1);
+                System.out.println(user_id);
+            }
+        } catch (SQLException sqle) {
+            System.out.println("Could not login");
+            sqle.printStackTrace();
+        }
+        return user_id;
+    }
+
+
 }
