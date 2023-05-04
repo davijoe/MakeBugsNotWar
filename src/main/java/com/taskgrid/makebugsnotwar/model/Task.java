@@ -1,4 +1,4 @@
 package com.taskgrid.makebugsnotwar.model;
 
-public class TaskModel {
+public class Task {
 }
