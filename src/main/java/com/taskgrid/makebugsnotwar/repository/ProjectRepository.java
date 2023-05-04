@@ -1,4 +1,4 @@
-package com.taskgrid.makebugsnotwar.respository;
+package com.taskgrid.makebugsnotwar.repository;
 
 import org.springframework.stereotype.Repository;
 

@@ -2,9 +2,9 @@ package com.taskgrid.makebugsnotwar.controller;
 
 import com.taskgrid.makebugsnotwar.model.ProjectModel;
 import com.taskgrid.makebugsnotwar.model.User;
-import com.taskgrid.makebugsnotwar.respository.ProjectRepository;
-import com.taskgrid.makebugsnotwar.respository.TaskRepository;
-import com.taskgrid.makebugsnotwar.respository.UserRepository;
+import com.taskgrid.makebugsnotwar.repository.ProjectRepository;
+import com.taskgrid.makebugsnotwar.repository.TaskRepository;
+import com.taskgrid.makebugsnotwar.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
