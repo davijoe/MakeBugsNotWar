@@ -1,9 +1,11 @@
 package com.taskgrid.makebugsnotwar.controller;
 
+import com.taskgrid.makebugsnotwar.model.ProjectModel;
 import com.taskgrid.makebugsnotwar.model.User;
 import com.taskgrid.makebugsnotwar.respository.ProjectRepository;
 import com.taskgrid.makebugsnotwar.respository.TaskRepository;
 import com.taskgrid.makebugsnotwar.respository.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -87,5 +89,26 @@ public class MyController {
             return "signup";
         }
         return "redirect:/";
+    }
+
+    @PostMapping("/login")
+    public String enterLoginInfo(@RequestParam("u_username") String username,
+                                 @RequestParam("u_password") String password,
+                                 HttpSession session) {
+        int user_id = userRepository.checkLogin(username, password);
+        if (user_id!=0) {
+            session.setAttribute("user_id", user_id);
+            return "redirect:/profilePage";
+        }
+
+        return "login";
+
+    }
+    @GetMapping("/profilePage")
+    public String profilePage(HttpSession session, User user, ProjectModel projectModel) {
+        if (session.getAttribute("user_id") == null) {
+            return "redirect:/login";
+        }
+        return "profilePage";
     }
 }
