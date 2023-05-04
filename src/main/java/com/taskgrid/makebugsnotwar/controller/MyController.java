@@ -1,6 +1,7 @@
 package com.taskgrid.makebugsnotwar.controller;
 
-import com.taskgrid.makebugsnotwar.model.ProjectModel;
+
+import com.taskgrid.makebugsnotwar.model.Project;
 import com.taskgrid.makebugsnotwar.model.User;
 import com.taskgrid.makebugsnotwar.repository.ProjectRepository;
 import com.taskgrid.makebugsnotwar.repository.TaskRepository;
@@ -26,7 +27,7 @@ public class MyController {
 
     @GetMapping("/")
     public String landingSite(){
-        return "landingSite";
+        return "index";
     }
     @GetMapping("/login")
     public String login(){
@@ -91,6 +92,7 @@ public class MyController {
         return "redirect:/";
     }
 
+
     @PostMapping("/login")
     public String enterLoginInfo(@RequestParam("u_username") String username,
                                  @RequestParam("u_password") String password,
@@ -105,10 +107,28 @@ public class MyController {
 
     }
     @GetMapping("/profilePage")
-    public String profilePage(HttpSession session, User user, ProjectModel projectModel) {
+    public String profilePage(HttpSession session, User user, Project project) {
         if (session.getAttribute("user_id") == null) {
             return "redirect:/login";
         }
         return "profilePage";
     }
+
+    @GetMapping("/create-project")
+    public String showCreateProject(){
+        return "create-project";
+    }
+
+    @PostMapping("/create-project")
+    public String createProject(@RequestParam("project-name") String name,
+                                @RequestParam("project-description") String description){
+        Project project = new Project();
+        project.setProjectName(name);
+        project.setProjectDescription(description);
+        projectRepository.addProject(project);
+
+        return "redirect:/";
+    }
+
+
 }

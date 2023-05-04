@@ -87,6 +87,7 @@ public class UserRepository {
         }
     }
 
+
     public int checkLogin(String username, String password) {
         int user_id = 0;
         final String CHECKLOGIN_QUERY = "SELECT user_id FROM taskgrid.users WHERE username = ? AND user_password = ?";
@@ -108,4 +109,6 @@ public class UserRepository {
         }
         return user_id;
     }
+
+
 }
