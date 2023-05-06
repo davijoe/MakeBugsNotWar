@@ -123,13 +123,23 @@ public class MyController {
 
     @PostMapping("/create-project")
     public String createProject(@RequestParam("project-name") String name,
-                                @RequestParam("project-description") String description){
-        Project project = new Project();
-        project.setProjectName(name);
-        project.setProjectDescription(description);
-        projectRepository.addProject(project);
+                                @RequestParam("project-description") String description,
+                                HttpSession session){
 
-        return "redirect:/";
+        if (session.getAttribute("user_id") != null) {
+            int userId = (int) session.getAttribute("user_id");
+            Project project = new Project();
+            project.setProjectName(name);
+            project.setProjectDescription(description);
+            int projectId = projectRepository.addProject(project);
+
+            projectRepository.addProjectRole(userId, projectId, "project creator");
+
+            return "redirect:/profilePage";
+        } else {
+            return "redirect:/login";
+        }
+
     }
 
 
