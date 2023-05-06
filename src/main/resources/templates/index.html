@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../static/css/mystyles.css" th:href="@{/css/styles.css}">
 </head>
 <body>
+
     <a class="login-page" th:href="@{/login}">Login</a>
 
     <br>
 
+<div class="container">
+    <nav th:insert="fragments/topnav">
+    </nav>
+</div>
 
 </body>
 </html>
