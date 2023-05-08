@@ -27,4 +27,18 @@ public class Task {
     public String getName() {
         return name;
     }
+
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", taskStatus=" + taskStatus +
+                ", userId=" + userId +
+                ", projectId=" + projectId +
+                ", taskTime=" + taskTime +
+                '}';
+    }
 }
