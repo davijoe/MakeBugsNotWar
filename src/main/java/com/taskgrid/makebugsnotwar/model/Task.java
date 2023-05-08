@@ -3,14 +3,17 @@ package com.taskgrid.makebugsnotwar.model;
 public class Task {
     private int taskId;
     private String taskName;
+    private String taskStatus;
     private int taskTime;
     private String taskDescription;
 
     public Task(){} // default constructor
 
-    public Task(int taskId, String taskName, String taskDescription) {
+    public Task(int taskId, String taskName, String taskStatus, int taskTime, String taskDescription) {
         this.taskId = taskId;
         this.taskName = taskName;
+        this.taskStatus = taskStatus;
+        this.taskTime = taskTime;
         this.taskDescription = taskDescription;
     }
 
@@ -25,6 +28,12 @@ public class Task {
     }
     public void setTaskName(String taskName) {
         this.taskName = taskName;
+    }
+    public String getTaskStatus(String taskStatus) {
+        return taskStatus;
+    }
+    public void setTaskStatus(String taskStatus) {
+        this.taskStatus = taskStatus;
     }
     public int getTaskTime(){
         return taskTime;
