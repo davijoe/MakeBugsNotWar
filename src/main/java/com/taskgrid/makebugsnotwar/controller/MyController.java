@@ -2,6 +2,7 @@ package com.taskgrid.makebugsnotwar.controller;
 
 
 import com.taskgrid.makebugsnotwar.model.Project;
+import com.taskgrid.makebugsnotwar.model.Task;
 import com.taskgrid.makebugsnotwar.model.User;
 import com.taskgrid.makebugsnotwar.repository.ProjectRepository;
 import com.taskgrid.makebugsnotwar.repository.TaskRepository;
@@ -147,6 +148,10 @@ public class MyController {
     public String viewProject(@PathVariable("id") int projectId, Model model){
         Project project = projectRepository.findProjectById(projectId);
         model.addAttribute("project", project);
+        Task testTask = taskRepository.findById(1);
+        model.addAttribute("task", testTask);
+
+        return "/project";
     }
 
 
