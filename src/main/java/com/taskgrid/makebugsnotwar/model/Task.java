@@ -60,4 +60,18 @@ public class Task {
     public void setTaskDescription(String taskDescription){
         this.taskDescription = taskDescription;
     }
+
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", taskStatus=" + taskStatus +
+                ", userId=" + userId +
+                ", projectId=" + projectId +
+                ", taskTime=" + taskTime +
+                '}';
+    }
 }
