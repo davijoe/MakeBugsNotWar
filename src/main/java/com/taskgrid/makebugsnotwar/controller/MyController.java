@@ -148,9 +148,8 @@ public class MyController {
     public String viewProject(@PathVariable("id") int projectId, Model model){
         Project project = projectRepository.findProjectById(projectId);
         model.addAttribute("project", project);
-        model.addAttribute("project-tasks", taskRepository.retrieveProjectTasks(projectId));
-        Task testTask = taskRepository.findById(1);
-        model.addAttribute("task", testTask);
+        model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
+
 
         return "/project";
     }
