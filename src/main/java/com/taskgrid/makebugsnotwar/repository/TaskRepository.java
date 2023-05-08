@@ -45,4 +45,38 @@ public class TaskRepository {
 
         return taskId;
     }
+
+
+    public Task findById(int id) {
+        Task task = new Task();
+        final String TASK_QUERY = "SELECT * FROM taskgrid.tasks WHERE task_id = ?";
+
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(TASK_QUERY);
+            preparedStatement.setInt(1,id);
+
+            ResultSet resultSet= preparedStatement.executeQuery();
+            resultSet.next();
+
+            String name = resultSet.getString("task_name");
+            String description = resultSet.getString("task_description");
+            int taskStatus = resultSet.getInt("task_status");
+            int userId = resultSet.getInt("user_id");
+            int projectId = resultSet.getInt("project_id");
+            int taskTime = resultSet.getInt("task_time");
+
+            task = new Task(id, name, description, taskStatus, userId, projectId, taskTime);
+
+
+        } catch(SQLException e){
+            System.out.println("Could not retrieve the specified task from the database");
+        }
+
+
+        return task;
+    }
+
 }
+
+
