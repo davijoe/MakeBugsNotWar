@@ -2,6 +2,7 @@ package com.taskgrid.makebugsnotwar.controller;
 
 
 import com.taskgrid.makebugsnotwar.model.Project;
+import com.taskgrid.makebugsnotwar.model.Task;
 import com.taskgrid.makebugsnotwar.model.User;
 import com.taskgrid.makebugsnotwar.repository.ProjectRepository;
 import com.taskgrid.makebugsnotwar.repository.TaskRepository;
@@ -134,6 +135,34 @@ public class MyController {
             int projectId = projectRepository.addProject(project);
 
             projectRepository.addProjectRole(userId, projectId, "project creator");
+
+            return "redirect:/profilePage";
+        } else {
+            return "redirect:/login";
+        }
+
+    }
+
+    @GetMapping("/create-task")
+    public String showCreateTask(){
+        return "create-task";
+    }
+
+    @PostMapping("/create-task")
+    public String createTask(@RequestParam("task-name") String name,
+                             @RequestParam("task-status") String status,
+                             @RequestParam("task-time") int time,
+                             @RequestParam("task-description") String description,
+                             HttpSession session){
+
+        if (session.getAttribute("user_id") != null) {
+            int userId = (int) session.getAttribute("user_id");
+            Task task = new Task();
+            task.setTaskName(name);
+            task.setTaskStatus(status);
+            task.setTaskTime(time);
+            task.setTaskDescription(description);
+            int taskId = taskRepository.addTask(task);
 
             return "redirect:/profilePage";
         } else {
