@@ -175,6 +175,7 @@ public class MyController {
     @GetMapping("/project/{id}")
     public String viewProject(@PathVariable("id") int projectId, Model model){
         Project project = projectRepository.findProjectById(projectId);
+        model.addAttribute("project", project);
     }
 
 
