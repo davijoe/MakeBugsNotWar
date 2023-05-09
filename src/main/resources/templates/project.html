@@ -41,6 +41,7 @@
             <td th:text="${task.userId}"></td>
             <td th:text="${task.projectId}"></td>
             <td th:text="${task.taskTime}"></td>
+            <a th:href="'/edit-task/' + ${task.taskId}">Edit task</a>
         </tr>
         </tbody>
     </table>

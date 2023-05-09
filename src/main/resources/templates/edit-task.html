@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+  <form action="/edit-task" method="post">
+    <input id="task-id" name="taskId" type="hidden" th:value="${tasks.taskId}">
+
+    <label for="task-name">Task Name</label>
+    <input id="task-name" name="taskName" type="text" th:value="${tasks.taskName}">
+
+    <label for="task-description">Task Description</label>
+    <input id="task-description" name="taskDescription" type="text" th:value="${tasks.taskDescription}">
+
+    <label for="task-status">Task Status</label>
+    <input id="task-status" name="taskStatus" type="text" th:value="${tasks.taskStatus}">
+
+    <label for="user-id">User ID</label>
+    <input id="user-id" name="userId" type="text" th:value="${tasks.userId}">
+
+    <input id="project-id" name="projectId" type="hidden" th:value="${tasks.projectId}">
+
+    <label for="task-time">Task Time</label>
+    <input id="task-time" name="taskTime" type="text" th:value="${tasks.taskTime}">
+
+    <input type="submit" value="Edit task">
+  </form>
+</div>
+</body>
+</html>

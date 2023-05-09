@@ -113,4 +113,23 @@ public class TaskRepository {
         return taskList;
     }
 
+    public void editTask(Task task) {
+        final String EDITTASK_QUERY = "UPDATE tasks SET task_name = ?, task_description = ?, task_status = ?, user_id = ?, task_time = ? WHERE task_id = ?";
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(EDITTASK_QUERY);
+            preparedStatement.setString(1,task.getTaskName());
+            preparedStatement.setString(2, task.getTaskDescription());
+            preparedStatement.setInt(3, task.getTaskStatus());
+            preparedStatement.setInt(4, task.getUserId());
+            preparedStatement.setInt(5, task.getTaskTime());
+            preparedStatement.setInt(6, task.getTaskId());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Could not edit task");
+            e.printStackTrace();
+        }
+    }
 }
