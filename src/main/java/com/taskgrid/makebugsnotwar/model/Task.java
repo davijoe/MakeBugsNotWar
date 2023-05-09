@@ -45,7 +45,7 @@ public class Task {
     public String getTaskStatus(String taskStatus) {
         return taskStatus;
     }
-    public void setTaskStatus(String taskStatus) {
+    public void setTaskStatus(int taskStatus) {
         this.taskStatus = taskStatus;
     }
     public int getTaskTime(){
@@ -65,13 +65,14 @@ public class Task {
     @Override
     public String toString() {
         return "Task{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
+                "id=" + taskId +
+                ", name='" + taskName + '\'' +
+                ", description='" + taskDescription + '\'' +
                 ", taskStatus=" + taskStatus +
                 ", userId=" + userId +
                 ", projectId=" + projectId +
                 ", taskTime=" + taskTime +
                 '}';
     }
+
 }
