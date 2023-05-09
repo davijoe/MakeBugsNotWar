@@ -42,7 +42,7 @@ public class Task {
     public void setTaskName(String taskName) {
         this.taskName = taskName;
     }
-    public String getTaskStatus(String taskStatus) {
+    public int getTaskStatus() {
         return taskStatus;
     }
     public void setTaskStatus(int taskStatus) {

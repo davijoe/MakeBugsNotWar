@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class UserRepository {
@@ -108,6 +110,28 @@ public class UserRepository {
             sqle.printStackTrace();
         }
         return user_id;
+    }
+
+    public List<User> retrieveProjectUsers(int projectId){
+        List<User> projectUsers = new ArrayList<>();
+        final String PROJECT_USERS_QUERY = "SELECT *, users.username" +
+                "FROM users" +
+                "JOIN user_project ON users.id = user_project.user_id" +
+                "WHERE user_project.project_id = ?";
+
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(PROJECT_USERS_QUERY);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+
+
+        }catch(SQLException e){
+            System.out.println("Could not retrieve the users associated with this project");
+            e.printStackTrace();
+        }
+
+        return projectUsers;
     }
 
 

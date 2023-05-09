@@ -5,10 +5,7 @@ import com.taskgrid.makebugsnotwar.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +30,7 @@ public class TaskRepository {
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
         PreparedStatement preparedStatement = connection.prepareStatement(ADD_TASK_QUERY);
         preparedStatement.setString(1, task.getTaskName());
-        preparedStatement.setString(2,task.getTaskStatus(LAST_INSERT_QUERY));
+        preparedStatement.setInt(2,task.getTaskStatus());
         preparedStatement.setInt(3, task.getTaskTime());
         preparedStatement.setString(4, task.getTaskDescription());
         preparedStatement.executeUpdate();

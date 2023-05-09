@@ -161,7 +161,7 @@ public class MyController {
 
     @PostMapping("/create-task")
     public String createTask(@RequestParam("task-name") String name,
-                             @RequestParam("task-status") String status,
+                             @RequestParam("task-status") int status,
                              @RequestParam("task-time") int time,
                              @RequestParam("task-description") String description,
                              HttpSession session){
