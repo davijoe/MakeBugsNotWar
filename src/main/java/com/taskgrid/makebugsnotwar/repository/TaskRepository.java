@@ -28,12 +28,12 @@ public class TaskRepository {
 
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
-        PreparedStatement preparedStatement = connection.prepareStatement(ADD_TASK_QUERY);
-        preparedStatement.setString(1, task.getTaskName());
-        preparedStatement.setInt(2,task.getTaskStatus());
-        preparedStatement.setInt(3, task.getTaskTime());
-        preparedStatement.setString(4, task.getTaskDescription());
-        preparedStatement.executeUpdate();
+            PreparedStatement preparedStatement = connection.prepareStatement(ADD_TASK_QUERY);
+            preparedStatement.setString(1, task.getTaskName());
+            preparedStatement.setInt(2,task.getTaskStatus());
+            preparedStatement.setInt(3, task.getTaskTime());
+            preparedStatement.setString(4, task.getTaskDescription());
+            preparedStatement.executeUpdate();
 
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(LAST_INSERT_QUERY);
@@ -114,5 +114,3 @@ public class TaskRepository {
     }
 
 }
-
-

@@ -5,8 +5,46 @@
     <title>Title</title>
 </head>
 <body>
-
-<div th:text= "${tasks}"></div>
+<div class="projects" th:each="project : ${project}">
+    <table>
+        <thead>
+        <th>Project ID</th>
+        <th>Project name</th>
+        <th>Project Description</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${project.projectId}"></td>
+            <td th:text="${project.projectName}"></td>
+            <td th:text="${project.projectDescription}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="tasks" th:each="task : ${tasks}">
+    <table>
+        <thead>
+        <th>Task ID</th>
+        <th>Task Name</th>
+        <th>Task Description</th>
+        <th>Task Status</th>
+        <th>User ID</th>
+        <th>Project ID</th>
+        <th>Task Time</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${task.taskId}"></td>
+            <td th:text="${task.taskName}"></td>
+            <td th:text="${task.taskDescription}"></td>
+            <td th:text="${task.taskStatus}"></td>
+            <td th:text="${task.userId}"></td>
+            <td th:text="${task.projectId}"></td>
+            <td th:text="${task.taskTime}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 
 </body>

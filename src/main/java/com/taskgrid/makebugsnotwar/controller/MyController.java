@@ -151,7 +151,7 @@ public class MyController {
         model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
 
 
-        return "/project";
+        return "project";
     }
 
     @GetMapping("/create-task")
@@ -181,16 +181,5 @@ public class MyController {
         }
 
     }
-
-    @GetMapping("/project/{id}")
-    public String viewProject(@PathVariable("id") int projectId, Model model){
-        Project project = projectRepository.findProjectById(projectId);
-        model.addAttribute("project", project);
-        model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
-
-
-        return "/project";
-    }
-
 
 }
