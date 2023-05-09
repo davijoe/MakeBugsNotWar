@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Task</title>
+</head>
+<body>
+    <div>
+        <form action="/create-task" method="post">
+            <div>
+                <label for="name-field">Task name:</label>
+                <input id="name-field" name="task-name" type="text">
+            </div>
+            <br>
+             <div>
+                <label for="description-field">Task description:</label>
+                <input id="description-field" name="task-description" type="text">
+             </div>
+            <br>
+            <div>
+                <label for="status-field">Task Status:</label>
+                <input id="status-field" name="task-status" type="text">
+             </div>
+            <br>
+            <div>
+                <label for="time-field">Task description:</label>
+                <input id="time-field" name="task-time" type="text">
+             </div>
+            <br>
+            <div>
+                <label for="project-field">Project:</label>
+                <select id="project-field" name="project-id">
+                    <option value="1">Project 1</option>
+                    <option value="2">Project 2</option>
+                    <option value="3">Project 3</option>
+                </select>
+            </div>
+            <br>
+            <input type="submit" value="Create task">
+        </form>
+    </div>
+</body>
+</html>
