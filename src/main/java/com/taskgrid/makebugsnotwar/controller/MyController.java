@@ -11,8 +11,11 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class MyController {
@@ -110,11 +113,32 @@ public class MyController {
         }
     }
     @GetMapping("/profilePage")
-    public String profilePage(HttpSession session, User user, Project project) {
+    public String profilePage(HttpSession session, Model model) {
         if (session.getAttribute("user_id") == null) {
             return "redirect:/login";
         }
+        int user_id = (int) session.getAttribute("user_id");
+        model.addAttribute("user_id", session.getAttribute("user_id"));
+        model.addAttribute("users", userRepository.getUserInfo(user_id));
         return "profilePage";
+    }
+    @GetMapping("/updateProfile/{user_id}")
+    public String updateProfilePage(@PathVariable("user_id") int findUser, Model model, HttpSession session){
+        int user_id = (int) session.getAttribute("user_id");
+        model.addAttribute("user_id", session.getAttribute("user_id"));
+        model.addAttribute("user", userRepository.getUserInfo(user_id));
+        return "updateProfile";
+    }
+    @PostMapping("/updateProfile")
+    public String updateProfilePost(@RequestParam("user_id") int user_id,
+                                    @RequestParam("username") String username,
+                                    @RequestParam("email") String email,
+                                    @RequestParam("firstname") String firstname,
+                                    @RequestParam("lastname") String lastname,
+                                    @RequestParam("jobtitle") String jobtitle){
+        User user = new User(username, email, firstname, lastname, jobtitle);
+        userRepository.updateUser(user, user_id);
+        return "redirect:/profilePage";
     }
 
     @GetMapping("/create-project")
