@@ -132,12 +132,28 @@ public class UserRepository {
                 userList.add(user);
             }
 
-        }catch (SQLException sqle){
-            System.out.println("Could not find user");
-            sqle.printStackTrace();
+    public List<User> retrieveProjectUsers(int projectId){
+        List<User> projectUsers = new ArrayList<>();
+        final String PROJECT_USERS_QUERY = "SELECT *, users.username" +
+                "FROM users" +
+                "JOIN user_project ON users.id = user_project.user_id" +
+                "WHERE user_project.project_id = ?";
+
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(PROJECT_USERS_QUERY);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+
+
+        }catch(SQLException e){
+            System.out.println("Could not retrieve the users associated with this project");
+            e.printStackTrace();
         }
-        return userList;
+
+        return projectUsers;
     }
+
 
     public void updateUser(User user, int user_id) {
         final String UPDATEPROFILE_QUERY = "UPDATE taskgrid.users, taskgrid.user_info SET username = ?, user_email = ?, " +

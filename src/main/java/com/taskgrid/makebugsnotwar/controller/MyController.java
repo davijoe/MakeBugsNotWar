@@ -167,6 +167,37 @@ public class MyController {
 
     }
 
+    @GetMapping("/project/{id}")
+    public String viewProject(@PathVariable("id") int projectId, Model model){
+        Project project = projectRepository.findProjectById(projectId);
+        model.addAttribute("project", project);
+        model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
+
+
+        return "project";
+    }
+    @GetMapping("/edit-task/{taskId}")
+    public String showEditTask(@PathVariable("taskId") int taskId, Model model) {
+        model.addAttribute("tasks", taskRepository.findById(taskId));
+        return "edit-task";
+    }
+
+    @PostMapping("/edit-task")
+    public String editTask(@RequestParam("taskId") int taskId,
+                           @RequestParam("taskName") String taskName,
+                           @RequestParam("taskDescription") String taskDescription,
+                           @RequestParam("taskStatus") int taskStatus,
+                           @RequestParam("userId") int userId,
+                           @RequestParam("projectId") int projectId,
+                           @RequestParam("taskTime") int taskTime) {
+
+        Task task = new Task(taskId, taskName, taskDescription, taskStatus, userId, projectId, taskTime);
+        taskRepository.editTask(task);
+        return "redirect:/project/"+projectId;
+
+    }
+
+
     @GetMapping("/create-task")
     public String showCreateTask(){
         return "create-task";
@@ -174,7 +205,7 @@ public class MyController {
 
     @PostMapping("/create-task")
     public String createTask(@RequestParam("task-name") String name,
-                             @RequestParam("task-status") String status,
+                             @RequestParam("task-status") int status,
                              @RequestParam("task-time") int time,
                              @RequestParam("task-description") String description,
                              HttpSession session){
@@ -194,6 +225,5 @@ public class MyController {
         }
 
     }
-
 
 }

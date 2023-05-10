@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>th:text="${project.projectName}"</h1>
+
+<div class="tasks" th:each="task : ${tasks}">
+    <table>
+        <thead>
+        <th>Task ID</th>
+        <th>Task Name</th>
+        <th>Task Description</th>
+        <th>Task Status</th>
+        <th>User ID</th>
+        <th>Project ID</th>
+        <th>Task Time</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${task.taskId}"></td>
+            <td th:text="${task.taskName}"></td>
+            <td th:text="${task.taskDescription}"></td>
+            <td th:text="${task.taskStatus}"></td>
+            <td th:text="${task.userId}"></td>
+            <td th:text="${task.projectId}"></td>
+            <td th:text="${task.taskTime}"></td>
+            <a th:href="'/edit-task/' + ${task.taskId}">Edit task</a>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>

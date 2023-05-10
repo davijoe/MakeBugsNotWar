@@ -62,4 +62,32 @@ public class ProjectRepository {
         }
     }
 
+    public Project findProjectById(int projectId) {
+
+        final String SELECT_PROJECT_QUERY = "SELECT * FROM taskgrid.projects WHERE project_id = ?";
+        Project project = new Project();
+        project.setProjectId(projectId);
+
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PROJECT_QUERY);
+            preparedStatement.setInt(1,projectId);
+
+           ResultSet resultSet = preparedStatement.executeQuery();
+
+           resultSet.next();
+
+           String name = resultSet.getString(2);
+           String description = resultSet.getString(3);
+
+           project.setProjectName(name);
+           project.setProjectDescription(description);
+
+        } catch (SQLException e){
+            System.out.println("Could not retrieve the specified project from the database");
+            e.printStackTrace();
+        }
+
+        return project;
+    }
 }
