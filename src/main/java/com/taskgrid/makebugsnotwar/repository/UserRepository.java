@@ -111,6 +111,26 @@ public class UserRepository {
         }
         return user_id;
     }
+    public List<User> getUserInfo(int user_id){
+        List<User> userList = new ArrayList<>();
+        final String GETUSER_INFO = "SELECT username, user_email, first_name, last_name, job_title " +
+                "FROM taskgrid.users JOIN taskgrid.user_info ON users.user_id = user_info.user_id\n" +
+                "WHERE user_info.user_id = ?;";
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL,DB_UID,DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(GETUSER_INFO);
+            preparedStatement.setInt(1, user_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                String username = resultSet.getString(1);
+                String email = resultSet.getString(2);
+                String firstname = resultSet.getString(3);
+                String lastname = resultSet.getString(4);
+                String job_title = resultSet.getString(5);
+                User user = new User(username, email, firstname, lastname, job_title);
+                userList.add(user);
+            }
 
     public List<User> retrieveProjectUsers(int projectId){
         List<User> projectUsers = new ArrayList<>();
@@ -135,4 +155,25 @@ public class UserRepository {
     }
 
 
+    public void updateUser(User user, int user_id) {
+        final String UPDATEPROFILE_QUERY = "UPDATE taskgrid.users, taskgrid.user_info SET username = ?, user_email = ?, " +
+                "first_name = ?, last_name = ?, job_title = ? WHERE users.user_id = ? AND user_info.user_id = ?;";
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATEPROFILE_QUERY);
+
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getEmail());
+            preparedStatement.setString(3, user.getFirstname());
+            preparedStatement.setString(4, user.getLastname());
+            preparedStatement.setString(5, user.getJobtitle());
+            preparedStatement.setInt(6, user_id);
+            preparedStatement.setInt(7, user_id);
+
+            preparedStatement.executeUpdate();
+        }catch(SQLException sqle){
+            System.out.println("Could not update product");
+            sqle.printStackTrace();
+        }
+    }
 }

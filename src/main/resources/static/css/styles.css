@@ -76,8 +76,20 @@ html{
 }
 .landingpage-body {
     display: flex;
-    height: 78vh;
+    min-height: 78vh;
     width: 100%;
     min-width: 800px;
     justify-content: center;
+}
+.profile_info {
+    display: flex;
+    min-height: 78vh;
+    width: 100%;
+    min-width: 800px;
+}
+.update_info {
+    display: flex;
+    min-height: 78vh;
+    width: 100%;
+    min-width: 800px;
 }

@@ -1,6 +1,7 @@
 package com.taskgrid.makebugsnotwar.model;
 
 public class User {
+
     private int userId;
     private String firstname;
     private String lastname;
@@ -8,6 +9,7 @@ public class User {
     private String password;
     private String email;
     private String jobtitle;
+
 
     public User() {
 
@@ -22,7 +24,7 @@ public class User {
         this.email = email;
         this.jobtitle = jobtitle;
     }
-
+  
     public User(String firstname, String lastname, String username, String password, String email, String jobtitle) {
         this.firstname = firstname;
         this.lastname = lastname;
