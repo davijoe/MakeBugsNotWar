@@ -34,6 +34,14 @@ public class User {
         this.jobtitle = jobtitle;
     }
 
+    public User(String firstname, String lastname, String username, String email, String jobtitle) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        this.email = email;
+        this.jobtitle = jobtitle;
+    }
+
     public String getFirstname() {
         return firstname;
     }

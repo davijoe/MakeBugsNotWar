@@ -111,18 +111,18 @@ public class UserRepository {
         }
         return user_id;
     }
-    public List<User> getUserInfo(int user_id){
+    public List<User> getUserInfo(int user_id) {
         List<User> userList = new ArrayList<>();
         final String GETUSER_INFO = "SELECT username, user_email, first_name, last_name, job_title " +
                 "FROM taskgrid.users JOIN taskgrid.user_info ON users.user_id = user_info.user_id\n" +
                 "WHERE user_info.user_id = ?;";
-        try{
-            Connection connection = ConnectionManager.getConnection(DB_URL,DB_UID,DB_PWD);
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(GETUSER_INFO);
             preparedStatement.setInt(1, user_id);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 String username = resultSet.getString(1);
                 String email = resultSet.getString(2);
                 String firstname = resultSet.getString(3);
@@ -131,12 +131,18 @@ public class UserRepository {
                 User user = new User(username, email, firstname, lastname, job_title);
                 userList.add(user);
             }
+        } catch (SQLException e) {
+            System.out.println("Could not get user info");
+            e.printStackTrace();
+        }
+        return userList;
+    }
 
     public List<User> retrieveProjectUsers(int projectId){
         List<User> projectUsers = new ArrayList<>();
-        final String PROJECT_USERS_QUERY = "SELECT *, users.username" +
-                "FROM users" +
-                "JOIN user_project ON users.id = user_project.user_id" +
+        final String PROJECT_USERS_QUERY = "SELECT *, users.username " +
+                "FROM users " +
+                "JOIN user_project ON users.user_id = user_project.user_id " +
                 "WHERE user_project.project_id = ?";
 
         try{
