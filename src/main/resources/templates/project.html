@@ -5,22 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<div class="projects" th:each="project : ${project}">
-    <table>
-        <thead>
-        <th>Project ID</th>
-        <th>Project name</th>
-        <th>Project Description</th>
-        </thead>
-        <tbody>
-        <tr>
-            <td th:text="${project.projectId}"></td>
-            <td th:text="${project.projectName}"></td>
-            <td th:text="${project.projectDescription}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+
+<h1>th:text="${project.projectName}"</h1>
+
 <div class="tasks" th:each="task : ${tasks}">
     <table>
         <thead>
