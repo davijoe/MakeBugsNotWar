@@ -29,8 +29,26 @@
     </table>
         <a th:href="'/updateProfile/'+${user_id}">Update profile information</a>
     </div>
+    <div th:each="project : ${projects}">
+        <table>
+            <thead>
+            <th>Project ID</th>
+            <th>Project Name</th>
+            <th>Project Description</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${project.projectId}"></td>
+                <td th:text="${project.projectName}"></td>
+                <td th:text="${project.projectDescription}"></td>
+                <a th:href="'/project/' + ${project.projectId}">Link til project</a>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <footer th:insert="fragments/footer"></footer>
 </div>
 <a th:href="@{/create-project}">Create new project</a>
+<a th:href="@{/project/8}">Link til project 8</a>
 </body>
 </html>

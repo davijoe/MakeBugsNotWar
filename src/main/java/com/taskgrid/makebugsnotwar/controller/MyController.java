@@ -120,6 +120,7 @@ public class MyController {
         int user_id = (int) session.getAttribute("user_id");
         model.addAttribute("user_id", session.getAttribute("user_id"));
         model.addAttribute("users", userRepository.getUserInfo(user_id));
+        model.addAttribute("projects", projectRepository.getProjectsForUser(user_id));
         return "profilePage";
     }
     @GetMapping("/updateProfile/{user_id}")
@@ -175,6 +176,12 @@ public class MyController {
 
 
         return "project";
+    }
+
+    @GetMapping("/view-project-tasks/{projectId}")
+    public String viewProjectTasks(@PathVariable("projectId") int projectId, Model model) {
+        model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
+        return "view-project-tasks";
     }
     @GetMapping("/edit-task/{taskId}")
     public String showEditTask(@PathVariable("taskId") int taskId, Model model) {

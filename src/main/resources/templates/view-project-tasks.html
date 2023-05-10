@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
-<h1>th:text="${project.projectName}"</h1>
-<a th:href="'/view-project-tasks/'+${project.projectId}">Link to tasks</a>
-
 <div class="tasks" th:each="task : ${tasks}">
     <table>
         <thead>
@@ -36,7 +32,6 @@
 </div>
 <br>
 <a th:href="'/profilePage'">Return to my page</a>
-
 
 </body>
 </html>

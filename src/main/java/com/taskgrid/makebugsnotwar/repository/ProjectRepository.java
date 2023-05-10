@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Repository
@@ -89,5 +91,30 @@ public class ProjectRepository {
         }
 
         return project;
+    }
+
+    public List getProjectsForUser(int userId) {
+        final String PROJECTBYUSERID_QUERY = "SELECT * FROM projects JOIN user_project up on projects.project_id = " +
+                "up.project_id JOIN users u on u.user_id = up.user_id WHERE u.user_id = ?";
+        List<Project> projectList = new ArrayList<>();
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(PROJECTBYUSERID_QUERY);
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            while (resultSet.next()) {
+                int projectId = resultSet.getInt(1);
+                String projectName = resultSet.getString(2);
+                String projectDescription = resultSet.getString(3);
+                Project project = new Project(projectId, projectName, projectDescription);
+                projectList.add(project);
+            }
+        } catch (SQLException e) {
+            System.out.println("Could not get projects");
+            e.printStackTrace();
+        }
+
+        return projectList;
     }
 }
