@@ -4,6 +4,10 @@
     <title th:text="${project.projectName}"></title>
     <style>
 
+        body{
+            background-color: #F1FAEE;
+        }
+
         .board {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -11,10 +15,10 @@
         }
 
         .column {
-            background-color: #f9f9f9;
+            background-color: #A8DADC;
             border: 1px solid #ddd;
             padding: 20px;
-            border-radius: 5px;
+            border-radius: 2em;
         }
 
         .column h2 {
@@ -22,13 +26,13 @@
         }
 
         .task {
-            background-color: #fff;
+            background-color: #F1FAEE;
             border: 1px solid #ddd;
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             justify-content: space-between;
         }
 
@@ -51,73 +55,100 @@
 <h1 th:text="${project.projectName}"></h1>
 <div class="board">
     <div class="column">
-        <h2>To Do</h2>
+        <h2>Stories</h2>
         <div th:each="task : ${tasks}" th:if="${task.taskStatus == 0}" class="task">
-            <p th:text="${task.taskName}"></p>
+            <h3 th:text="${task.taskName}"></h3>
             <p th:text="${task.taskDescription}"></p>
+            <p th:text="'Time:'+${task.taskTime}"></p>
             <div>
                 <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
-                <button th:onclick="'moveTask(' + ${task.taskId} + ', 1)'">Move Right</button>
+                <a th:href="@{'project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
+                    <button type="button">---></button>
+                </a>
             </div>
         </div>
     </div>
     <div class="column">
-        <h2>In Progress</h2>
+        <h2>To-do</h2>
         <div th:each="task : ${tasks}" th:if="${task.taskStatus == 1}" class="task">
-            <p th:text="${task.taskName}"></p>
+            <h3 th:text="${task.taskName}"></h3>
             <p th:text="${task.taskDescription}"></p>
+            <p th:text="'Time:'+${task.taskTime}"></p>
             <div>
+
+                <a th:href="@{'move-task-left/'+${task.taskId}}">
+                    <button th:onclick="'move-task/'+${task.taskId}"><---</button>
+                </a>
                 <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
-                <button th:onclick="'moveTask(' + ${task.taskId} + ', 0)'">Move Left</button>
-                <button th:onclick="'moveTask(' + ${task.taskId} + ', 2)'">Move Right</button>
+                <a th:href="@{'move-task-right/'+${task.taskId}}">
+                    <button th:onclick="'move-task/'+${task.taskId}">---></button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <h2>Doing</h2>
+        <div th:each="task : ${tasks}" th:if="${task.taskStatus == 2}" class="task">
+            <h3 th:text="${task.taskName}"></h3>
+            <p th:text="${task.taskDescription}"></p>
+            <p th:text="'Time:'+${task.taskTime}"></p>
+            <div>
+
+                <a th:href="@{'move-task-left/'+${task.taskId}}">
+                    <button th:onclick="'move-task/'+${task.taskId}"><---</button>
+                </a>
+                <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
+                <a th:href="@{'move-task-right/'+${task.taskId}}">
+                    <button th:onclick="'move-task/'+${task.taskId}">---></button>
+                </a>
             </div>
         </div>
     </div>
     <div class="column">
         <h2>Testing</h2>
-        <div th:each="task : ${tasks}" th:if="${task.taskStatus == 2}" class="task">
-            <p th:text="${task.taskName}"></p>
-            <p th:text="${task.taskDescription}"></p>
-            <div>
-                <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
-                <button th:onclick="'moveTask(' + ${task.taskId} + ', 1)'">Move Left</button>
-                <button th:onclick="'moveTask(' + ${task.taskId} + ', 3)'">Move Right</button>
-            </div>
-        </div>
-    </div>
-    <div class="column">
-        <h2>Review</h2>
         <div th:each="task : ${tasks}" th:if="${task.taskStatus == 3}" class="task">
-            <p th:text="${task.taskName}"></p>
+            <h3 th:text="${task.taskName}"></h3>
             <p th:text="${task.taskDescription}"></p>
+            <p th:text="'Time:'+${task.taskTime}"></p>
             <div>
+                <a th:href="@{'move-task-left/'+${task.taskId}}">
+                    <button th:onclick="'move-task/'+${task.taskId}"><---</button>
+                </a>
                 <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
-                <button th:onclick="'moveTask(' + ${task.taskId} + ', 2)'">Move Left</button>
-                <button th:onclick="'moveTask(' + ${task.taskId} + ', 4)'">Move Right</button>
+                <a th:href="@{'move-task-right/'+${task.taskId}}">
+                    <button th:onclick="'move-task/'+${task.taskId}">---></button>
+                </a>
             </div>
         </div>
     </div>
     <div class="column">
         <h2>Review</h2>
         <div th:each="task : ${tasks}" th:if="${task.taskStatus == 4}" class="task">
-            <p th:text="${task.taskName}"></p>
+            <h3 th:text="${task.taskName}"></h3>
             <p th:text="${task.taskDescription}"></p>
+            <p th:text="'Time:'+${task.taskTime}"></p>
             <div>
                 <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
-                <button th:onclick="'moveTask(' + ${task.taskId} + ', 3)'">Move Left</button>
-                <button th:onclick="'moveTask(' + ${task.taskId} + ', 5)'">Move Right</button>
+                <a th:href="@{'move-task-left/'+${task.taskId}}">
+                    <button th:onclick="'move-task/'+${task.taskId}"><---</button>
+                </a>
+                <a th:href="@{'move-task-right/'+${task.taskId}}">
+                    <button th:onclick="'move-task/'+${task.taskId}">---></button>
+                </a>
             </div>
         </div>
     </div>
     <div class="column">
-        <h2>Review</h2>
+        <h2>Done</h2>
         <div th:each="task : ${tasks}" th:if="${task.taskStatus == 5}" class="task">
-            <p th:text="${task.taskName}"></p>
+            <h3 th:text="${task.taskName}"></h3>
             <p th:text="${task.taskDescription}"></p>
+            <p th:text="'Time:'+${task.taskTime}"></p>
             <div>
                 <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
-                <button th:onclick="'moveTask(' + ${task.taskId} + ', 4)'">Move Left</button>
-                <button th:onclick="'moveTask(' + ${task.taskId} + ', 6)'">Move Right</button>
+                <a th:href="@{'move-task-left/'+${task.taskId}}">
+                    <button th:onclick="'move-task/'+${task.taskId}"><---</button>
+                </a>
             </div>
         </div>
     </div>
