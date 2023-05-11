@@ -1,39 +1,129 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${project.projectName}"></title>
+    <style>
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+        }
+
+        .column {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .column h2 {
+            margin-top: 0;
+        }
+
+        .task {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .task h3 {
+            margin-top: 0;
+        }
+
+        .task button {
+            background-color: #ddd;
+            border: none;
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    </style>
 </head>
 <body>
-
-<h1>th:text="${project.projectName}"</h1>
-<a th:href="'/view-project-tasks/'+${project.projectId}">Link to tasks</a>
-
-<div class="tasks" th:each="task : ${tasks}">
-    <table>
-        <thead>
-        <th>Task ID</th>
-        <th>Task Name</th>
-        <th>Task Description</th>
-        <th>Task Status</th>
-        <th>User ID</th>
-        <th>Project ID</th>
-        <th>Task Time</th>
-        </thead>
-        <tbody>
-        <tr>
-            <td th:text="${task.taskId}"></td>
-            <td th:text="${task.taskName}"></td>
-            <td th:text="${task.taskDescription}"></td>
-            <td th:text="${task.taskStatus}"></td>
-            <td th:text="${task.userId}"></td>
-            <td th:text="${task.projectId}"></td>
-            <td th:text="${task.taskTime}"></td>
-            <a th:href="'/edit-task/' + ${task.taskId}">Edit task</a>
-        </tr>
-        </tbody>
-    </table>
+<h1 th:text="${project.projectName}"></h1>
+<div class="board">
+    <div class="column">
+        <h2>To Do</h2>
+        <div th:each="task : ${tasks}" th:if="${task.taskStatus == 0}" class="task">
+            <p th:text="${task.taskName}"></p>
+            <p th:text="${task.taskDescription}"></p>
+            <div>
+                <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
+                <button th:onclick="'moveTask(' + ${task.taskId} + ', 1)'">Move Right</button>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <h2>In Progress</h2>
+        <div th:each="task : ${tasks}" th:if="${task.taskStatus == 1}" class="task">
+            <p th:text="${task.taskName}"></p>
+            <p th:text="${task.taskDescription}"></p>
+            <div>
+                <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
+                <button th:onclick="'moveTask(' + ${task.taskId} + ', 0)'">Move Left</button>
+                <button th:onclick="'moveTask(' + ${task.taskId} + ', 2)'">Move Right</button>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <h2>Testing</h2>
+        <div th:each="task : ${tasks}" th:if="${task.taskStatus == 2}" class="task">
+            <p th:text="${task.taskName}"></p>
+            <p th:text="${task.taskDescription}"></p>
+            <div>
+                <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
+                <button th:onclick="'moveTask(' + ${task.taskId} + ', 1)'">Move Left</button>
+                <button th:onclick="'moveTask(' + ${task.taskId} + ', 3)'">Move Right</button>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <h2>Review</h2>
+        <div th:each="task : ${tasks}" th:if="${task.taskStatus == 3}" class="task">
+            <p th:text="${task.taskName}"></p>
+            <p th:text="${task.taskDescription}"></p>
+            <div>
+                <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
+                <button th:onclick="'moveTask(' + ${task.taskId} + ', 2)'">Move Left</button>
+                <button th:onclick="'moveTask(' + ${task.taskId} + ', 4)'">Move Right</button>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <h2>Review</h2>
+        <div th:each="task : ${tasks}" th:if="${task.taskStatus == 4}" class="task">
+            <p th:text="${task.taskName}"></p>
+            <p th:text="${task.taskDescription}"></p>
+            <div>
+                <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
+                <button th:onclick="'moveTask(' + ${task.taskId} + ', 3)'">Move Left</button>
+                <button th:onclick="'moveTask(' + ${task.taskId} + ', 5)'">Move Right</button>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <h2>Review</h2>
+        <div th:each="task : ${tasks}" th:if="${task.taskStatus == 5}" class="task">
+            <p th:text="${task.taskName}"></p>
+            <p th:text="${task.taskDescription}"></p>
+            <div>
+                <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
+                <button th:onclick="'moveTask(' + ${task.taskId} + ', 4)'">Move Left</button>
+                <button th:onclick="'moveTask(' + ${task.taskId} + ', 6)'">Move Right</button>
+            </div>
+        </div>
+    </div>
 </div>
+
+<a th:href="'/view-project-tasks'+${project.getProjectId}">Link to tasks</a>
 <a th:href="@{/profilePage}">Back to profile</a>
 
 </body>
