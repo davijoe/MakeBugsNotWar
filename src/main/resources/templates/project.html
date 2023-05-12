@@ -76,14 +76,14 @@
             <p th:text="'Time:'+${task.taskTime}"></p>
             <div>
 
-                <a th:href="@{'move-task-left/'+${task.taskId}}">
-                    <button type="button"><---</button>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
+                    <button><--</button>
                 </a>
 
-                <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
+                <a th:href="@{'/tasks/'+{taskId}+'/edit-task'+${task.taskId}}">Edit</a>
 
-                <a th:href="@{'move-task-right/'+${task.taskId}}">
-                    <button type="button">---></button>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
+                    <button>--></button>
                 </a>
             </div>
         </div>
@@ -96,14 +96,14 @@
             <p th:text="'Time:'+${task.taskTime}"></p>
             <div>
 
-                <a th:href="@{'move-task-left/'+${task.taskId}}">
-                    <button type="button"><---</button>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
+                    <button><--</button>
                 </a>
 
-                <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
+                <a th:href="@{'/tasks/'+{taskId}+'/edit-task'+${task.taskId}}">Edit</a>
 
-                <a th:href="@{'move-task-right/'+${task.taskId}}">
-                    <button type="button">---></button>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
+                    <button>--></button>
                 </a>
             </div>
         </div>
@@ -115,14 +115,14 @@
             <p th:text="${task.taskDescription}"></p>
             <p th:text="'Time:'+${task.taskTime}"></p>
             <div>
-                <a th:href="@{'move-task-left/'+${task.taskId}}">
-                    <button type="button"><---</button>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
+                    <button><--</button>
                 </a>
 
-                <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
+                <a th:href="@{'/tasks/'+{taskId}+'/edit-task'+${task.taskId}}">Edit</a>
 
-                <a th:href="@{'move-task-right/'+${task.taskId}}">
-                    <button type="button">---></button>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
+                    <button>--></button>
                 </a>
             </div>
         </div>
@@ -134,14 +134,14 @@
             <p th:text="${task.taskDescription}"></p>
             <p th:text="'Time:'+${task.taskTime}"></p>
             <div>
-                <a th:href="@{'move-task-left/'+${task.taskId}}">
-                    <button type="button"><---</button>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
+                    <button><--</button>
                 </a>
 
-                <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
+                <a th:href="@{'/tasks/'+{taskId}+'/edit-task'+${task.taskId}}">Edit</a>
 
-                <a th:href="@{'move-task-right/'+${task.taskId}}">
-                    <button type="button">---></button>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
+                    <button>--></button>
                 </a>
             </div>
         </div>
@@ -153,14 +153,14 @@
             <p th:text="${task.taskDescription}"></p>
             <p th:text="'Time:'+${task.taskTime}"></p>
             <div>
-                <a th:href="@{'move-task-left/'+${task.taskId}}">
-                    <button type="button"><---</button>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
+                    <button><--</button>
                 </a>
 
-                <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
+                <a th:href="@{'/tasks/'+{taskId}+'/edit-task'+${task.taskId}}">Edit</a>
 
-                <a th:href="@{'move-task-right/'+${task.taskId}}">
-                    <button type="button">---></button>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
+                    <button>--></button>
                 </a>
             </div>
         </div>

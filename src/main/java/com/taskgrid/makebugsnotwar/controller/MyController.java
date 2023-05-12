@@ -239,4 +239,11 @@ public class MyController {
         return "redirect:/project/{id}";
     }
 
+    @GetMapping("/project/{id}/move-task-left/{task-id}")
+    public String moveTaskLeft(@PathVariable("task-id") int taskId,
+                                @PathVariable("id") int projectId){
+        taskRepository.updateTaskStatus(taskId, -1);
+        return "redirect:/project/{id}";
+    }
+
 }
