@@ -132,4 +132,21 @@ public class TaskRepository {
             e.printStackTrace();
         }
     }
+
+    public void updateTaskStatus(int taskId, int delta){
+        final String UPDATE_QUERY = "UPDATE taskgrid.tasks SET task_status = task_status+? WHERE (task_id = ?)";
+
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
+            preparedStatement.setInt(1, delta);
+            preparedStatement.setInt(2, taskId);
+
+            preparedStatement.executeUpdate();
+
+        }catch (SQLException e){
+            System.out.println("could not update task status");
+            e.printStackTrace();
+        }
+    }
 }
