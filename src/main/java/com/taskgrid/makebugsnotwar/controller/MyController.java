@@ -200,7 +200,7 @@ public class MyController {
 
         Task task = new Task(taskId, taskName, taskDescription, taskStatus, userId, projectId, taskTime);
         taskRepository.editTask(task);
-        return "redirect:/project/"+projectId;
+        return "redirect:/project/{projectId}";
 
     }
 
