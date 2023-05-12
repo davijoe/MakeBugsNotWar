@@ -183,6 +183,11 @@ public class MyController {
         model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
         return "view-project-tasks";
     }
+    @GetMapping("/project-users/{project-id}")
+    public String viewProjectUsers(@PathVariable("project-id") int projectId, Model model){
+        model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
+        return "project-users";
+    }
     @GetMapping("/edit-task/{taskId}")
     public String showEditTask(@PathVariable("taskId") int taskId, Model model) {
         model.addAttribute("tasks", taskRepository.findById(taskId));

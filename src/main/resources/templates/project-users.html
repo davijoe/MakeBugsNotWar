@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Team</title>
+</head>
+<body>
+<div class="users" >
+    <table>
+        <thead>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Job title</th>
+            <th>Project role</th>
+        </thead>
+        <tbody>
+        <tr th:each =" user: ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.lastname}+${user.firstname}"> </td>
+            <td th:text="${user.jobtitle}"></td>
+            <td th:text="${user.projectRole}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>

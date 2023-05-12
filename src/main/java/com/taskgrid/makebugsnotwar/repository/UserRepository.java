@@ -140,17 +140,35 @@ public class UserRepository {
 
     public List<User> retrieveProjectUsers(int projectId){
         List<User> projectUsers = new ArrayList<>();
-        final String PROJECT_USERS_QUERY = "SELECT *, users.username " +
-                "FROM users " +
-                "JOIN user_project ON users.user_id = user_project.user_id " +
-                "WHERE user_project.project_id = ?";
+        final String PROJECT_USERS_QUERY = "SELECT * FROM taskgrid.users "+
+        "JOIN taskgrid.user_info ON users.user_id = user_info.user_id "+
+        "JOIN taskgrid.user_project ON users.user_id = user_project.user_id "+
+        "WHERE user_project.project_id = ?";
 
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(PROJECT_USERS_QUERY);
+            preparedStatement.setInt(1, projectId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
+            while(resultSet.next()){
+                int userId = resultSet.getInt("user_id");
+                String userName = resultSet.getString("username");
+                String lastName = resultSet.getString("last_name");
+                String firstName = resultSet.getString("first_name");
+                String projectRole = resultSet.getString("user_position");
+                String jobTitle = resultSet.getString("job_title");
 
+                User user = new User();
+                user.setUserId(userId);
+                user.setUsername(userName);
+                user.setFirstname(firstName);
+                user.setLastname(lastName);
+                user.setJobtitle(jobTitle);
+                user.setProjectRole(projectRole);
+                projectUsers.add(user);
+                System.out.println(user);
+            }
 
         }catch(SQLException e){
             System.out.println("Could not retrieve the users associated with this project");
@@ -178,7 +196,7 @@ public class UserRepository {
 
             preparedStatement.executeUpdate();
         }catch(SQLException sqle){
-            System.out.println("Could not update product");
+            System.out.println("Could not update user");
             sqle.printStackTrace();
         }
     }
