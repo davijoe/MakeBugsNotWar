@@ -232,7 +232,7 @@ public class MyController {
         }
 
     }
-    @PostMapping("/project/{id}/move-task-right/{task-id}")
+    @GetMapping("/project/{id}/move-task-right/{task-id}")
     public String moveTaskRight(@PathVariable("task-id") int taskId,
                                 @PathVariable("id") int projectId){
         taskRepository.updateTaskStatus(taskId, 1);

@@ -62,7 +62,9 @@
             <p th:text="'Time:'+${task.taskTime}"></p>
             <div>
                 <a th:href="@{/tasks/{taskId}/edit(taskId=${task.taskId})}" title="Edit">Edit</a>
-                <a th:href="@{'/project/'+${project.projectId}+''/move-task-right/'+'${task.taskId}}">---></a>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
+                    <button>--></button>
+                </a>
             </div>
         </div>
     </div>
