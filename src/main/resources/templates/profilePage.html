@@ -8,6 +8,7 @@
 <body>
 <div class="container">
     <nav th:insert="fragments/topnav"></nav>
+    <div class="profile_body">
     <div th:each="user : ${users}" class="profile_info">
     <table>
         <thead>
@@ -27,6 +28,7 @@
         </tr>
         </tbody>
     </table>
+        <a th:href="'/deleteProfile/' + ${user_id}">Delete Profile</a>
         <a th:href="'/updateProfile/'+${user_id}">Update profile information</a>
     </div>
     <div th:each="project : ${projects}">
@@ -45,10 +47,11 @@
             </tr>
             </tbody>
         </table>
+        <a th:href="@{/create-project}">Create new project</a>
+        <a th:href="@{/project/8}">Link til project 8</a>
+    </div>
     </div>
     <footer th:insert="fragments/footer"></footer>
 </div>
-<a th:href="@{/create-project}">Create new project</a>
-<a th:href="@{/project/8}">Link til project 8</a>
 </body>
 </html>

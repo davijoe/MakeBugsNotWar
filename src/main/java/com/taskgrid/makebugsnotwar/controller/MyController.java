@@ -141,6 +141,11 @@ public class MyController {
         userRepository.updateUser(user, user_id);
         return "redirect:/profilePage";
     }
+    @GetMapping("/deleteProfile/{user_id}")
+    public String deleteProfile(@PathVariable("user_id") int user_id){
+        userRepository.deleteProfile(user_id);
+        return "redirect:/";
+    }
 
     @GetMapping("/create-project")
     public String showCreateProject(){
