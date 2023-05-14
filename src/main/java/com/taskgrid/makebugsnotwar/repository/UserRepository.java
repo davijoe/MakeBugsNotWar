@@ -182,4 +182,21 @@ public class UserRepository {
             sqle.printStackTrace();
         }
     }
+
+    public void deleteProfile(int user_id) {
+        final String DELETE_PROFILE_QUERY = "DELETE taskgrid.users, taskgrid.user_info, taskgrid.user_project\n" +
+                "FROM taskgrid.users INNER JOIN taskgrid.user_info INNER JOIN taskgrid.user_project\n" +
+                "ON user_info.user_id = users.user_id AND users.user_id = user_project.user_id\n" +
+                "WHERE users.user_id = ?;";
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_PROFILE_QUERY);
+            preparedStatement.setInt(1, user_id);
+            preparedStatement.executeUpdate();
+
+        }catch(SQLException sqle){
+            System.out.println("Could not delete product.");
+            sqle.printStackTrace();
+        }
+    }
 }
