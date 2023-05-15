@@ -200,4 +200,48 @@ public class UserRepository {
             sqle.printStackTrace();
         }
     }
+
+    public List<User> searchUsers(String searchText){
+        searchText = "%"+ searchText+"%";
+        List<User> resultUsers = new ArrayList<>();
+        final String SEARCH_QUERY = "SELECT *" +
+                "FROM taskgrid.users " +
+                "JOIN taskgrid.user_info ON users.user_id = user_info.user_id " +
+                "WHERE users.username LIKE ?" +
+                "OR users.user_email LIKE ?" +
+                "OR user_info.first_name LIKE ?" +
+                "OR user_info.last_name LIKE ?" +
+                "OR user_info.job_title LIKE ?" +
+                "ORDER BY last_name";
+
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_QUERY);
+            preparedStatement.setString(1, searchText);
+            preparedStatement.setString(2, searchText);
+            preparedStatement.setString(3, searchText);
+            preparedStatement.setString(4, searchText);
+            preparedStatement.setString(5, searchText);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                int userId = resultSet.getInt("user_id");
+                String username = resultSet.getString("username");
+                String email = resultSet.getString("user_email");
+                String firstname = resultSet.getString("first_name");
+                String lastname = resultSet.getString("last_name");
+                String job_title = resultSet.getString("job_title");
+                User user = new User(username, email, firstname, lastname, job_title);
+                user.setUserId(userId);
+                resultUsers.add(user);
+                System.out.println(user);
+            }
+        } catch(SQLException e){
+            System.out.println("Failed to search database for user(s)");
+            e.printStackTrace();
+        }
+
+        return resultUsers;
+    }
 }
