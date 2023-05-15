@@ -10,10 +10,8 @@ import com.taskgrid.makebugsnotwar.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -208,9 +206,10 @@ public class MyController {
         return "view-project-tasks";
     }
     @GetMapping("/project-users/{project-id}")
-    public String viewProjectUsers(@PathVariable("project-id") int projectId, Model model){
+    public String viewProjectUsers(@PathVariable("project-id") int projectId, Model model, @ModelAttribute("foundUsers") User foundUsers) {
         model.addAttribute("project", projectRepository.findProjectById(projectId));
         model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
+        model.addAttribute("foundUsers", foundUsers);
         return "project-users";
     }
     @GetMapping("/edit-task/{taskId}")
@@ -276,10 +275,11 @@ public class MyController {
         return "redirect:/project/{id}";
     }
 
-    @GetMapping("{id}/search-users")
-    public String searchUsers(@PathVariable("id") int id, @RequestParam("query") String query, Model model) {
+    @GetMapping("/{id}/search-users")
+    public String searchUsers(@PathVariable("id") int id, @RequestParam("query") String query, Model model, RedirectAttributes attributes) {
         List<User> foundUsers = userRepository.searchUsers(query);
         model.addAttribute("foundUsers", foundUsers);
+        attributes.addFlashAttribute("foundUsers", foundUsers);
         return "redirect:/project-users/{id}";
     }
 

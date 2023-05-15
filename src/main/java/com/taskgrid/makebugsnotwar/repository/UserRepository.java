@@ -202,6 +202,7 @@ public class UserRepository {
     }
 
     public List<User> searchUsers(String searchText){
+        System.out.println("test");
         searchText = "%"+ searchText+"%";
         List<User> resultUsers = new ArrayList<>();
         final String SEARCH_QUERY = "SELECT *" +
@@ -213,18 +214,17 @@ public class UserRepository {
                 "OR user_info.last_name LIKE ?" +
                 "OR user_info.job_title LIKE ?" +
                 "ORDER BY last_name";
-
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_QUERY);
             preparedStatement.setString(1, searchText);
+            System.out.println(searchText);
             preparedStatement.setString(2, searchText);
             preparedStatement.setString(3, searchText);
             preparedStatement.setString(4, searchText);
             preparedStatement.setString(5, searchText);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-
             while (resultSet.next()){
                 int userId = resultSet.getInt("user_id");
                 String username = resultSet.getString("username");
@@ -232,16 +232,15 @@ public class UserRepository {
                 String firstname = resultSet.getString("first_name");
                 String lastname = resultSet.getString("last_name");
                 String job_title = resultSet.getString("job_title");
+
                 User user = new User(username, email, firstname, lastname, job_title);
                 user.setUserId(userId);
                 resultUsers.add(user);
-                System.out.println(user);
             }
         } catch(SQLException e){
             System.out.println("Failed to search database for user(s)");
             e.printStackTrace();
         }
-
         return resultUsers;
     }
 }

@@ -114,7 +114,7 @@ public class TaskRepository {
     }
 
     public void editTask(Task task) {
-        final String EDITTASK_QUERY = "UPDATE tasks SET task_name = ?, task_description = ?, task_status = ?, user_id = ?, task_time = ? WHERE task_id = ?";
+        final String EDITTASK_QUERY = "UPDATE taskgrid.tasks SET task_name = ?, task_description = ?, task_status = ?, user_id = ?, task_time = ? WHERE task_id = ?";
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(EDITTASK_QUERY);
