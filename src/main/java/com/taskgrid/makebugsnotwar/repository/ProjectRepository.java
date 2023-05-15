@@ -124,7 +124,7 @@ public class ProjectRepository {
                    "SET name = ?, description = ? WHERE id = ?";
 
             try {
-                Connection connection = ConnectionManager.getConnection(DB_UID, DB_UID, DB_PWD)
+                Connection connection = ConnectionManager.getConnection(DB_UID, DB_UID, DB_PWD);
                 PreparedStatement statement = connection.prepareStatement(UPDATE_PROJECT_QUERY);
                 statement.setString(1, newName);
                 statement.setString(2, newDescription);

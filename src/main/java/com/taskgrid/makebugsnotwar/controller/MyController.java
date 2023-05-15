@@ -180,19 +180,24 @@ public class MyController {
 
     @GetMapping("/project-details/{id}")
     public String viewProjectDetails(@PathVariable("id") int projectId, Model model){
-        Project project = projectRepository.findProjectById(projectId);
-        model.addAttribute("project", project);
+        model.addAttribute("project", projectRepository.findProjectById(projectId));
         model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
         model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
 
         return "project-details";
     }
-    @GetMapping("/edit-project-details/{id}")
+
+    @GetMapping("edit-project-details/{id}")
+    public String showEditProjectDetails(@PathVariable("id") int id, Model model){
+        model.addAttribute("project", projectRepository.findProjectById(id));
+        return "edit-project-details";
+    }
+    @PostMapping("edit-project-details/{id}")
     public String editProject(@PathVariable("id") int id,
                               @RequestParam("project-name") String projectName,
-                              @RequestParam("project-description") String projectDscription,
+                              @RequestParam("project-description") String projectDescription,
                               Model model){
-        model.addAttribute("project", projectRepository.findProjectById(id));
+        projectRepository.updateProjectDetails(id, projectName,projectDescription);
 
         return "redirect:/project-details/{id}";
     }
