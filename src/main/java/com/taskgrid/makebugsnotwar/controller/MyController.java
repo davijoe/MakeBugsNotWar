@@ -251,4 +251,12 @@ public class MyController {
         return "redirect:/project/{id}";
     }
 
+    @GetMapping("/project/{id}/delete-task/{task-id}")
+    public String deleteTask(@PathVariable("id") int projectId,
+                             @PathVariable("task-id") int taskId) {
+
+        taskRepository.deleteTask(taskId);
+        return "redirect:/project/{id}";
+    }
+
 }
