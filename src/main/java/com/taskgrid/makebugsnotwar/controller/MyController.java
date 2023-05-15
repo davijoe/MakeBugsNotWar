@@ -142,8 +142,10 @@ public class MyController {
         return "redirect:/profilePage";
     }
     @GetMapping("/deleteProfile/{user_id}")
-    public String deleteProfile(@PathVariable("user_id") int user_id){
+    public String deleteProfile(@PathVariable("user_id") int user_id,
+                                HttpSession session){
         userRepository.deleteProfile(user_id);
+        session.removeAttribute("user_id");
         return "redirect:/";
     }
 
