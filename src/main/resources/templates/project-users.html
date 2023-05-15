@@ -2,26 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Team</title>
+    <link rel="stylesheet" href="../static/css/mystyles.css" th:href="@{/css/styles.css}">
+    <title th:text="${project.projectName}+' team members'"></title>
 </head>
 <body>
-<div class="users" >
-    <table>
-        <thead>
-            <th>Username</th>
-            <th>Name</th>
-            <th>Job title</th>
-            <th>Project role</th>
-        </thead>
-        <tbody>
-        <tr th:each =" user: ${users}">
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.lastname}+${user.firstname}"> </td>
-            <td th:text="${user.jobtitle}"></td>
-            <td th:text="${user.projectRole}"></td>
-        </tr>
-        </tbody>
-    </table>
+<h1 th:text="${project.projectName}"></h1>
+
+    <div class="board">
+        <div class="column">
+            <h2>Team members</h2>
+            <div th:each =" user: ${users}" class="user">
+                <p th:text="'Username: '+${user.username}"></p>
+                <p th:text="'Name: '+${user.firstname}+' '+${user.lastname}"></p>
+                <p th:text="'Job title: '+${user.jobtitle}"></p>
+                <p th:text="'Role(s): '+${user.projectRole}"></p>
+                <p th:text="'Email: '+${user.email}"></p>
+            </div>
+        </div>
+
+        <div class="column">
+            <h2>Add new team members</h2>
+
+            <form th:action="@{/search-users}" method="get">
+                <label for="query">Search:</label>
+                <input type="text" id="query" name="query">
+                <button type="submit">Search</button>
+            </form>
+
+
+                    <div th:if="${foundUsers != null}" th:each =" user: ${foundUsers}" class="user">
+                        <p th:text="'Username: '+${user?.username}"></p>
+                        <p th:text="'Name: '+${user.firstname}+' '+${user.lastname}"></p>
+                        <p th:text="'Job title: '+${user?.jobtitle}"></p>
+                        <p th:text="'Role(s): '+${user?.projectRole}"></p>
+                        <p th:text="'Email: '+${user?.email}"></p>
+
+            </div>
+        </div>
 </div>
 </body>
 

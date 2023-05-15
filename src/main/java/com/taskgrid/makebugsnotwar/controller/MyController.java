@@ -178,6 +178,25 @@ public class MyController {
         return "project";
     }
 
+    @GetMapping("/project-details/{id}")
+    public String viewProjectDetails(@PathVariable("id") int projectId, Model model){
+        Project project = projectRepository.findProjectById(projectId);
+        model.addAttribute("project", project);
+        model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
+        model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
+
+        return "project-details";
+    }
+    @GetMapping("/edit-project-details/{id}")
+    public String editProject(@PathVariable("id") int id,
+                              @RequestParam("project-name") String projectName,
+                              @RequestParam("project-description") String projectDscription,
+                              Model model){
+        model.addAttribute("project", projectRepository.findProjectById(id));
+
+        return "redirect:/project-details/{id}";
+    }
+
     @GetMapping("/view-project-tasks/{projectId}")
     public String viewProjectTasks(@PathVariable("projectId") int projectId, Model model) {
         model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
@@ -185,6 +204,7 @@ public class MyController {
     }
     @GetMapping("/project-users/{project-id}")
     public String viewProjectUsers(@PathVariable("project-id") int projectId, Model model){
+        model.addAttribute("project", projectRepository.findProjectById(projectId));
         model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
         return "project-users";
     }
@@ -249,6 +269,13 @@ public class MyController {
                                 @PathVariable("id") int projectId){
         taskRepository.updateTaskStatus(taskId, -1);
         return "redirect:/project/{id}";
+    }
+
+    @GetMapping("{id}/search-users")
+    public String searchUsers(@PathVariable("id") int id, @RequestParam("query") String query, Model model) {
+        List<User> foundUsers = userRepository.searchUsers(query);
+        model.addAttribute("foundUsers", foundUsers);
+        return "redirect:/project-users/{id}";
     }
 
 }

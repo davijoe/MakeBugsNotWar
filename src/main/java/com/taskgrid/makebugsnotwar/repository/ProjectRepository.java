@@ -117,4 +117,23 @@ public class ProjectRepository {
 
         return projectList;
     }
+
+    public void updateProjectDetails(int projectId, String newName, String newDescription) {
+
+           final String UPDATE_PROJECT_QUERY = "UPDATE taskgrid.projects "+
+                   "SET name = ?, description = ? WHERE id = ?";
+
+            try {
+                Connection connection = ConnectionManager.getConnection(DB_UID, DB_UID, DB_PWD)
+                PreparedStatement statement = connection.prepareStatement(UPDATE_PROJECT_QUERY);
+                statement.setString(1, newName);
+                statement.setString(2, newDescription);
+                statement.setInt(3, projectId);
+
+                statement.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println("Could not update project");
+            e.printStackTrace();
+        }
+    }
 }
