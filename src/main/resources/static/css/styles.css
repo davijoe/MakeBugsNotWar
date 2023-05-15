@@ -103,10 +103,10 @@ html{
 }
 
 .column {
-    background-color: #A8DADC;
+    background-color: #457B9D;
     border: 1px solid #ddd;
     padding: 20px;
-    border-radius: 2em;
+    border-radius: 1em;
 }
 
 .column h2 {
@@ -136,4 +136,20 @@ html{
     border-radius: 5px;
     cursor: pointer;
     margin-left: 10px;
+}
+
+/* styling for showing users*/
+.user {
+    background-color: #F1FAEE;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user p {
+    row-gap: 1em;
 }

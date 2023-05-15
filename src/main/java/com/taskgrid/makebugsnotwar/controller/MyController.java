@@ -185,6 +185,7 @@ public class MyController {
     }
     @GetMapping("/project-users/{project-id}")
     public String viewProjectUsers(@PathVariable("project-id") int projectId, Model model){
+        model.addAttribute("project", projectRepository.findProjectById(projectId));
         model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
         return "project-users";
     }
@@ -250,5 +251,12 @@ public class MyController {
         taskRepository.updateTaskStatus(taskId, -1);
         return "redirect:/project/{id}";
     }
+    @PostMapping("/search-users")
+    public String searchUsers(@PathVariable("id") int id, @RequestParam("query") String query, Model model){
+        List<User> foundUsers = userRepository.searchUsers(query);
+        model.addAttribute("foundUsers", foundUsers);
+        return "redirect:/project-users/{id}";
+    }
+
 
 }

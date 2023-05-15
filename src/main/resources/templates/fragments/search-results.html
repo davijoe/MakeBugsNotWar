@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Search Results</title>
+</head>
+<body>
+<div th:fragment="results">
+  <p>Search results:</p>
+  <div th:each="user : ${foundUsers}" class="user">
+    <p th:text="'Username: ' + ${user.username}"></p>
+    <p th:text="'Name: ' + ${user.firstname} + ' ' + ${user.lastname}"></p>
+    <p th:text="'Job title: ' + ${user.jobtitle}"></p>
+    <p th:text="'Role(s): ' + ${user.projectRole}"></p>
+    <p th:text="'Email: ' + ${user.email}"></p>
+  </div>
+</div>
+</body>
+</html>
