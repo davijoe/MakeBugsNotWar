@@ -216,7 +216,8 @@ public class MyController {
     public String viewProjectUsers(@PathVariable("project-id") int projectId, Model model, @ModelAttribute("foundUsers") User foundUsers) {
         model.addAttribute("project", projectRepository.findProjectById(projectId));
         model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
-        model.addAttribute("foundUsers", foundUsers);
+        System.out.println("break");
+        model.addAttribute("foundUsers");
         return "project-users";
     }
     @GetMapping("/edit-task/{taskId}")
@@ -286,13 +287,12 @@ public class MyController {
     @GetMapping("/{id}/search-users")
     public String searchUsers(@PathVariable("id") int id, @RequestParam("query") String query, Model model, RedirectAttributes attributes) {
         List<User> foundUsers = userRepository.searchUsers(query);
-        model.addAttribute("foundUsers", foundUsers);
         attributes.addFlashAttribute("foundUsers", foundUsers);
+        System.out.println(foundUsers);
         return "redirect:/project-users/{id}";
-
+    }
     @GetMapping("/project/{id}/delete-task/{task-id}")
-    public String deleteTask(@PathVariable("id") int projectId,
-                             @PathVariable("task-id") int taskId) {
+    public String deleteTask(@PathVariable("id") int projectId, @PathVariable("task-id") int taskId) {
 
         taskRepository.deleteTask(taskId);
         return "redirect:/project/{id}";
