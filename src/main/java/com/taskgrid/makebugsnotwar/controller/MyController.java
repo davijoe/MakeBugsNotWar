@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+
 @Controller
 public class MyController {
     private final UserRepository userRepository;
@@ -254,6 +255,7 @@ public class MyController {
             task.setTaskTime(time);
             task.setTaskDescription(description);
             int taskId = taskRepository.addTask(task);
+            task.setTaskId(taskId);
 
             return "redirect:/profilePage";
         } else {

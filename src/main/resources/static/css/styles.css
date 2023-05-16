@@ -137,3 +137,14 @@ html{
     cursor: pointer;
     margin-left: 10px;
 }
+
+.user {
+    background-color: #F1FAEE;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

@@ -229,11 +229,11 @@ public class UserRepository {
                 int userId = resultSet.getInt("user_id");
                 String username = resultSet.getString("username");
                 String email = resultSet.getString("user_email");
-                String firstname = resultSet.getString("first_name");
-                String lastname = resultSet.getString("last_name");
-                String job_title = resultSet.getString("job_title");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String jobTitle = resultSet.getString("job_title");
 
-                User user = new User(username, email, firstname, lastname, job_title);
+                User user = new User(firstName,lastName,username,email,jobTitle );
                 user.setUserId(userId);
                 resultUsers.add(user);
             }
