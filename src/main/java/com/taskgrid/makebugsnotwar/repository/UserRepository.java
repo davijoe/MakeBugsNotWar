@@ -201,9 +201,9 @@ public class UserRepository {
         }
     }
 
-    public List<User> searchUsers(String searchText){
+    public List<User> searchUsers(String searchText) {
         System.out.println("test");
-        searchText = "%"+ searchText+"%";
+        searchText = "%" + searchText + "%";
         List<User> resultUsers = new ArrayList<>();
         final String SEARCH_QUERY = "SELECT *" +
                 "FROM taskgrid.users " +
@@ -225,7 +225,7 @@ public class UserRepository {
             preparedStatement.setString(5, searchText);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int userId = resultSet.getInt("user_id");
                 String username = resultSet.getString("username");
                 String email = resultSet.getString("user_email");
@@ -233,15 +233,16 @@ public class UserRepository {
                 String lastName = resultSet.getString("last_name");
                 String jobTitle = resultSet.getString("job_title");
 
-                User user = new User(firstName,lastName,username,email,jobTitle );
+                User user = new User(firstName, lastName, username, email, jobTitle);
                 user.setUserId(userId);
                 resultUsers.add(user);
             }
-        } catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("Failed to search database for user(s)");
             e.printStackTrace();
         }
         return resultUsers;
+    }
 
     public void deleteProfile(int user_id) {
         final String DELETE_PROFILE_QUERY = "DELETE FROM users WHERE users.user_id = ?";
