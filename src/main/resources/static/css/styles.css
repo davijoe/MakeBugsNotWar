@@ -133,3 +133,37 @@ html{
     margin-left: 10px;
 
 }
+
+
+/*------------------------STYLING FOR SEARCH USER-------------------------*/
+
+.search-user-board {
+    display: grid;
+    grid-template-columns: 20% 20% auto;
+    gap: 20px;
+}
+.search-user-board h1 {
+    background-image: linear-gradient(whitesmoke,black);
+}
+.search-user-board .user {
+    padding: 10px;
+    border: solid #333333;
+}
+.searched-user {
+    background-color: #A8DADC;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 2em;
+    margin: 5px;
+}
+.flex-box {
+    display: flex;
+    flex-flow: row wrap;
+}
+.search-column {
+    background-color: #A8DADC;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 2em;
+}
+

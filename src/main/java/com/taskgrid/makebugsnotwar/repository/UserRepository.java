@@ -103,7 +103,6 @@ public class UserRepository {
             resultSet.getInt(1);
             if (!(resultSet.wasNull())) {
                 user_id = resultSet.getInt(1);
-                System.out.println(user_id);
             }
         } catch (SQLException sqle) {
             System.out.println("Could not login");
@@ -167,7 +166,6 @@ public class UserRepository {
                 user.setJobtitle(jobTitle);
                 user.setProjectRole(projectRole);
                 projectUsers.add(user);
-                System.out.println(user);
             }
 
         }catch(SQLException e){
@@ -201,9 +199,9 @@ public class UserRepository {
         }
     }
 
-    public List<User> searchUsers(String searchText){
+    public List<User> searchUsers(String searchText) {
         System.out.println("test");
-        searchText = "%"+ searchText+"%";
+        searchText = "%" + searchText + "%";
         List<User> resultUsers = new ArrayList<>();
         final String SEARCH_QUERY = "SELECT *" +
                 "FROM taskgrid.users " +
@@ -218,16 +216,16 @@ public class UserRepository {
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_QUERY);
             preparedStatement.setString(1, searchText);
-            System.out.println(searchText);
             preparedStatement.setString(2, searchText);
             preparedStatement.setString(3, searchText);
             preparedStatement.setString(4, searchText);
             preparedStatement.setString(5, searchText);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int userId = resultSet.getInt("user_id");
                 String username = resultSet.getString("username");
+                System.out.println(username);
                 String email = resultSet.getString("user_email");
                 String firstname = resultSet.getString("first_name");
                 String lastname = resultSet.getString("last_name");
@@ -237,11 +235,12 @@ public class UserRepository {
                 user.setUserId(userId);
                 resultUsers.add(user);
             }
-        } catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("Failed to search database for user(s)");
             e.printStackTrace();
         }
         return resultUsers;
+    }
 
     public void deleteProfile(int user_id) {
         final String DELETE_PROFILE_QUERY = "DELETE FROM users WHERE users.user_id = ?";
