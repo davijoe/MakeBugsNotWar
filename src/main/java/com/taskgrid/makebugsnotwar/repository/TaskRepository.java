@@ -149,4 +149,20 @@ public class TaskRepository {
             e.printStackTrace();
         }
     }
+
+    public void deleteTask(int taskId) {
+
+        final String DELETETASK = "DELETE FROM taskgrid.tasks WHERE task_id = ?";
+
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL,DB_UID,DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETETASK);
+            preparedStatement.setInt(1, taskId);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Could not delete task");
+            e.printStackTrace();
+        }
+    }
 }

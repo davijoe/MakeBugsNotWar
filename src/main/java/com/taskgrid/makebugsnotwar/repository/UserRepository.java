@@ -242,5 +242,18 @@ public class UserRepository {
             e.printStackTrace();
         }
         return resultUsers;
+
+    public void deleteProfile(int user_id) {
+        final String DELETE_PROFILE_QUERY = "DELETE FROM users WHERE users.user_id = ?";
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_PROFILE_QUERY);
+            preparedStatement.setInt(1, user_id);
+            preparedStatement.executeUpdate();
+
+        }catch(SQLException sqle){
+            System.out.println("Could not delete product.");
+            sqle.printStackTrace();
+        }
     }
 }

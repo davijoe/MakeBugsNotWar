@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>New project</title>
+    <link rel="stylesheet" href="../static/css/mystyles.css" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <div>
+<nav th:insert="fragments/topnav"></nav>
+    <div class="create_body">
         <form action="/create-project" method="post">
 
             <div>
@@ -24,6 +26,6 @@
         </form>
         <a th:href="@{/profilePage}">Back</a>
     </div>
-
+<footer th:insert="fragments/footer"></footer>
 </body>
 </html>
