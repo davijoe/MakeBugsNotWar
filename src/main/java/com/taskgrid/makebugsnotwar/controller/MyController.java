@@ -139,6 +139,13 @@ public class MyController {
         userRepository.updateUser(user, user_id);
         return "redirect:/profilePage";
     }
+    @GetMapping("/deleteProfile/{user_id}")
+    public String deleteProfile(@PathVariable("user_id") int user_id,
+                                HttpSession session){
+        userRepository.deleteProfile(user_id);
+        session.removeAttribute("user_id");
+        return "redirect:/";
+    }
 
     @GetMapping("/create-project")
     public String showCreateProject(){
@@ -275,12 +282,21 @@ public class MyController {
         return "redirect:/project/{id}";
     }
 
+
     @GetMapping("/{id}/search-users")
     public String searchUsers(@PathVariable("id") int id, @RequestParam("query") String query, Model model, RedirectAttributes attributes) {
         List<User> foundUsers = userRepository.searchUsers(query);
         model.addAttribute("foundUsers", foundUsers);
         attributes.addFlashAttribute("foundUsers", foundUsers);
         return "redirect:/project-users/{id}";
+
+    @GetMapping("/project/{id}/delete-task/{task-id}")
+    public String deleteTask(@PathVariable("id") int projectId,
+                             @PathVariable("task-id") int taskId) {
+
+        taskRepository.deleteTask(taskId);
+        return "redirect:/project/{id}";
+
     }
 
 }

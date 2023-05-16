@@ -4,17 +4,17 @@
     box-sizing: border-box;
 }
 body{
+    width: 100%;
     min-width: 800px;
     background-color: #F1FAEE;
 }
-html, body {
-    min-height: 100vh;
+body, html{
     height: auto;
     width: auto;
 }
 html{
+    min-height: 100vh;
     min-width: 800px;
-
 }
 .top-nav{
     position: relative;
@@ -74,21 +74,16 @@ html{
     border-color: #A8DADC;
     background-color: #457B9D;
 }
-.landingpage-body {
-    display: flex;
+.landingpage-body{
     min-height: 78vh;
-    width: 100%;
-    min-width: 800px;
-    justify-content: center;
 }
-.profile_info {
-    display: flex;
+.profile_body{
     min-height: 78vh;
-    width: 100%;
-    min-width: 800px;
 }
-.update_info {
-    display: flex;
+.login_body{
+    min-height: 78vh;
+}
+.create_body{
     min-height: 78vh;
     width: 100%;
     min-width: 800px;
@@ -136,4 +131,5 @@ html{
     border-radius: 5px;
     cursor: pointer;
     margin-left: 10px;
+
 }
