@@ -2,10 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:text="${project.projectName}"></title>
-    <link rel="stylesheet" href="../static/css/mystyles.css" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
+
 
 </head>
 <body>
+<nav th:insert="fragments/topnav"></nav>
+
 <h1 th:text="${project.projectName}"></h1>
 <div class="board">
     <div class="column">
@@ -120,6 +123,6 @@
 
 <a th:href="'/view-project-tasks/'+${project.getProjectId}">Link to tasks</a>
 <a th:href="@{/profilePage}">Back to profile</a>
-
+<footer th:insert="fragments/footer"></footer>
 </body>
 </html>

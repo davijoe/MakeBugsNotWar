@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../static/css/mystyles.css" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 </head>
 <body>
 <div class="container">
@@ -16,10 +16,6 @@
     <br><br><br><br><br><br><br>
     <p>Content for body</p>
 </div>
-<div class="container2">
-    <footer th:insert="fragments/footer">
-    </footer>
-</div>
 
 <a th:href="@{/project/13}">View project test</a>
 
@@ -31,5 +27,6 @@
 <a th:href="@{/project-users/8}">View project-team test</a>
 <a th:href="@{/project-details/8}">View project-details test</a>
 
+<footer th:insert="fragments/footer"></footer>
 </body>
 </html>

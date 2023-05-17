@@ -3,34 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../static/css/mystyles.css" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 </head>
 <body>
+<nav th:insert="fragments/topnav"></nav>
+
 <div class="container">
-  <nav th:insert="fragments/topnav"></nav>
-    <form action="/updateProfile" method="post">
-      <div class="update_info" th:each="user : ${user}">
-      <input id="userid" name="user_id" type="hidden" th:value="${user_id}">
 
-      <label for="user_name">User name</label>
-      <input id="user_name" name="username" type="text" th:value="${user.username}">
+  <form action="/updateProfile" method="post">
+    <div class="update_info" th:each="user : ${user}">
+    <input id="userid" name="user_id" type="hidden" th:value="${user_id}">
 
-      <label for="user_email">Email</label>
-      <input id="user_email" name="email" type="text" th:value="${user.email}">
+    <label for="user_name">User name</label>
+    <input id="user_name" name="username" type="text" th:value="${user.username}">
 
-      <label for="first_name">First name</label>
-      <input id="first_name" name="firstname" type="text" th:value="${user.firstname}">
+    <label for="user_email">Email</label>
+    <input id="user_email" name="email" type="text" th:value="${user.email}">
 
-      <label for="last_name">Last name</label>
-      <input id="last_name" name="lastname" type="text" th:value="${user.lastname}">
+    <label for="first_name">First name</label>
+    <input id="first_name" name="firstname" type="text" th:value="${user.firstname}">
 
-      <label for="job_title">Job title</label>
-      <input id="job_title" name="jobtitle" type="text" th:value="${user.jobtitle}">
-      <input type="submit" value="Update profile">
-      </div>
-    </form>
+    <label for="last_name">Last name</label>
+    <input id="last_name" name="lastname" type="text" th:value="${user.lastname}">
+
+    <label for="job_title">Job title</label>
+    <input id="job_title" name="jobtitle" type="text" th:value="${user.jobtitle}">
+    <input type="submit" value="Update profile">
+    </div>
+  </form>
   <a th:href="@{/profilePage}">Back</a>
-  <footer th:insert="fragments/footer"></footer>
 </div>
+
+<footer th:insert="fragments/footer"></footer>
 </body>
 </html>

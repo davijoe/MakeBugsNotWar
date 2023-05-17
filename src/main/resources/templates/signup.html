@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 </head>
 <body>
+<nav th:insert="fragments/topnav"></nav>
+
 <form action="/signup" method="post">
     <span th:if="${errorMessageEmailUsername != null}" th:text="${errorMessageEmailUsername}"></span>
 
@@ -34,5 +37,7 @@
     <br>
     <input type="submit" id="signup_button" class="button_signup" value="Create User">
 </form>
+
+<footer th:insert="fragments/footer"></footer>
 </body>
 </html>

@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>New Task</title>
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 </head>
 <body>
+<nav th:insert="fragments/topnav"></nav>
     <div>
         <form action="/create-task" method="post">
             <div>
@@ -30,5 +32,6 @@
             <input type="submit" value="Create task">
         </form>
     </div>
+<footer th:insert="fragments/footer"></footer>
 </body>
 </html>
