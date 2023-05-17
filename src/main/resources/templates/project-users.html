@@ -6,6 +6,7 @@
     <title th:text="${project.projectName}+' team members'"></title>
 </head>
 <body>
+<nav th:insert="fragments/topnav"></nav>
 <h1 th:text="${project.projectName}"></h1>
 
     <div class="search-user-board">
@@ -40,6 +41,7 @@
         </div>
         </div>
     </div>
+<footer th:insert="fragments/footer"></footer>
 </body>
 
 </html>

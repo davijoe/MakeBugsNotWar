@@ -255,11 +255,15 @@ html{
     border: solid #333333;
 }
 .searched-user {
+    display: flex;
+    align-items: flex-start;
+    flex-flow: column;
     background-color: #A8DADC;
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 2em;
     margin: 5px;
+    align-self: flex-start;
 }
 .flex-box {
     display: flex;
