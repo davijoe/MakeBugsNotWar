@@ -6,7 +6,7 @@
 </head>
 <body>
 
-  <form th:action="@{'/project-users/'+${projectId}+'/add-user-to-project/'+${userId}}" method="post">
+  <form th:action="@{'/project-users/'+${project.projectId}+'/add-user-to-project/'+${userId}}" method="post">
       <label for="role">Select a role:</label>
       <select id="role" name="role">
           <option value="Developer">Developer</option>
