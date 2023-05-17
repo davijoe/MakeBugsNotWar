@@ -10,6 +10,8 @@ public class User {
     private String email;
     private String jobtitle;
 
+    private String projectRole;
+
 
     public User() {
 
@@ -90,4 +92,19 @@ public class User {
         this.jobtitle = jobtitle;
     }
 
+    public String getProjectRole() {
+        return projectRole;
+    }
+
+    public void setProjectRole(String projectRole) {
+        this.projectRole = projectRole;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }

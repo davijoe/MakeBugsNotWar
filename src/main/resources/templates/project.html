@@ -4,6 +4,7 @@
     <title th:text="${project.projectName}"></title>
     <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 
+
 </head>
 <body>
 <nav th:insert="fragments/topnav"></nav>
@@ -21,6 +22,7 @@
                 <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
                     <button>--></button>
                 </a>
+                <a th:href="@{'/project/' + ${project.projectId} + '/delete-task/' + ${task.taskId}}">Delete task</a>
             </div>
         </div>
     </div>
@@ -119,7 +121,7 @@
     </div>
 </div>
 
-<a th:href="'/view-project-tasks'+${project.getProjectId}">Link to tasks</a>
+<a th:href="'/view-project-tasks/'+${project.getProjectId}">Link to tasks</a>
 <a th:href="@{/profilePage}">Back to profile</a>
 <footer th:insert="fragments/footer"></footer>
 </body>

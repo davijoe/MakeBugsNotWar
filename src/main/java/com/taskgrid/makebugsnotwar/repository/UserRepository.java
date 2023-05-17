@@ -140,17 +140,35 @@ public class UserRepository {
 
     public List<User> retrieveProjectUsers(int projectId){
         List<User> projectUsers = new ArrayList<>();
-        final String PROJECT_USERS_QUERY = "SELECT *, users.username " +
-                "FROM users " +
-                "JOIN user_project ON users.user_id = user_project.user_id " +
-                "WHERE user_project.project_id = ?";
+        final String PROJECT_USERS_QUERY = "SELECT * FROM taskgrid.users "+
+        "JOIN taskgrid.user_info ON users.user_id = user_info.user_id "+
+        "JOIN taskgrid.user_project ON users.user_id = user_project.user_id "+
+        "WHERE user_project.project_id = ?";
 
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(PROJECT_USERS_QUERY);
+            preparedStatement.setInt(1, projectId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
+            while(resultSet.next()){
+                int userId = resultSet.getInt("user_id");
+                String userName = resultSet.getString("username");
+                String lastName = resultSet.getString("last_name");
+                String firstName = resultSet.getString("first_name");
+                String projectRole = resultSet.getString("user_position");
+                String jobTitle = resultSet.getString("job_title");
 
+                User user = new User();
+                user.setUserId(userId);
+                user.setUsername(userName);
+                user.setFirstname(firstName);
+                user.setLastname(lastName);
+                user.setJobtitle(jobTitle);
+                user.setProjectRole(projectRole);
+                projectUsers.add(user);
+                System.out.println(user);
+            }
 
         }catch(SQLException e){
             System.out.println("Could not retrieve the users associated with this project");
@@ -178,16 +196,55 @@ public class UserRepository {
 
             preparedStatement.executeUpdate();
         }catch(SQLException sqle){
-            System.out.println("Could not update product");
+            System.out.println("Could not update user");
             sqle.printStackTrace();
         }
     }
 
+    public List<User> searchUsers(String searchText){
+        System.out.println("test");
+        searchText = "%"+ searchText+"%";
+        List<User> resultUsers = new ArrayList<>();
+        final String SEARCH_QUERY = "SELECT *" +
+                "FROM taskgrid.users " +
+                "JOIN taskgrid.user_info ON users.user_id = user_info.user_id " +
+                "WHERE users.username LIKE ?" +
+                "OR users.user_email LIKE ?" +
+                "OR user_info.first_name LIKE ?" +
+                "OR user_info.last_name LIKE ?" +
+                "OR user_info.job_title LIKE ?" +
+                "ORDER BY last_name";
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_QUERY);
+            preparedStatement.setString(1, searchText);
+            System.out.println(searchText);
+            preparedStatement.setString(2, searchText);
+            preparedStatement.setString(3, searchText);
+            preparedStatement.setString(4, searchText);
+            preparedStatement.setString(5, searchText);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int userId = resultSet.getInt("user_id");
+                String username = resultSet.getString("username");
+                String email = resultSet.getString("user_email");
+                String firstname = resultSet.getString("first_name");
+                String lastname = resultSet.getString("last_name");
+                String job_title = resultSet.getString("job_title");
+
+                User user = new User(username, email, firstname, lastname, job_title);
+                user.setUserId(userId);
+                resultUsers.add(user);
+            }
+        } catch(SQLException e){
+            System.out.println("Failed to search database for user(s)");
+            e.printStackTrace();
+        }
+        return resultUsers;
+
     public void deleteProfile(int user_id) {
-        final String DELETE_PROFILE_QUERY = "DELETE taskgrid.users, taskgrid.user_info, taskgrid.user_project\n" +
-                "FROM taskgrid.users INNER JOIN taskgrid.user_info INNER JOIN taskgrid.user_project\n" +
-                "ON user_info.user_id = users.user_id AND users.user_id = user_project.user_id\n" +
-                "WHERE users.user_id = ?;";
+        final String DELETE_PROFILE_QUERY = "DELETE FROM users WHERE users.user_id = ?";
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_PROFILE_QUERY);

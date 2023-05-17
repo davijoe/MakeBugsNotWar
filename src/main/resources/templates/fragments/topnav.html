@@ -7,18 +7,20 @@
 <body>
 <nav th:fragment="navbar" class="navbar-fragment">
     <div class="top-nav">
-        <img th:src="@{/images/1.jpg}">
+        <div class="homepage_image">
+            <a class="blankspace_0" th:href="@{/}"><img th:src="@{/images/homepagepic.png}">&nbsp Taskgrid - project management tool</a>
+        </div>
         <div class="blankspace_one">
-            <a class="blank_space_one" th:href="@{/create-project}">Create Project</a>
+            <a class="blank_space_one" th:href="@{/create-project}"><img th:src="@{/images/taskgridpic.png}">New Project</a>
         </div>
         <div class="blankspace_two">
-            <a class="blank_space_two" th:href="@{/profilePage}">My page</a>
+            <a class="blank_space_two" th:href="@{/profilePage}"><img th:src="@{/images/profilepic.png}">My page</a>
         </div>
         <div class="blankspace_three">
-            <a class="blank_space_three" th:href="@{/help}">Don't click me</a>
+            <a class="blank_space_three" th:href="@{/help}"><img th:src="@{/images/helppic.png}">Help</a>
         </div>
         <div class="login-link">
-            <a class="login" th:href="@{/login}">Login</a>
+            <a class="login" th:href="@{/login}"><img th:src="@{/images/loginpic.png}">Login</a>
         </div>
     </div>
 </nav>

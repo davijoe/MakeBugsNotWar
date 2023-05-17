@@ -10,10 +10,8 @@ import com.taskgrid.makebugsnotwar.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -142,8 +140,10 @@ public class MyController {
         return "redirect:/profilePage";
     }
     @GetMapping("/deleteProfile/{user_id}")
-    public String deleteProfile(@PathVariable("user_id") int user_id){
+    public String deleteProfile(@PathVariable("user_id") int user_id,
+                                HttpSession session){
         userRepository.deleteProfile(user_id);
+        session.removeAttribute("user_id");
         return "redirect:/";
     }
 
@@ -183,10 +183,41 @@ public class MyController {
         return "project";
     }
 
+    @GetMapping("/project-details/{id}")
+    public String viewProjectDetails(@PathVariable("id") int projectId, Model model){
+        model.addAttribute("project", projectRepository.findProjectById(projectId));
+        model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
+        model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
+
+        return "project-details";
+    }
+
+    @GetMapping("edit-project-details/{id}")
+    public String showEditProjectDetails(@PathVariable("id") int id, Model model){
+        model.addAttribute("project", projectRepository.findProjectById(id));
+        return "edit-project-details";
+    }
+    @PostMapping("edit-project-details/{id}")
+    public String editProject(@PathVariable("id") int id,
+                              @RequestParam("project-name") String projectName,
+                              @RequestParam("project-description") String projectDescription,
+                              Model model){
+        projectRepository.updateProjectDetails(id, projectName,projectDescription);
+
+        return "redirect:/project-details/{id}";
+    }
+
     @GetMapping("/view-project-tasks/{projectId}")
     public String viewProjectTasks(@PathVariable("projectId") int projectId, Model model) {
         model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
         return "view-project-tasks";
+    }
+    @GetMapping("/project-users/{project-id}")
+    public String viewProjectUsers(@PathVariable("project-id") int projectId, Model model, @ModelAttribute("foundUsers") User foundUsers) {
+        model.addAttribute("project", projectRepository.findProjectById(projectId));
+        model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
+        model.addAttribute("foundUsers", foundUsers);
+        return "project-users";
     }
     @GetMapping("/edit-task/{taskId}")
     public String showEditTask(@PathVariable("taskId") int taskId, Model model) {
@@ -249,6 +280,23 @@ public class MyController {
                                 @PathVariable("id") int projectId){
         taskRepository.updateTaskStatus(taskId, -1);
         return "redirect:/project/{id}";
+    }
+
+
+    @GetMapping("/{id}/search-users")
+    public String searchUsers(@PathVariable("id") int id, @RequestParam("query") String query, Model model, RedirectAttributes attributes) {
+        List<User> foundUsers = userRepository.searchUsers(query);
+        model.addAttribute("foundUsers", foundUsers);
+        attributes.addFlashAttribute("foundUsers", foundUsers);
+        return "redirect:/project-users/{id}";
+
+    @GetMapping("/project/{id}/delete-task/{task-id}")
+    public String deleteTask(@PathVariable("id") int projectId,
+                             @PathVariable("task-id") int taskId) {
+
+        taskRepository.deleteTask(taskId);
+        return "redirect:/project/{id}";
+
     }
 
 }
