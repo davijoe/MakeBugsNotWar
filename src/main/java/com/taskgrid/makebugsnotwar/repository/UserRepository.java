@@ -158,7 +158,6 @@ public class UserRepository {
                 String firstName = resultSet.getString("first_name");
                 String projectRole = resultSet.getString("user_position");
                 String jobTitle = resultSet.getString("job_title");
-                String email = resultSet.getString("user_email");
 
                 User user = new User();
                 user.setUserId(userId);
@@ -167,7 +166,6 @@ public class UserRepository {
                 user.setLastname(lastName);
                 user.setJobtitle(jobTitle);
                 user.setProjectRole(projectRole);
-                user.setEmail(email);
                 projectUsers.add(user);
                 System.out.println(user);
             }
@@ -231,11 +229,11 @@ public class UserRepository {
                 int userId = resultSet.getInt("user_id");
                 String username = resultSet.getString("username");
                 String email = resultSet.getString("user_email");
-                String firstName = resultSet.getString("first_name");
-                String lastName = resultSet.getString("last_name");
-                String jobTitle = resultSet.getString("job_title");
+                String firstname = resultSet.getString("first_name");
+                String lastname = resultSet.getString("last_name");
+                String job_title = resultSet.getString("job_title");
 
-                User user = new User(firstName, lastName, username, email, jobTitle);
+                User user = new User(username, email, firstname, lastname, job_title);
                 user.setUserId(userId);
                 resultUsers.add(user);
             }
@@ -245,7 +243,6 @@ public class UserRepository {
         }
         return resultUsers;
     }
-
     public void deleteProfile(int user_id) {
         final String DELETE_PROFILE_QUERY = "DELETE FROM users WHERE users.user_id = ?";
         try{

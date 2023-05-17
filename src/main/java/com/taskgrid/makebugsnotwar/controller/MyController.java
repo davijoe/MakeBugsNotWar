@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
-
 @Controller
 public class MyController {
     private final UserRepository userRepository;
@@ -201,8 +200,9 @@ public class MyController {
     @PostMapping("edit-project-details/{id}")
     public String editProject(@PathVariable("id") int id,
                               @RequestParam("project-name") String projectName,
-                              @RequestParam("project-description") String projectDescription){
-        projectRepository.updateProjectDetails(id, projectName, projectDescription);
+                              @RequestParam("project-description") String projectDescription,
+                              Model model){
+        projectRepository.updateProjectDetails(id, projectName,projectDescription);
 
         return "redirect:/project-details/{id}";
     }
@@ -261,7 +261,6 @@ public class MyController {
             task.setTaskTime(time);
             task.setTaskDescription(description);
             int taskId = taskRepository.addTask(task);
-            task.setTaskId(taskId);
 
             return "redirect:/profilePage";
         } else {
@@ -291,7 +290,6 @@ public class MyController {
         attributes.addFlashAttribute("foundUsers", foundUsers);
         return "redirect:/project-users/{id}";
     }
-
     @GetMapping("/project/{id}/delete-task/{task-id}")
     public String deleteTask(@PathVariable("id") int projectId,
                              @PathVariable("task-id") int taskId) {
@@ -300,23 +298,4 @@ public class MyController {
         return "redirect:/project/{id}";
 
     }
-
-    @GetMapping("project-users/{project-id}/add-user-to-project/{user-id}")
-    public String showAddUserToProject(@PathVariable("project-id") int projectId,
-                                       @PathVariable("user-id") int userId,
-                                       Model model){
-        model.addAttribute(projectRepository.findProjectById(projectId));
-        model.addAttribute("userId", userId);
-        return "add-user-to-project";
-    }
-
-    @PostMapping("/project-users/{project-id}/add-user-to-project/{user-id}")
-    public String addUserToProject(@RequestParam("role") String role,
-                                   @PathVariable("project-id") int projectId,
-                                   @PathVariable("user-id") int userId){
-        projectRepository.addProjectRole(userId, projectId, role);
-
-        return "redirect:/project-users/{project-id}";
-    }
-
 }

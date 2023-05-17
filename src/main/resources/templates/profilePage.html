@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="../static/css/mystyles.css" th:href="@{/css/styles.css}">
 </head>
 <body>
-<nav th:insert="fragments/topnav"></nav>
-
 <div class="container">
+    <nav th:insert="fragments/topnav"></nav>
     <div class="profile_body">
     <div th:each="user : ${users}" class="profile_info">
     <table>
@@ -52,7 +51,7 @@
         <a th:href="@{/project/8}">Link til project 8</a>
     </div>
     </div>
+    <footer th:insert="fragments/footer"></footer>
 </div>
-<footer th:insert="fragments/footer"></footer>
 </body>
 </html>
