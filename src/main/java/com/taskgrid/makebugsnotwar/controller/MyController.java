@@ -216,7 +216,7 @@ public class MyController {
     public String viewProjectUsers(@PathVariable("project-id") int projectId, Model model, @ModelAttribute("foundUsers") User foundUsers) {
         model.addAttribute("project", projectRepository.findProjectById(projectId));
         model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
-        model.addAttribute("foundUsers", foundUsers);
+        model.addAttribute("foundUsers");
         return "project-users";
     }
     @GetMapping("/edit-task/{taskId}")
