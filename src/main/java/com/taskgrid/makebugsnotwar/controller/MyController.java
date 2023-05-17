@@ -316,7 +316,7 @@ public class MyController {
                                    @PathVariable("user-id") int userId){
         projectRepository.addProjectRole(userId, projectId, role);
 
-        return "redirect:project-users/"+projectId;
+        return "redirect:/project-users/{id}";
     }
 
 }
