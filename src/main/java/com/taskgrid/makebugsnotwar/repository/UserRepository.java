@@ -158,13 +158,10 @@ public class UserRepository {
                 String firstName = resultSet.getString("first_name");
                 String projectRole = resultSet.getString("user_position");
                 String jobTitle = resultSet.getString("job_title");
+                String email = resultSet.getString("user_email");
 
-                User user = new User();
+                User user = new User(firstName, lastName, userName, email, jobTitle);
                 user.setUserId(userId);
-                user.setUsername(userName);
-                user.setFirstname(firstName);
-                user.setLastname(lastName);
-                user.setJobtitle(jobTitle);
                 user.setProjectRole(projectRole);
                 projectUsers.add(user);
                 System.out.println(user);
