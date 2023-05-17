@@ -191,8 +191,7 @@ html{
 }
 .create_body{
     min-height: 78vh;
-    width: 100%;
-    min-width: 800px;
+
 }
 
 /*styling for the taskboard*/
@@ -237,5 +236,4 @@ html{
     border-radius: 5px;
     cursor: pointer;
     margin-left: 10px;
-
 }

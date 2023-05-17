@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 </head>
 <body>
+<nav th:insert="fragments/topnav"></nav>
+
 <div>
   <form action="/edit-task" method="post">
     <input id="task-id" name="taskId" type="hidden" th:value="${tasks.taskId}">
@@ -30,5 +33,7 @@
   </form>
   <a th:href="'/project/' + ${tasks.projectId}">Back</a>
 </div>
+
+<footer th:insert="fragments/footer"></footer>
 </body>
 </html>
