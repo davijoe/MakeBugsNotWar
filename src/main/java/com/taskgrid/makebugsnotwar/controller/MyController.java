@@ -288,12 +288,10 @@ public class MyController {
     public String searchUsers(@PathVariable("id") int id, @RequestParam("query") String query, Model model, RedirectAttributes attributes) {
         List<User> foundUsers = userRepository.searchUsers(query);
         attributes.addFlashAttribute("foundUsers", foundUsers);
-        System.out.println(foundUsers);
         return "redirect:/project-users/{id}";
     }
     @GetMapping("/project/{id}/delete-task/{task-id}")
     public String deleteTask(@PathVariable("id") int projectId, @PathVariable("task-id") int taskId) {
-
         taskRepository.deleteTask(taskId);
         return "redirect:/project/{id}";
 

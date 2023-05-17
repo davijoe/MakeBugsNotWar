@@ -32,12 +32,12 @@
 
         </div>
         <div class="flex-box">
-        <div th:if="${foundUsers != null}" th:each =" user: ${foundUsers}" th:unless="${user?.username} == null" class="searched-user">
-            <p th:text="'Username: '+${user?.username}"></p>
+        <div th:if="${foundUsers != null}" th:each ="user: ${foundUsers}" th:unless="${user.username} == null" class="searched-user">
+            <p th:text="'Username: '+${user.username}"></p>
             <p th:text="'Name: '+${user.firstname}+' '+${user.lastname}"></p>
-            <p th:text="'Job title: '+${user?.jobtitle}"></p>
-            <p th:text="'Role(s): '+${user?.projectRole}"></p>
-            <p th:text="'Email: '+${user?.email}"></p>
+            <p th:text="'Job title: '+${user.jobtitle}"></p>
+            <p th:text="'Role(s): '+${user.projectRole}"></p>
+            <p th:text="'Email: '+${user.email}"></p>
         </div>
         </div>
     </div>
