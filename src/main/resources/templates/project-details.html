@@ -10,7 +10,7 @@
 
 <p th:text="${project.projectDescription}"></p>
 
-<a th:href="@{'edit-project-details/'+${project.projectId}}">
+<a th:href="@{'/edit-project-details/'+${project.projectId}}">
     Edit details
 </a>
 
