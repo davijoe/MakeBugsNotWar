@@ -310,13 +310,13 @@ public class MyController {
         return "add-user-to-project";
     }
 
-    @PostMapping("project-users/{project-id}/add-user-to-project/{user-id}")
+    @PostMapping("/project-users/{project-id}/add-user-to-project/{user-id}")
     public String addUserToProject(@RequestParam("role") String role,
                                    @PathVariable("project-id") int projectId,
                                    @PathVariable("user-id") int userId){
         projectRepository.addProjectRole(userId, projectId, role);
 
-        return "redirect:/project-users/{id}";
+        return "redirect:/project-users/{project-id}";
     }
 
 }

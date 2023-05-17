@@ -158,6 +158,7 @@ public class UserRepository {
                 String firstName = resultSet.getString("first_name");
                 String projectRole = resultSet.getString("user_position");
                 String jobTitle = resultSet.getString("job_title");
+                String email = resultSet.getString("user_email");
 
                 User user = new User();
                 user.setUserId(userId);
@@ -166,6 +167,7 @@ public class UserRepository {
                 user.setLastname(lastName);
                 user.setJobtitle(jobTitle);
                 user.setProjectRole(projectRole);
+                user.setEmail(email);
                 projectUsers.add(user);
                 System.out.println(user);
             }
