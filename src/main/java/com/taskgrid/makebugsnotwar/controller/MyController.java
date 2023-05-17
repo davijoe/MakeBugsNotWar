@@ -290,6 +290,7 @@ public class MyController {
         attributes.addFlashAttribute("foundUsers", foundUsers);
         return "redirect:/project-users/{id}";
     }
+
     @GetMapping("/project/{id}/delete-task/{task-id}")
     public String deleteTask(@PathVariable("id") int projectId,
                              @PathVariable("task-id") int taskId) {
@@ -298,4 +299,5 @@ public class MyController {
         return "redirect:/project/{id}";
 
     }
+
 }
