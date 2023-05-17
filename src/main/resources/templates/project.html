@@ -2,56 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:text="${project.projectName}"></title>
-    <style>
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 
-        body{
-            background-color: #F1FAEE;
-        }
-
-        .board {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 20px;
-        }
-
-        .column {
-            background-color: #A8DADC;
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 2em;
-        }
-
-        .column h2 {
-            margin-top: 0;
-        }
-
-        .task {
-            background-color: #F1FAEE;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .task h3 {
-            margin-top: 0;
-        }
-
-        .task button {
-            background-color: #ddd;
-            border: none;
-            color: #333;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-    </style>
 </head>
 <body>
+<nav th:insert="fragments/topnav"></nav>
+
 <h1 th:text="${project.projectName}"></h1>
 <div class="board">
     <div class="column">
@@ -165,6 +121,6 @@
 
 <a th:href="'/view-project-tasks'+${project.getProjectId}">Link to tasks</a>
 <a th:href="@{/profilePage}">Back to profile</a>
-
+<footer th:insert="fragments/footer"></footer>
 </body>
 </html>

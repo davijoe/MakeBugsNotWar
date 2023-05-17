@@ -3,20 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../static/css/mystyles.css" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 </head>
 <body>
-<div class="container">
-    <nav th:insert="fragments/topnav">
-    </nav>
-</div>
+<nav th:insert="fragments/topnav"></nav>
+
 <div class="landingpage-body">
     <br><br><br><br><br><br><br>
     <p>Content for body</p>
 </div>
-<div class="container2">
-    <footer th:insert="fragments/footer">
-    </footer>
-</div>
+<footer th:insert="fragments/footer"></footer>
 </body>
 </html>

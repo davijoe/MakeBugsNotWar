@@ -86,3 +86,45 @@ html{
 .create_body{
     min-height: 78vh;
 }
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+}
+
+.column {
+    background-color: #A8DADC;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 2em;
+}
+
+.column h2 {
+    margin-top: 0;
+}
+
+.task {
+    background-color: #F1FAEE;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.task h3 {
+    margin-top: 0;
+}
+
+.task button {
+    background-color: #ddd;
+    border: none;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
