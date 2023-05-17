@@ -29,6 +29,7 @@ html{
     min-width: 800px;
     font-size: 18px;
     justify-content: space-between;
+    align-items: center;
     background-color: #E63946;
 }
 .top-nav img{
