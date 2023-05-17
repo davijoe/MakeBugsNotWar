@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 </head>
 <body>
+<nav th:insert="fragments/topnav"></nav>
+
 <div class="tasks" th:each="task : ${tasks}">
     <table>
         <thead>
@@ -34,5 +37,6 @@
 <br>
 <a th:href="@{/profilePage}">Return to my page</a>
 
+<footer th:insert="fragments/footer"></footer>
 </body>
 </html>

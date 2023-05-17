@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../static/css/mystyles.css" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 </head>
 <body>
+<nav th:insert="fragments/topnav"></nav>
+
 <div class="container">
-    <nav th:insert="fragments/topnav"></nav>
     <div class="login_body">
     <form action="/login" method="post">
         <label for="username">Username</label>
@@ -21,7 +22,8 @@
     <p>Do you want to sign up as a new user?</p>
     <a class="login-page" th:href="@{/signup}">Signup</a>
     </div>
-    <footer th:insert="fragments/footer"></footer>
+
 </div>
+<footer th:insert="fragments/footer"></footer>
 </body>
 </html>
