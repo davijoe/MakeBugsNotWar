@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add user</title>
+</head>
+<body>
+
+  <form th:action="@{${project.projectId}+'/add-user-to-project/'+${userId}}" method="post">
+      <label for="role">Select a role:</label>
+      <select id="role" name="role">
+          <option value="Developer">Developer</option>
+          <option value="Project Manager">Project Manager</option>
+          <option value="Product Owner">Product Owner</option>
+          <option value="SCRUM Master">SCRUM Master</option>
+      </select>
+      <input type="submit" value="Add Role">
+  </form>
+
+</body>
+</html>

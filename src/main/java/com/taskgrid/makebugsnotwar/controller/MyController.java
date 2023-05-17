@@ -291,6 +291,7 @@ public class MyController {
         model.addAttribute("foundUsers", foundUsers);
         attributes.addFlashAttribute("foundUsers", foundUsers);
         return "redirect:/project-users/{id}";
+    }
 
     @GetMapping("/project/{id}/delete-task/{task-id}")
     public String deleteTask(@PathVariable("id") int projectId,
@@ -299,6 +300,24 @@ public class MyController {
         taskRepository.deleteTask(taskId);
         return "redirect:/project/{id}";
 
+    }
+
+    @GetMapping("project-users/{project-id}/add-user-to-project/{user-id}")
+    public String showAddUserToProject(@PathVariable("project-id") int projectId,
+                                       @PathVariable("user-id") int userId,
+                                       Model model){
+        model.addAttribute(projectRepository.findProjectById(projectId));
+        model.addAttribute("userId", userId);
+        return "add-user-to-project";
+    }
+
+    @PostMapping("project-users/{project-id}/add-user-to-project/{user-id}")
+    public String addUserToProject(@RequestParam("role") String role,
+                                   @PathVariable("project-id") int projectId,
+                                   @PathVariable("user-id") int userId){
+        projectRepository.addProjectRole(userId, projectId, role);
+
+        return "redirect:project-users/"+projectId;
     }
 
 }
