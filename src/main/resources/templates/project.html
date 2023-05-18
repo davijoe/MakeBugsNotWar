@@ -43,6 +43,7 @@
                 <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
                     <button>--></button>
                 </a>
+                <a th:href="@{'/project/' + ${project.projectId} + '/delete-task/' + ${task.taskId}}">Delete task</a>
             </div>
         </div>
     </div>
@@ -63,6 +64,7 @@
                 <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
                     <button>--></button>
                 </a>
+                <a th:href="@{'/project/' + ${project.projectId} + '/delete-task/' + ${task.taskId}}">Delete task</a>
             </div>
         </div>
     </div>
@@ -82,6 +84,7 @@
                 <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
                     <button>--></button>
                 </a>
+                <a th:href="@{'/project/' + ${project.projectId} + '/delete-task/' + ${task.taskId}}">Delete task</a>
             </div>
         </div>
     </div>
@@ -101,6 +104,7 @@
                 <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
                     <button>--></button>
                 </a>
+                <a th:href="@{'/project/' + ${project.projectId} + '/delete-task/' + ${task.taskId}}">Delete task</a>
             </div>
         </div>
     </div>
@@ -116,6 +120,7 @@
                 </a>
 
                 <a th:href="@{'/edit-task/'+${task.taskId}}">Edit</a>
+                <a th:href="@{'/project/' + ${project.projectId} + '/delete-task/' + ${task.taskId}}">Delete task</a>
             </div>
         </div>
     </div>
@@ -124,6 +129,7 @@
 <a th:href="'/view-project-tasks/'+${project.getProjectId}">Link to tasks</a>
 <a th:href="'/project-details/' + ${project.projectId}">View project details</a>
 <a th:href="@{/profilePage}">Back to profile</a>
+<a th:href="'/create-task/' + ${project.projectId}">Create new task</a>
 <footer th:insert="fragments/footer"></footer>
 </body>
 </html>

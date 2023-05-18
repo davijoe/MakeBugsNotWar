@@ -237,7 +237,7 @@ public class MyController {
 
         Task task = new Task(taskId, taskName, taskDescription, taskStatus, userId, projectId, taskTime);
         taskRepository.editTask(task);
-        return "redirect:/project/{projectId}";
+        return "redirect:/project/" + projectId;
 
     }
 
@@ -266,7 +266,7 @@ public class MyController {
             task.setProjectId(projectId);
             int taskId = taskRepository.addTask(task);
 
-            return "redirect:/profilePage";
+            return "redirect:/project/" + projectId;
         } else {
             return "redirect:/login";
         }
