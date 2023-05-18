@@ -318,4 +318,12 @@ public class MyController {
         return "redirect:/project-users/{project-id}";
     }
 
+    @GetMapping("/project-users/{project-id}/remove-user/{user-id}")
+    public String removeUserFromProject(@PathVariable("project-id") int projectId,
+                                        @PathVariable("user-id") int userId){
+        userRepository.removeFromProject(userId, projectId);
+
+        return "redirect:/project-users/{project-id}";
+    }
+
 }
