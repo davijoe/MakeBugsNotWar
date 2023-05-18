@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/mystyles.css" th:href="@{/css/styles.css}">
     <title>Project details</title>
 </head>
 <body>
+<nav th:insert="fragments/topnav"></nav>
 
 <h1 th:text="${project.projectName}"></h1>
 
@@ -14,8 +16,23 @@
     Edit details
 </a>
 <br>
+<h1> Tasks on this project</h1>
+<div class="flex-box">
+    <div class="project-task" th:each="task : ${tasks}">
+            <p th:text="'Task name: '+ ${task.taskName}"></p>
+            <p th:text="'Task description: ' + ${task.taskDescription}"></p>
+            <p th:text="'Task status: ' + ${task.taskStatus}"></p>
+            <p th:text="'Task time: ' + ${task.taskTime}"></p>
+            <p th:text="'User ID: ' + ${task.userId}"></p>
+</div>
+    <div class="project-task-calc">
+        <p>How this look</p>
+        <p>fisk</p>
+    </div>
+</div>
 
 <a th:href="'/create-task/' + ${project.projectId}">Create task</a>
 
+<footer th:insert="fragments/footer"></footer>
 </body>
 </html>

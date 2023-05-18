@@ -166,4 +166,28 @@ public class TaskRepository {
             e.printStackTrace();
         }
     }
+
+    public List<Task> calculateProjectTaskInfo(int projectId) {
+        List<Task> taskInfoList = new ArrayList<>();
+
+        final String CALCTASKINFO_QUERY="SELECT task_status, SUM(task_time) AS sum FROM tasks WHERE project_id = ? GROUP BY task_status WITH ROLLUP";
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL,DB_UID,DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(CALCTASKINFO_QUERY);
+            preparedStatement.setInt(1,projectId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+
+
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println("Could not get task info");
+            e.printStackTrace();
+
+        }
+
+        return taskInfoList;
+    }
 }

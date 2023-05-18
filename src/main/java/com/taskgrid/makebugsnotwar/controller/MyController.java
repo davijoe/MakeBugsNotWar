@@ -187,6 +187,7 @@ public class MyController {
     public String viewProjectDetails(@PathVariable("id") int projectId, Model model){
         model.addAttribute("project", projectRepository.findProjectById(projectId));
         model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
+        model.addAttribute("task-info", taskRepository.calculateProjectTaskInfo(projectId));
         model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
 
         return "project-details";

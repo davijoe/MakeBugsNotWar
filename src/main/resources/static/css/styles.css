@@ -277,3 +277,18 @@ html{
     border-radius: 2em;
 }
 
+/*-----------------------------CSS FOR PROJECT DETAILS ----------------------*/
+
+
+.project-task {
+    display: flex;
+    align-items: flex-start;
+    flex-flow: column wrap;
+    background-color: #A8DADC;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 2em;
+    margin: 5px;
+    align-self: flex-start;
+
+}
