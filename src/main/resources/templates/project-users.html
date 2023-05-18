@@ -19,6 +19,9 @@
                 <p th:text="'Job title: '+${user.jobtitle}"></p>
                 <p th:text="'Role(s): '+${user.projectRole}"></p>
                 <p th:text="'Email: '+${user.email}"></p>
+                <a th:href="@{'/project-users/'+${project.projectId}+'/remove-user/'+${user.userId}}">
+                    <button>Remove from project</button>
+                </a>
             </div>
         </div>
 

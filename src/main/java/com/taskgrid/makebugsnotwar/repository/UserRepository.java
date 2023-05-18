@@ -249,8 +249,26 @@ public class UserRepository {
             preparedStatement.executeUpdate();
 
         }catch(SQLException sqle){
-            System.out.println("Could not delete product.");
+            System.out.println("Could not delete profile.");
             sqle.printStackTrace();
         }
     }
+
+    public void removeFromProject(int userId, int projectId) {
+        final String DELETE_QUERY = "DELETE FROM taskgrid.user_project "+
+                                    "WHERE user_id = ? AND project_id = ?";
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY);
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, projectId);
+            preparedStatement.executeUpdate();
+
+        }catch(SQLException e){
+            System.out.println("Could not unassign user.");
+            e.printStackTrace();
+        }
+    }
+
 }
+
