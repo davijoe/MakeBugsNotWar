@@ -20,7 +20,7 @@ public class TaskRepository {
 
     public int addTask(Task task) {
         final String ADD_TASK_QUERY = "INSERT INTO taskgrid.tasks"+
-                "(task_name, task_status, task_time, task_description) VALUES (?,?,?,?)";
+                "(task_name, task_status, task_time, task_description, project_id) VALUES (?,?,?,?,?)";
 
         final String LAST_INSERT_QUERY = "SELECT LAST_INSERT_ID()";
 
@@ -33,6 +33,7 @@ public class TaskRepository {
             preparedStatement.setInt(2,task.getTaskStatus());
             preparedStatement.setInt(3, task.getTaskTime());
             preparedStatement.setString(4, task.getTaskDescription());
+            preparedStatement.setInt(5,task.getProjectId());
             preparedStatement.executeUpdate();
 
             Statement statement = connection.createStatement();

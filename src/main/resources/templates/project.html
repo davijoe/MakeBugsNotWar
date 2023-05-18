@@ -122,6 +122,7 @@
 </div>
 
 <a th:href="'/view-project-tasks/'+${project.getProjectId}">Link to tasks</a>
+<a th:href="'/project-details/' + ${project.projectId}">View project details</a>
 <a th:href="@{/profilePage}">Back to profile</a>
 <footer th:insert="fragments/footer"></footer>
 </body>

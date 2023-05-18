@@ -121,7 +121,7 @@ public class ProjectRepository {
     public void updateProjectDetails(int projectId, String newName, String newDescription) {
 
            final String UPDATE_PROJECT_QUERY = "UPDATE taskgrid.projects "+
-                   "SET name = ?, description = ? WHERE id = ?";
+                   "SET project_name = ?, project_description = ? WHERE project_id = ?";
 
             try {
                 Connection connection = ConnectionManager.getConnection(DB_UID, DB_UID, DB_PWD);

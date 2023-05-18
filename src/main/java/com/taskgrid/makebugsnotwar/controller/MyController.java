@@ -192,15 +192,15 @@ public class MyController {
         return "project-details";
     }
 
-    @GetMapping("edit-project-details/{id}")
+    @GetMapping("/edit-project-details/{id}")
     public String showEditProjectDetails(@PathVariable("id") int id, Model model){
         model.addAttribute("project", projectRepository.findProjectById(id));
         return "edit-project-details";
     }
-    @PostMapping("edit-project-details/{id}")
+    @PostMapping("/edit-project-details/{id}")
     public String editProject(@PathVariable("id") int id,
-                              @RequestParam("project-name") String projectName,
-                              @RequestParam("project-description") String projectDescription,
+                              @RequestParam("name") String projectName,
+                              @RequestParam("description") String projectDescription,
                               Model model){
         projectRepository.updateProjectDetails(id, projectName,projectDescription);
 
@@ -242,8 +242,9 @@ public class MyController {
     }
 
 
-    @GetMapping("/create-task")
-    public String showCreateTask(){
+    @GetMapping("/create-task/{projectId}")
+    public String showCreateTask(@PathVariable("projectId") int projectId, Model model){
+        model.addAttribute("project-id", projectId);
         return "create-task";
     }
 
@@ -252,6 +253,7 @@ public class MyController {
                              @RequestParam("task-status") int status,
                              @RequestParam("task-time") int time,
                              @RequestParam("task-description") String description,
+                             @RequestParam("project-id") int projectId,
                              HttpSession session){
 
         if (session.getAttribute("user_id") != null) {
@@ -261,6 +263,7 @@ public class MyController {
             task.setTaskStatus(status);
             task.setTaskTime(time);
             task.setTaskDescription(description);
+            task.setProjectId(projectId);
             int taskId = taskRepository.addTask(task);
 
             return "redirect:/profilePage";

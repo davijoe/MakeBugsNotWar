@@ -10,9 +10,12 @@
 
 <p th:text="${project.projectDescription}"></p>
 
-<a th:href="@{'edit-project-details/'+${project.projectId}}">
+<a th:href="'/edit-project-details/'+${project.projectId}">
     Edit details
 </a>
+<br>
+
+<a th:href="'/create-task/' + ${project.projectId}">Create task</a>
 
 </body>
 </html>
