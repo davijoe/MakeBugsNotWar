@@ -5,6 +5,7 @@
     <title>Project details</title>
 </head>
 <body>
+<nav th:insert="fragments/topnav"></nav>
 
 <h1 th:text="${project.projectName}"></h1>
 
@@ -14,5 +15,6 @@
     Edit details
 </a>
 
+<footer th:insert="fragments/footer"></footer>
 </body>
 </html>
