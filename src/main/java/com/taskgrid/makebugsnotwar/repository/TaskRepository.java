@@ -177,8 +177,10 @@ public class TaskRepository {
             preparedStatement.setInt(1,projectId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-
-
+                int taskStatus = resultSet.getInt(1);
+                int sumTaskTime = resultSet.getInt(2);
+                Task task = new Task(taskStatus, sumTaskTime);
+                taskInfoList.add(task);
             }
 
 
