@@ -7,9 +7,9 @@ body{
     width: 100%;
     min-width: 800px;
     background-color: #F1FAEE;
+    min-height: 78vh;
 }
 body, html{
-    height: auto;
     width: auto;
 }
 html{
@@ -241,6 +241,7 @@ html{
 
 
 /*------------------------STYLING FOR SEARCH USER-------------------------*/
+
 
 .search-user-board {
     display: grid;

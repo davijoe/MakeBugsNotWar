@@ -5,8 +5,9 @@
     <link rel="stylesheet" href="../static/css/mystyles.css" th:href="@{/css/styles.css}">
     <title th:text="${project.projectName}+' team members'"></title>
 </head>
-<body>
 <nav th:insert="fragments/topnav"></nav>
+<body>
+
 <h1 th:text="${project.projectName}"></h1>
 
     <div class="search-user-board">
