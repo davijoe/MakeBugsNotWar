@@ -135,4 +135,24 @@ public class ProjectRepository {
             e.printStackTrace();
         }
     }
+
+    public void deleteProjectById(int id){
+        final String DELETE_QUERY = "DELETE taskgrid.projects, taskgrid.user_project, taskgrid.tasks "+
+        "FROM taskgrid.projects "+
+        "LEFT JOIN taskgrid.tasks ON tasks.project_id = projects.project_id "+
+        "LEFT JOIN taskgrid.user_project ON user_project.project_id = projects.project_id "+
+        "WHERE projects.project_id = ?";
+
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_UID, DB_UID, DB_PWD);
+            PreparedStatement statement = connection.prepareStatement(DELETE_QUERY);
+            statement.setInt(1, id);
+
+            statement.executeUpdate();
+        }catch(SQLException e){
+            System.out.println("Could not delete project");
+            e.printStackTrace();
+        }
+
+    }
 }

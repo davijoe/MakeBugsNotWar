@@ -329,4 +329,14 @@ public class MyController {
         return "redirect:/project-users/{project-id}";
     }
 
+    @PostMapping("/edit-project-details/{project-id}/delete-project")
+    public String deleteProject(@PathVariable("project-id") int projectId,
+                                @RequestParam("delete") String deleteRequest){
+        if (deleteRequest.equals("DELETE")){
+            projectRepository.deleteProjectById(projectId);
+        return "redirect:/profilePage";}
+        else {
+            return "redirect:/edit-project-details/{project-id}";
+        }
+    }
 }

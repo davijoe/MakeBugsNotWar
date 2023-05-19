@@ -16,14 +16,15 @@
   
   <label for="description">Description:</label>
   <input type="text" id="description" name="description" th:value="${project.projectDescription}" required />
-  
-  <input type="text" id="name" name="project-name" th:value="${project.projectName}" required />
-  <br/>
-  <label for="description">Description:</label>
-  <input type="text" id="description" name="project-description" th:value="${project.projectDescription}" required />
 
   <br/>
   <button type="submit">Update</button>
+</form>
+
+<form th:action="@{'/edit-project-details/'+${project.projectId}+'/delete-project'}" method="post">
+  <label for="delete">Write 'DELETE' to delete this project and all its content. WARNING: this is permanent</label>
+  <input type="text" id="delete" name="delete"/>
+  <button type="submit">Delete project</button>
 </form>
 
 <footer th:insert="fragments/footer"></footer>
