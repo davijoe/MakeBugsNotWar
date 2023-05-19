@@ -219,7 +219,6 @@ public class MyController {
     public String viewProjectUsers(@PathVariable("project-id") int projectId, Model model, @ModelAttribute("foundUsers") User foundUsers) {
         model.addAttribute("project", projectRepository.findProjectById(projectId));
         model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
-        System.out.println("break");
         model.addAttribute("foundUsers");
         return "project-users";
     }
@@ -296,11 +295,38 @@ public class MyController {
         attributes.addFlashAttribute("foundUsers", foundUsers);
         return "redirect:/project-users/{id}";
     }
+
     @GetMapping("/project/{id}/delete-task/{task-id}")
     public String deleteTask(@PathVariable("id") int projectId, @PathVariable("task-id") int taskId) {
         taskRepository.deleteTask(taskId);
         return "redirect:/project/{id}";
 
+    }
+
+    @GetMapping("project-users/{project-id}/add-user-to-project/{user-id}")
+    public String showAddUserToProject(@PathVariable("project-id") int projectId,
+                                       @PathVariable("user-id") int userId,
+                                       Model model){
+        model.addAttribute(projectRepository.findProjectById(projectId));
+        model.addAttribute("userId", userId);
+        return "add-user-to-project";
+    }
+
+    @PostMapping("/project-users/{project-id}/add-user-to-project/{user-id}")
+    public String addUserToProject(@RequestParam("role") String role,
+                                   @PathVariable("project-id") int projectId,
+                                   @PathVariable("user-id") int userId){
+        projectRepository.addProjectRole(userId, projectId, role);
+
+        return "redirect:/project-users/{project-id}";
+    }
+
+    @GetMapping("/project-users/{project-id}/remove-user/{user-id}")
+    public String removeUserFromProject(@PathVariable("project-id") int projectId,
+                                        @PathVariable("user-id") int userId){
+        userRepository.removeFromProject(userId, projectId);
+
+        return "redirect:/project-users/{project-id}";
     }
 
 }

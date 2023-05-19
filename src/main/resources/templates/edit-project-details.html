@@ -4,16 +4,28 @@
   <title>Update Project</title>
 </head>
 <body>
+<nav th:insert="fragments/topnav"></nav>
+
 <h1>Update Project</h1>
 <form th:action="@{'/edit-project-details/'+${project.projectId}}" method="post">
   <input type="hidden" th:name="${project.projectId}" th:value="${project.projectId}" />
+  
   <label for="name">Name:</label>
   <input type="text" id="name" name="name" th:value="${project.projectName}" required />
   <br/>
+  
   <label for="description">Description:</label>
   <input type="text" id="description" name="description" th:value="${project.projectDescription}" required />
+  
+  <input type="text" id="name" name="project-name" th:value="${project.projectName}" required />
+  <br/>
+  <label for="description">Description:</label>
+  <input type="text" id="description" name="project-description" th:value="${project.projectDescription}" required />
+
   <br/>
   <button type="submit">Update</button>
 </form>
+
+<footer th:insert="fragments/footer"></footer>
 </body>
 </html>

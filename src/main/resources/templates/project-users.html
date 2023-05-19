@@ -19,6 +19,9 @@
                 <p th:text="'Job title: '+${user.jobtitle}"></p>
                 <p th:text="'Role(s): '+${user.projectRole}"></p>
                 <p th:text="'Email: '+${user.email}"></p>
+                <a th:href="@{'/project-users/'+${project.projectId}+'/remove-user/'+${user.userId}}">
+                    <button>Remove from project</button>
+                </a>
             </div>
         </div>
 
@@ -32,6 +35,7 @@
             </form>
 
         </div>
+
         <div class="flex-box">
         <div th:if="${foundUsers != null}" th:each ="user: ${foundUsers}" th:unless="${user.username} == null" class="searched-user">
             <p th:text="'Username: '+${user.username}"></p>
@@ -42,6 +46,20 @@
         </div>
         </div>
     </div>
+
+
+        <div class="column">
+            <div th:if="${foundUsers != null}" th:each =" user: ${foundUsers}" class="user">
+                <p th:text="'Username: '+${user.username}"></p>
+                <p th:text="'Name: '+${user.firstname}+' '+${user.lastname}"></p>
+                <p th:text="'Job title: '+${user.jobtitle}"></p>
+                <p th:text="'Email: '+${user.email}"></p>
+                <a th:href="@{${project.projectId}+'/add-user-to-project/'+${user.userId}}">Add to project</a>
+            </div>
+        </div>
+    </div>
+
+
 <footer th:insert="fragments/footer"></footer>
 </body>
 

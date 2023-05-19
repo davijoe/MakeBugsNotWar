@@ -12,7 +12,9 @@
 
 <p th:text="${project.projectDescription}"></p>
 
-<a th:href="'/edit-project-details/'+${project.projectId}">
+
+<a th:href="@{'/edit-project-details/'+${project.projectId}}">
+  
     Edit details
 </a>
 <br>
@@ -33,6 +35,7 @@
 </div>
 
 <a th:href="'/create-task/' + ${project.projectId}">Create task</a>
+
 
 <footer th:insert="fragments/footer"></footer>
 </body>

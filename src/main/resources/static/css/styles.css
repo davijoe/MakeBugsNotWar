@@ -29,7 +29,6 @@ html{
     min-width: 800px;
     font-size: 18px;
     justify-content: space-between;
-    align-items: center;
     background-color: #E63946;
 }
 .top-nav img{
@@ -83,85 +82,58 @@ html{
 }
 .login-link a:hover {
     color: black;
-}/* TOPNAV CSS BLOCK */
+}
 
-.top-nav{
-    position: relative;
-    display:flex;
-    flex-direction: row;
-    height: 4vh;
-    min-height: 35px;
-    width: 100%;
-    min-width: 800px;
-    font-size: 18px;
-    justify-content: space-between;
-    background-color: #E63946;
-}
-/* TOPNAV CSS BLOCK */
+/* SIDENAV CSS BLOCK */
 
-.top-nav{
-    position: relative;
-    display:flex;
-    flex-direction: row;
-    height: 4vh;
-    min-height: 35px;
-    width: 100%;
-    min-width: 800px;
-    font-size: 18px;
-    justify-content: space-between;
+.proj_tool_bar{
+    position: fixed;
+    top: 30%;
+    font-size: 35px;
+    writing-mode: vertical-rl;
+}
+.sidenav-container{
+    width: 10vw;
+    min-width: 45px;
+    height: 60vh;
+    min-height: 250px;
+    margin-top: 5%;
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+}
+.sidenav{
     background-color: #E63946;
-}
-.top-nav img{
-    width: 1.5vw;
-    min-height: 25px;
-    min-width: 25px;
-}
-.homepage_image a{
+    transform: translateX(calc(-100% + 10px));
+    transition: transform .4s cubic-bezier(.4, 0, .2, 1) .2s;
+    flex-grow: 1;
     display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: white;
-    margin-left: 2vw;
-}
-.homepage_image a:hover{
-    color: black;
-}
-.blankspace_one a{
-    display: flex;
-    text-decoration: none;
-    color: white;
+    flex-direction: column;
     align-items: center;
 }
-.blankspace_one a:hover {
-    color: black;
+.sidenav-container:hover .sidenav{
+    transform: translateX(0);
+    transition-delay: 0s;
 }
-.blankspace_two a{
-    display: flex;
-    text-decoration: none;
+
+.sidenav{
+    position: relative;
+}
+.link-container{
+    font-size: 30px;
+    width: 100%;
+    margin-top: 80%;
+}
+.link-container a{
     color: white;
-    align-items: center;
-}
-.blankspace_two a:hover {
-    color: black;
-}
-.blankspace_three a{
-    display: flex;
     text-decoration: none;
-    color: white;
-    align-items: center;
+    display: block;
 }
-.blankspace_three a:hover {
+.link-container a:hover{
     color: black;
 }
-.login-link a{
+.sidebar-links{
     display: flex;
-    text-decoration: none;
-    color: white;
-    align-items: center;
-    margin-right: 2vw;
-}
-.login-link a:hover {
-    color: black;
 }
 
 .footer{
@@ -237,6 +209,7 @@ html{
     cursor: pointer;
     margin-left: 10px;
 
+
 }
 
 
@@ -302,4 +275,17 @@ html{
     border-radius: 2em;
     margin: 5px;
     align-self: flex-start;
+
+}
+
+.user {
+    background-color: #F1FAEE;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
 }
