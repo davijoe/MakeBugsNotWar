@@ -103,7 +103,6 @@ public class UserRepository {
             resultSet.getInt(1);
             if (!(resultSet.wasNull())) {
                 user_id = resultSet.getInt(1);
-                System.out.println(user_id);
             }
         } catch (SQLException sqle) {
             System.out.println("Could not login");
@@ -164,7 +163,6 @@ public class UserRepository {
                 user.setUserId(userId);
                 user.setProjectRole(projectRole);
                 projectUsers.add(user);
-                System.out.println(user);
             }
 
         }catch(SQLException e){
@@ -215,7 +213,6 @@ public class UserRepository {
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_QUERY);
             preparedStatement.setString(1, searchText);
-            System.out.println(searchText);
             preparedStatement.setString(2, searchText);
             preparedStatement.setString(3, searchText);
             preparedStatement.setString(4, searchText);
@@ -224,13 +221,20 @@ public class UserRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int userId = resultSet.getInt("user_id");
+                System.out.println(userId);
                 String username = resultSet.getString("username");
+                System.out.println(username);
                 String email = resultSet.getString("user_email");
+                System.out.println(email);
                 String firstname = resultSet.getString("first_name");
+                System.out.println(firstname);
                 String lastname = resultSet.getString("last_name");
+                System.out.println(lastname);
                 String job_title = resultSet.getString("job_title");
+                System.out.println(job_title);
+                System.out.println("break");
 
-                User user = new User(username, email, firstname, lastname, job_title);
+                User user = new User(firstname, lastname, username, email, job_title);
                 user.setUserId(userId);
                 resultUsers.add(user);
             }
@@ -240,6 +244,7 @@ public class UserRepository {
         }
         return resultUsers;
     }
+
     public void deleteProfile(int user_id) {
         final String DELETE_PROFILE_QUERY = "DELETE FROM users WHERE users.user_id = ?";
         try{

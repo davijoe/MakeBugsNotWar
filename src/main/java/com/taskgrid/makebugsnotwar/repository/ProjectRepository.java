@@ -102,7 +102,6 @@ public class ProjectRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(PROJECTBYUSERID_QUERY);
             preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
             while (resultSet.next()) {
                 int projectId = resultSet.getInt(1);
                 String projectName = resultSet.getString(2);

@@ -20,7 +20,7 @@ public class TaskRepository {
 
     public int addTask(Task task) {
         final String ADD_TASK_QUERY = "INSERT INTO taskgrid.tasks"+
-                "(task_name, task_status, task_time, task_description) VALUES (?,?,?,?)";
+                "(task_name, task_status, task_time, task_description, project_id) VALUES (?,?,?,?,?)";
 
         final String LAST_INSERT_QUERY = "SELECT LAST_INSERT_ID()";
 
@@ -33,6 +33,7 @@ public class TaskRepository {
             preparedStatement.setInt(2,task.getTaskStatus());
             preparedStatement.setInt(3, task.getTaskTime());
             preparedStatement.setString(4, task.getTaskDescription());
+            preparedStatement.setInt(5,task.getProjectId());
             preparedStatement.executeUpdate();
 
             Statement statement = connection.createStatement();
@@ -164,5 +165,33 @@ public class TaskRepository {
             System.out.println("Could not delete task");
             e.printStackTrace();
         }
+    }
+
+    public List<Task> calculateProjectTaskInfo(int projectId) {
+        List<Task> taskInfoList = new ArrayList<>();
+
+        final String CALCTASKINFO_QUERY="SELECT IFNULL(task_status, -1), SUM(task_time) AS sum FROM tasks WHERE project_id = ? GROUP BY task_status WITH ROLLUP";
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL,DB_UID,DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(CALCTASKINFO_QUERY);
+            preparedStatement.setInt(1,projectId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int taskStatus = resultSet.getInt(1);
+                System.out.println("tasks incomming");
+                System.out.println(taskStatus);
+                int sumTaskTime = resultSet.getInt(2);
+                Task task = new Task(taskStatus, sumTaskTime);
+                taskInfoList.add(task);
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println("Could not get task info");
+            e.printStackTrace();
+
+        }
+
+        return taskInfoList;
     }
 }

@@ -7,9 +7,9 @@ body{
     width: 100%;
     min-width: 800px;
     background-color: #F1FAEE;
+    min-height: 78vh;
 }
 body, html{
-    height: auto;
     width: auto;
 }
 html{
@@ -208,6 +208,74 @@ html{
     border-radius: 5px;
     cursor: pointer;
     margin-left: 10px;
+
+
+}
+
+
+/*------------------------STYLING FOR SEARCH USER-------------------------*/
+
+
+.search-user-board {
+    display: grid;
+    grid-template-columns: 20% 20% auto;
+    gap: 20px;
+}
+.search-user-board h1 {
+    background-image: linear-gradient(whitesmoke,black);
+}
+.search-user-board .user {
+    padding: 10px;
+    border: solid #333333;
+}
+.searched-user {
+    display: flex;
+    align-items: flex-start;
+    flex-flow: column;
+    background-color: #A8DADC;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 2em;
+    margin: 5px;
+    align-self: flex-start;
+}
+.flex-box {
+    display: flex;
+    flex-flow: row wrap;
+}
+.search-column {
+    background-color: #A8DADC;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 2em;
+}
+
+/*-----------------------------CSS FOR PROJECT DETAILS ----------------------*/
+
+
+.project-task {
+    display: flex;
+    align-items: flex-start;
+    flex-flow: column wrap;
+    background-color: #A8DADC;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 2em;
+    margin: 5px;
+    align-self: flex-start;
+
+}
+.project-task-calc {
+    display: flex;
+    align-items: flex-start;
+    flex-flow: column wrap;
+    background-color: #A8DADC;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 2em;
+    margin: 5px;
+    align-self: flex-start;
+
 }
 
 .user {
@@ -219,4 +287,5 @@ html{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  
 }

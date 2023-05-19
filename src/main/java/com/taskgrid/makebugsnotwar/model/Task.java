@@ -12,6 +12,11 @@ public class Task {
 
     public Task(){} // default constructor
 
+    public Task(int taskStatus, int taskTime) {
+        this.taskStatus = taskStatus;
+        this.taskTime = taskTime;
+    }
+
     public Task(int taskId, String taskName, int taskStatus, int taskTime, String taskDescription) {
         this.taskId = taskId;
         this.taskName = taskName;

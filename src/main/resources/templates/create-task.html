@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>New Task</title>
@@ -10,6 +10,7 @@
 
     <div>
         <form action="/create-task" method="post">
+            <input id="projectId" name="project-id" type="hidden" th:value="${projectId}">
             <div>
                 <label for="name-field">Task name:</label>
                 <input id="name-field" name="task-name" type="text">
@@ -26,7 +27,7 @@
              </div>
             <br>
             <div>
-                <label for="time-field">Task description:</label>
+                <label for="time-field">Task time:</label>
                 <input id="time-field" name="task-time" type="text">
              </div>
             <br>
