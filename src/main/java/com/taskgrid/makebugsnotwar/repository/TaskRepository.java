@@ -170,7 +170,7 @@ public class TaskRepository {
     public List<Task> calculateProjectTaskInfo(int projectId) {
         List<Task> taskInfoList = new ArrayList<>();
 
-        final String CALCTASKINFO_QUERY="SELECT task_status, SUM(task_time) AS sum FROM tasks WHERE project_id = ? GROUP BY task_status WITH ROLLUP";
+        final String CALCTASKINFO_QUERY="SELECT IFNULL(task_status, -1), SUM(task_time) AS sum FROM tasks WHERE project_id = ? GROUP BY task_status WITH ROLLUP";
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL,DB_UID,DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(CALCTASKINFO_QUERY);
@@ -178,6 +178,8 @@ public class TaskRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int taskStatus = resultSet.getInt(1);
+                System.out.println("tasks incomming");
+                System.out.println(taskStatus);
                 int sumTaskTime = resultSet.getInt(2);
                 Task task = new Task(taskStatus, sumTaskTime);
                 taskInfoList.add(task);

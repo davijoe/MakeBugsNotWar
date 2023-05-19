@@ -113,12 +113,14 @@ public class MyController {
     @GetMapping("/profilePage")
     public String profilePage(HttpSession session, Model model) {
         if (session.getAttribute("user_id") == null) {
+            System.out.println("user_id null");
             return "redirect:/login";
         }
         int user_id = (int) session.getAttribute("user_id");
         model.addAttribute("user_id", session.getAttribute("user_id"));
         model.addAttribute("users", userRepository.getUserInfo(user_id));
         model.addAttribute("projects", projectRepository.getProjectsForUser(user_id));
+        System.out.println(user_id);
         return "profilePage";
     }
     @GetMapping("/updateProfile/{user_id}")
@@ -187,7 +189,7 @@ public class MyController {
     public String viewProjectDetails(@PathVariable("id") int projectId, Model model){
         model.addAttribute("project", projectRepository.findProjectById(projectId));
         model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
-        model.addAttribute("task-info", taskRepository.calculateProjectTaskInfo(projectId));
+        model.addAttribute("taskinfo", taskRepository.calculateProjectTaskInfo(projectId));
         model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
 
         return "project-details";
