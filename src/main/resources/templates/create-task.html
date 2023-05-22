@@ -8,6 +8,8 @@
 <body>
 <nav th:insert="fragments/topnav"></nav>
 
+<nav th:insert="fragments/sidenav"></nav>
+
     <div>
         <form action="/create-task" method="post">
             <input id="projectId" name="project-id" type="hidden" th:value="${projectId}">
