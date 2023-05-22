@@ -8,6 +8,10 @@
 <body>
 <nav th:insert="fragments/topnav"></nav>
 
+<div class="container">
+    <nav th:insert="fragments/sidenav"></nav>
+</div>
+
 <div class="tasks" th:each="task : ${tasks}">
     <table>
         <thead>

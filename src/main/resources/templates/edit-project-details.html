@@ -2,9 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Update Project</title>
+  <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 </head>
 <body>
 <nav th:insert="fragments/topnav"></nav>
+
+<nav th:insert="fragments/sidenav"></nav>
 
 <h1>Update Project</h1>
 <form th:action="@{'/edit-project-details/'+${project.projectId}}" method="post">

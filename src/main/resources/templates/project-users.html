@@ -2,11 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/css/mystyles.css" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
     <title th:text="${project.projectName}+' team members'"></title>
 </head>
-<nav th:insert="fragments/topnav"></nav>
+
 <body>
+<nav th:insert="fragments/topnav"></nav>
+
+<nav th:insert="fragments/sidenav"></nav>
 
 <h1 th:text="${project.projectName}"></h1>
 

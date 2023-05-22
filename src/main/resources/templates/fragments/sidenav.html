@@ -11,20 +11,23 @@
         <nav class="sidenav">
         <div class="side_links">
             <div class="link-container">
-                <a class="sidebar-links">Link1</a>
+                <a th:href="@{'/view-project-tasks/'+${project.projectId}}">Tasks</a>
+
             </div>
             <div class="link-container">
-                <a class="sidebar-links">Link2</a>
+                <a th:href="'/project-details/' + ${project.projectId}">Data</a>
             </div>
             <div class="link-container">
-                <a class="sidebar-links">Link3</a>
+                <a th:href="@{'/project/'+${project.projectId}}">Board</a>
             </div>
             <div class="link-container">
-                <a class="sidebar-links">Link4</a>
+                <a th:href="@{'/project-users/'+${project.projectId}}">Team</a>
+            </div>
+            <div class="link-container">
+            <a th:href="@{'/edit-project-details/'+${project.projectId}}">Edit</a>
             </div>
         </div>
         </nav>
-        </div>
     </div>
 </nav>
 </body>
