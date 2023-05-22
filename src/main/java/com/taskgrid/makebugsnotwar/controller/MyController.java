@@ -7,6 +7,7 @@ import com.taskgrid.makebugsnotwar.model.User;
 import com.taskgrid.makebugsnotwar.repository.ProjectRepository;
 import com.taskgrid.makebugsnotwar.repository.TaskRepository;
 import com.taskgrid.makebugsnotwar.repository.UserRepository;
+import com.taskgrid.makebugsnotwar.service.ControllerServices;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +21,14 @@ public class MyController {
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
     private final TaskRepository taskRepository;
+    private final ControllerServices controllerServices;
 
-    public MyController(UserRepository userRepository, ProjectRepository projectRepository, TaskRepository taskRepository){
+    public MyController(UserRepository userRepository, ProjectRepository projectRepository,
+                        TaskRepository taskRepository, ControllerServices controllerServices){
         this.userRepository = userRepository;
         this.projectRepository = projectRepository;
         this.taskRepository = taskRepository;
+        this.controllerServices = controllerServices;
     }
 
     @GetMapping("/")
@@ -48,42 +52,40 @@ public class MyController {
                          @RequestParam("u_email") String email,
                          @RequestParam("u_jobtitle") String jobtitle,
                          Model model){
-        boolean testUsername = false;
-        boolean testPassword = false;
-        String username_output = "";
 
-        while(!testUsername){
-            char[] username_chars = username.toCharArray();
-            if(username.length() < 20){
-                for(char aChar : username_chars ) {
-                    if(Character.isLetter(aChar) || Character.isDigit(aChar)){
-                        username_output = username_output.concat(Character.toString(aChar));
-                        if(username_output.length() == username.length()){
-                            testUsername = true;
-                        }
-                    }
-                    else{
-                        model.addAttribute("errorMessageUserName", "Illegal characters in username");
-                        return "signup";
-                    }
-                }
-            }
-        }
-        while(!testPassword){
-            if(password.length() < 345 && password.length() > 16){
-              testPassword = true;
-            }
-            else {
-                model.addAttribute("errorMessagePassword", "Password is not within the length limit");
-                return "signup";
-            }
-        }
+        String testedUsername;
+        String testedPassword;
+        String testedEmail;
 
+        String checkedFirstname = controllerServices.checkFirstname(firstname);
+        String checkedLastname = controllerServices.checkLastname(lastname);
+
+        if(controllerServices.checkUsername(username)){
+            testedUsername = username;
+        }
+        else{
+            model.addAttribute("errorMessageUserName", "Illegal characters in username");
+            return "signup";
+        }
+        if(controllerServices.checkPassword(password)){
+            testedPassword = password;
+        }
+        else{
+            model.addAttribute("errorMessagePassword", "Password is not within the length limit");
+            return "signup";
+        }
         if(!password.equals(passwordRepeat)){
-            model.addAttribute("errorMessagePasswordRepeat", "Password is not the same");
+            model.addAttribute("errorMessagePasswordRepeat", "Passwords is not the same");
+        }
+        if(controllerServices.checkEmail(email)){
+            testedEmail = email;
+        }
+        else{
+            model.addAttribute("errorMessageEmail", "Invalid email adress");
+            return "signup";
         }
         if(!userRepository.checkUserEmail(username, email)){
-            User user = new User(firstname, lastname, username_output, password, email, jobtitle);
+            User user = new User(checkedFirstname, checkedLastname, testedUsername, testedPassword, testedEmail, jobtitle);
             int user_id = userRepository.addUserLogin(user);
             userRepository.addUserInfo(user, user_id);
         }
