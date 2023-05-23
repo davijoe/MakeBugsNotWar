@@ -30,12 +30,7 @@ public class MyController {
         this.taskRepository = taskRepository;
         this.controllerServices = controllerServices;
     }
-
     @GetMapping("/")
-    public String landingSite(){
-        return "index";
-    }
-    @GetMapping("/login")
     public String login(){
         return "login";
     }

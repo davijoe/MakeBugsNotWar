@@ -5,26 +5,34 @@
     <title>Title</title>
     <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 </head>
+<style>
+</style>
 <body>
-<nav th:insert="fragments/topnav"></nav>
-
-<div class="container">
-    <div class="login_body">
+<img th:src="@{/images/loginsignupbackground.jpg}" class="background">
+<div class="container-signin">
+    <div class="form-container sign-in-container">
     <form action="/login" method="post">
-        <label for="username">Username</label>
-        <input id="username" name="u_username" type="text">
-        <label for="password">Password</label>
-        <input id="password" name="u_password" type="text">
-        <input type="submit" value="Login">
+        <h1>Sign in</h1>
+        <label for="username"></label>
+        <input id="username" name="u_username" type="text" placeholder="Username" required>
+        <label for="password"></label>
+        <input id="password" name="u_password" type="password" placeholder="Password" required>
+        <input type="submit" value="Login" class="button">
         <br>
         <span th:if="${loginErrorMessage} != null") th:text="${loginErrorMessage}"></span>
     </form>
-    <p>Do you want to sign up as a new user?</p>
-    <a class="login-page" th:href="@{/signup}">Signup</a>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-right">
+                <h1>Welcome to Taskgrid!</h1>
+                <br>
+                <p>Enter your personal details and start your journey with us</p>
+                <a th:href="@{/signup}">Signup</a>
+            </div>
+        </div>
     </div>
 
 </div>
-
-<footer th:insert="fragments/footer"></footer>
 </body>
 </html>
