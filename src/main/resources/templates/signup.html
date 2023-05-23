@@ -5,40 +5,44 @@
     <title>Title</title>
     <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 </head>
+<style>
+</style>
 <body>
-<nav th:insert="fragments/topnav"></nav>
-
+<img th:src="@{/images/loginsignupbackground.jpg}" class="background">
+<div class="container-signup">
 <form action="/signup" method="post">
-    <span th:if="${errorMessageEmailUsername != null}" th:text="${errorMessageEmailUsername}"></span>
-
-    <label for="firstname">First Name</label>
-    <input id="firstname" name="u_firstname" type="text">
-    <br>
-    <label for="lastname">Last name</label>
-    <input id="lastname" name="u_lastname" type="text">
-    <br>
-    <label for="username">Username</label>
-    <input id="username" name="u_username" type="text">
-    <span th:if="${errorMessageUserName != null}" th:text="${errorMessageUserName}"></span>
-    <br>
-    <label for="password">Password</label>
-    <input id="password" name="u_password" type="text">
-    <span th:if="${errorMessagePassword != null}" th:text="${errorMessagePassword}"></span>
-    <br>
-    <label for="passwordRepeat">Repeat password</label>
-    <input id="passwordRepeat" name="u_passwordRepeat" type="text">
-    <span th:if="${errorMessagePasswordRepeat != null}" th:text="${errorMessagePasswordRepeat}"></span>
-    <br>
-    <label for="email">Email adress</label>
-    <input id="email" name="u_email" type="text">
-    <span th:if="${errorMessageEmail != null}" th:text="${errorMessageEmail}"></span>
-    <br>
-    <label for="jobtitle">Job title</label>
-    <input id="jobtitle" name="u_jobtitle" type="text">
-    <br>
-    <input type="submit" id="signup_button" class="button_signup" value="Create User">
+    <div class="form-container-signup">
+        <span th:if="${errorMessageEmailUsername != null}" th:text="${errorMessageEmailUsername}"></span>
+        <label for="firstname"></label>
+        <input id="firstname" name="u_firstname" type="text" placeholder="First name" required>
+        <label for="lastname"></label>
+        <input id="lastname" name="u_lastname" type="text" placeholder="Last name" required>
+        <label for="username"></label>
+        <input id="username" name="u_username" type="text" placeholder="Username - max 20 characters " required>
+        <span th:if="${errorMessageUserName != null}" th:text="${errorMessageUserName}"></span>
+        <label for="password"></label>
+        <input id="password" name="u_password" type="password" placeholder="Password - min 16 characters" required>
+        <span th:if="${errorMessagePassword != null}" th:text="${errorMessagePassword}"></span>
+        <label for="passwordRepeat"></label>
+        <input id="passwordRepeat" name="u_passwordRepeat" type="password" placeholder="Repeat your password" required>
+        <span th:if="${errorMessagePasswordRepeat != null}" th:text="${errorMessagePasswordRepeat}"></span>
+        <label for="email"></label>
+        <input id="email" name="u_email" type="text" placeholder="Email address" required>
+        <span th:if="${errorMessageEmail != null}" th:text="${errorMessageEmail}"></span>
+        <label for="jobtitle"></label>
+        <input id="jobtitle" name="u_jobtitle" type="text" placeholder="Jobtitle" required>
+        <input type="submit" id="signup_button" class="button_signup" value="Create User">
+    </div>
 </form>
-
-<footer th:insert="fragments/footer"></footer>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-right">
+                <h1>Enter your information</h1>
+                <br>
+                <p>Explore, create or join other projects.</p>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
