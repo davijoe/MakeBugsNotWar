@@ -3,7 +3,7 @@ package com.taskgrid.makebugsnotwar.model;
 public class Task {
 
     private int userId;
-    private int projectId;
+    private int boardId;
     private int taskId;
     private String taskName;
     private int taskStatus;
@@ -25,14 +25,14 @@ public class Task {
         this.taskDescription = taskDescription;
     }
 
-    public Task(int id, String name, String description, int taskStatus, int userId, int projectId, int taskTime) {
+    public Task(int id, String name, String description, int taskStatus, int userId, int boardId, int taskTime) {
 
         this.taskId = id;
         this.taskName = name;
         this.taskDescription = description;
         this.taskStatus = taskStatus;
         this.userId = userId;
-        this.projectId = projectId;
+        this.boardId = boardId;
         this.taskTime = taskTime;
     }
 
@@ -44,12 +44,12 @@ public class Task {
         this.userId = userId;
     }
 
-    public int getProjectId() {
-        return projectId;
+    public int getBoardId() {
+        return boardId;
     }
 
-    public void setProjectId(int projectId) {
-        this.projectId = projectId;
+    public void setBoardId(int boardId) {
+        this.boardId = boardId;
     }
     public int getTaskId() {
         return taskId;
@@ -91,7 +91,7 @@ public class Task {
                 ", description='" + taskDescription + '\'' +
                 ", taskStatus=" + taskStatus +
                 ", userId=" + userId +
-                ", projectId=" + projectId +
+                ", projectId=" + boardId +
                 ", taskTime=" + taskTime +
                 '}';
     }

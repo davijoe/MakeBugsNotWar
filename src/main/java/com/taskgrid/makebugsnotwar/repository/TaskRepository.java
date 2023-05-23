@@ -33,7 +33,7 @@ public class TaskRepository {
             preparedStatement.setInt(2,task.getTaskStatus());
             preparedStatement.setInt(3, task.getTaskTime());
             preparedStatement.setString(4, task.getTaskDescription());
-            preparedStatement.setInt(5,task.getProjectId());
+            preparedStatement.setInt(5,task.getBoardId());
             preparedStatement.executeUpdate();
 
             Statement statement = connection.createStatement();

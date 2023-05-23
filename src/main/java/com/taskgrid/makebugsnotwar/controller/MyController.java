@@ -262,7 +262,7 @@ public class MyController {
             task.setTaskStatus(status);
             task.setTaskTime(time);
             task.setTaskDescription(description);
-            task.setProjectId(projectId);
+            task.setBoardId(projectId);
             int taskId = taskRepository.addTask(task);
 
             return "redirect:/project/" + projectId;

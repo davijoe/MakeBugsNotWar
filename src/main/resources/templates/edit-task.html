@@ -24,14 +24,14 @@
     <label for="user-id">User ID</label>
     <input id="user-id" name="userId" type="text" th:value="${tasks.userId}">
 
-    <input id="project-id" name="projectId" type="hidden" th:value="${tasks.projectId}">
+    <input id="project-id" name="projectId" type="hidden" th:value="${tasks.boardId}">
 
     <label for="task-time">Task Time</label>
     <input id="task-time" name="taskTime" type="text" th:value="${tasks.taskTime}">
 
     <input type="submit" value="Edit task">
   </form>
-  <a th:href="'/project/' + ${tasks.projectId}">Back</a>
+  <a th:href="'/project/' + ${tasks.boardId}">Back</a>
 </div>
 
 <footer th:insert="fragments/footer"></footer>
