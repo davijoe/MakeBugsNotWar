@@ -1,13 +1,20 @@
 package com.taskgrid.makebugsnotwar.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.sql.Date;
+
 public class Board {
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private int boardId;
     private int projectId;
     private String boardName;
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date endDate;
+    public Board(){
+    }
 
-    public Board(int boardId, int projectId, String boardName, String startDate, String endDate){
+    public Board(int boardId, int projectId, String boardName, Date startDate, Date endDate){
         this.boardId = boardId;
         this.projectId = projectId;
         this.boardName = boardName;
@@ -39,19 +46,19 @@ public class Board {
         this.boardName = boardName;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

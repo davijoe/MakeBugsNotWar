@@ -1,19 +1,23 @@
 package com.taskgrid.makebugsnotwar.controller;
 
 
+import com.taskgrid.makebugsnotwar.model.Board;
 import com.taskgrid.makebugsnotwar.model.Project;
 import com.taskgrid.makebugsnotwar.model.Task;
 import com.taskgrid.makebugsnotwar.model.User;
+import com.taskgrid.makebugsnotwar.repository.BoardRepository;
 import com.taskgrid.makebugsnotwar.repository.ProjectRepository;
 import com.taskgrid.makebugsnotwar.repository.TaskRepository;
 import com.taskgrid.makebugsnotwar.repository.UserRepository;
 import com.taskgrid.makebugsnotwar.service.ControllerServices;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -22,12 +26,15 @@ public class MyController {
     private final ProjectRepository projectRepository;
     private final TaskRepository taskRepository;
     private final ControllerServices controllerServices;
+    private final BoardRepository boardRepository;
 
     public MyController(UserRepository userRepository, ProjectRepository projectRepository,
-                        TaskRepository taskRepository, ControllerServices controllerServices){
+                        TaskRepository taskRepository, BoardRepository boardRepository,
+                        ControllerServices controllerServices){
         this.userRepository = userRepository;
         this.projectRepository = projectRepository;
         this.taskRepository = taskRepository;
+        this.boardRepository = boardRepository;
         this.controllerServices = controllerServices;
     }
     @GetMapping("/")
@@ -111,7 +118,7 @@ public class MyController {
     public String profilePage(HttpSession session, Model model) {
         if (session.getAttribute("user_id") == null) {
             System.out.println("user_id null");
-            return "redirect:/login";
+            return "redirect:/";
         }
         int user_id = (int) session.getAttribute("user_id");
         model.addAttribute("user_id", session.getAttribute("user_id"));
@@ -154,6 +161,9 @@ public class MyController {
     @PostMapping("/create-project")
     public String createProject(@RequestParam("project-name") String name,
                                 @RequestParam("project-description") String description,
+                                @RequestParam("board_name") String boardName,
+                                @RequestParam("start_date") Date startDate,
+                                @RequestParam("end_date") Date endDate,
                                 HttpSession session){
 
         if (session.getAttribute("user_id") != null) {
@@ -162,12 +172,16 @@ public class MyController {
             project.setProjectName(name);
             project.setProjectDescription(description);
             int projectId = projectRepository.addProject(project);
-
+            Board board = new Board();
+            board.setBoardName(boardName);
+            board.setStartDate(startDate);
+            board.setEndDate(endDate);
+            board.setProjectId(projectId);
             projectRepository.addProjectRole(userId, projectId, "project creator");
-
+            boardRepository.createFirstBoard(board);
             return "redirect:/profilePage";
         } else {
-            return "redirect:/login";
+            return "redirect:/";
         }
 
     }
@@ -267,7 +281,7 @@ public class MyController {
 
             return "redirect:/project/" + projectId;
         } else {
-            return "redirect:/login";
+            return "redirect:/";
         }
 
     }
