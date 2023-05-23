@@ -9,6 +9,7 @@ public class Task {
     private int taskStatus;
     private int taskTime;
     private String taskDescription;
+    private int storyPoints;
 
     public Task(){} // default constructor
 
@@ -24,7 +25,16 @@ public class Task {
         this.taskTime = taskTime;
         this.taskDescription = taskDescription;
     }
+    public Task(int id, String name, String description, int taskStatus, int userId, int boardId, int taskTime, int storyPoints) {
 
+        this.taskId = id;
+        this.taskName = name;
+        this.taskDescription = description;
+        this.taskStatus = taskStatus;
+        this.userId = userId;
+        this.boardId = boardId;
+        this.taskTime = taskTime;
+    }
     public Task(int id, String name, String description, int taskStatus, int userId, int boardId, int taskTime) {
 
         this.taskId = id;
