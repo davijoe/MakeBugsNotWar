@@ -7,31 +7,39 @@
 </head>
 <body>
 <nav th:insert="fragments/topnav"></nav>
-
+<div class="container">
     <div class="create_body">
         <form action="/create-project" method="post">
+            <div class="form-container-create">
+                <label for="name-field"></label>
+                <input id="name-field" name="project-name" type="text" placeholder="Enter project name" required>
 
-                <label for="name-field">Project name:</label>
-                <input id="name-field" name="project-name" type="text" required>
+                <label for="description-field"></label>
+                <input id="description-field" name="project-description" type="text" placeholder="Enter project description" required>
 
-                <label for="description-field">Project description:</label>
-                <input id="description-field" name="project-description" type="text" required>
+                <label for="board-name-field"></label>
+                <input id="board-name-field" name="board_name" type="text" placeholder="Enter first board name" required>
 
-                <label for="board-name-field">Board name</label>
-                <input id="board-name-field" name="board_name" type="text" required>
+                <label for="start-date"></label>
+                <input type="date" id="start-date" name="start_date" placeholder="Start date of first board" required>
 
-                <label for="start-date">Start date of board</label>
-                <input type="date" id="start-date" name="start_date" required>
+                <label for="end-date"></label>
+                <input type="date" id="end-date" name="end_date" placeholder="End date of first board" required>
+                <input type="submit" value="Create project">
 
-                <label for="end-date">End date of board</label>
-                <input type="date" id="end-date" name="end_date" required>
-
-
-            <input type="submit" value="Create project">
+            </div>
         </form>
-        <a th:href="@{/profilePage}">Back</a>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <h1>Project board creation</h1>
+                    <br>
+                    <p>Enter project details to start a new project</p>
+                    <a th:href="@{/profilePage}">Go back to profile page</a>
+                </div>
+            </div>
+        </div>
     </div>
-
+</div>
 <footer th:insert="fragments/footer"></footer>
 </body>
-</html>
