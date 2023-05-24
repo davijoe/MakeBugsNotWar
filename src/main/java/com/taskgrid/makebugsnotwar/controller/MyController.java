@@ -265,7 +265,8 @@ public class MyController {
                              @RequestParam("task-status") int status,
                              @RequestParam("task-time") int time,
                              @RequestParam("task-description") String description,
-                             @RequestParam("project-id") int projectId,
+                             @RequestParam("board_id") int boardId,
+                             @RequestParam("project_id") int projectId,
                              HttpSession session){
 
         if (session.getAttribute("user_id") != null) {
@@ -275,7 +276,7 @@ public class MyController {
             task.setTaskStatus(status);
             task.setTaskTime(time);
             task.setTaskDescription(description);
-            task.setBoardId(projectId);
+            task.setBoardId(boardId);
             int taskId = taskRepository.addTask(task);
 
             return "redirect:/project/" + projectId;

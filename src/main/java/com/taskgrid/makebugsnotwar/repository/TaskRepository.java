@@ -20,7 +20,7 @@ public class TaskRepository {
 
     public int addTask(Task task) {
         final String ADD_TASK_QUERY = "INSERT INTO taskgrid.tasks"+
-                "(task_name, task_status, task_time, task_description, project_id) VALUES (?,?,?,?,?)";
+                "(task_name, task_status, task_time, task_description, board_id) VALUES (?,?,?,?,?)";
 
         final String LAST_INSERT_QUERY = "SELECT LAST_INSERT_ID()";
 
