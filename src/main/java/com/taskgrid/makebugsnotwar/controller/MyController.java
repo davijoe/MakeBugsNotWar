@@ -11,7 +11,6 @@ import com.taskgrid.makebugsnotwar.repository.TaskRepository;
 import com.taskgrid.makebugsnotwar.repository.UserRepository;
 import com.taskgrid.makebugsnotwar.service.ControllerServices;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -178,7 +177,7 @@ public class MyController {
             board.setEndDate(endDate);
             board.setProjectId(projectId);
             projectRepository.addProjectRole(userId, projectId, "project creator");
-            boardRepository.createFirstBoard(board);
+            boardRepository.createBoard(board);
             return "redirect:/profilePage";
         } else {
             return "redirect:/";

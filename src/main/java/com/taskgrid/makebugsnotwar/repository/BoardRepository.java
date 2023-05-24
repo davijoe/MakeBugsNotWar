@@ -16,7 +16,7 @@ public class BoardRepository {
     @Value("${spring.datasource.password}")
     private String DB_PWD;
 
-    public void createFirstBoard(Board board){
+    public void createBoard(Board board){
         final String ADD_BOARD_ONE_QUERY = "INSERT INTO taskgrid.boards"+
                 "(project_id, board_name, start_date, end_date) VALUES (?,?,?,?)";
         try{
