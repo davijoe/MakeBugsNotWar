@@ -18,6 +18,9 @@ html{
     min-width: 800px;
 }
 
+.container{
+    min-height: 78vh;
+}
 /* TOPNAV CSS BLOCK */
 
 .top-nav{
@@ -534,6 +537,45 @@ html{
     width: 90%;
 }
 .form-container-signup span{
+    font-size: 13px;
+    margin-left: 8%;
+    color: red;
+}
+
+/*-----------------------------CSS FOR SIGNUP ----------------------*/
+
+.create_body {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+    0 10px 10px rgba(0,0,0,0.22);
+    position: relative;
+    overflow: hidden;
+    width: 900px;
+    max-width: 100%;
+    min-height: 480px;
+    top: 13%;
+    left: 20%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.form-container-create {
+    position: absolute;
+    top: 10%;
+    height: 100%;
+    width: 50%;
+    transition: all 0.6s ease-in-out;
+}
+
+.form-container-create input {
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 20px;
+    width: 90%;
+}
+.form-container-create span{
     font-size: 13px;
     margin-left: 8%;
     color: red;
