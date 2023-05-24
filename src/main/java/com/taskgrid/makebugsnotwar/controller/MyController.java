@@ -189,7 +189,7 @@ public class MyController {
     public String viewProject(@PathVariable("id") int projectId, Model model){
         Project project = projectRepository.findProjectById(projectId);
         model.addAttribute("project", project);
-        model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
+        model.addAttribute("tasks", taskRepository.retrieveBoardTasks(projectId));
 
 
         return "project";
@@ -198,8 +198,8 @@ public class MyController {
     @GetMapping("/project-details/{id}")
     public String viewProjectDetails(@PathVariable("id") int projectId, Model model){
         model.addAttribute("project", projectRepository.findProjectById(projectId));
-        model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
-        model.addAttribute("taskinfo", taskRepository.calculateProjectTaskInfo(projectId));
+        model.addAttribute("tasks", taskRepository.retrieveBoardTasks(projectId));
+        model.addAttribute("taskinfo", taskRepository.calculateBoardTaskTime(projectId));
         model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
 
         return "project-details";
@@ -222,7 +222,7 @@ public class MyController {
 
     @GetMapping("/view-project-tasks/{projectId}")
     public String viewProjectTasks(@PathVariable("projectId") int projectId, Model model) {
-        model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
+        model.addAttribute("tasks", taskRepository.retrieveBoardTasks(projectId));
         return "view-project-tasks";
     }
     @GetMapping("/project-users/{project-id}")

@@ -20,7 +20,7 @@ public class TaskRepository {
 
     public int addTask(Task task) {
         final String ADD_TASK_QUERY = "INSERT INTO taskgrid.tasks"+
-                "(task_name, task_status, task_time, task_description, board_id) VALUES (?,?,?,?,?)";
+                "(task_name, task_status, story_points, task_description, board_id) VALUES (?,?,?,?,?)";
 
         final String LAST_INSERT_QUERY = "SELECT LAST_INSERT_ID()";
 
@@ -31,7 +31,7 @@ public class TaskRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(ADD_TASK_QUERY);
             preparedStatement.setString(1, task.getTaskName());
             preparedStatement.setInt(2,task.getTaskStatus());
-            preparedStatement.setInt(3, task.getTaskTime());
+            preparedStatement.setInt(3, task.getStoryPoints());
             preparedStatement.setString(4, task.getTaskDescription());
             preparedStatement.setInt(5,task.getBoardId());
             preparedStatement.executeUpdate();
@@ -66,10 +66,11 @@ public class TaskRepository {
             String description = resultSet.getString("task_description");
             int taskStatus = resultSet.getInt("task_status");
             int userId = resultSet.getInt("user_id");
-            int projectId = resultSet.getInt("project_id");
+            int projectId = resultSet.getInt("board_id");
             int taskTime = resultSet.getInt("task_time");
+            int storyPoints = resultSet.getInt("story_points");
 
-            task = new Task(id, name, description, taskStatus, userId, projectId, taskTime);
+            task = new Task(id, name, description, taskStatus, userId, projectId, taskTime, storyPoints);
 
 
         } catch(SQLException e){
@@ -80,14 +81,14 @@ public class TaskRepository {
         return task;
     }
 
-    public List<Task> retrieveProjectTasks(int projectId){
+    public List<Task> retrieveBoardTasks(int boardId){
         List<Task> taskList = new ArrayList<>();
-        final String QUERY = "SELECT * FROM taskgrid.tasks WHERE project_id = ?";
+        final String QUERY = "SELECT * FROM taskgrid.tasks WHERE board_id = ?";
 
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
-            preparedStatement.setInt(1, projectId);
+            preparedStatement.setInt(1, boardId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -98,8 +99,9 @@ public class TaskRepository {
                 int taskStatus = resultSet.getInt("task_status");
                 int userId = resultSet.getInt("user_id");
                 int taskTime = resultSet.getInt("task_time");
+                int storyPoints = resultSet.getInt("story_points");
 
-                Task task = new Task(id, name, description, taskStatus, userId, projectId, taskTime);
+                Task task = new Task(id, name, description, taskStatus, userId, boardId, taskTime, storyPoints);
 
                 taskList.add(task);
                 System.out.println(task);
@@ -115,7 +117,7 @@ public class TaskRepository {
     }
 
     public void editTask(Task task) {
-        final String EDITTASK_QUERY = "UPDATE taskgrid.tasks SET task_name = ?, task_description = ?, task_status = ?, user_id = ?, task_time = ? WHERE task_id = ?";
+        final String EDITTASK_QUERY = "UPDATE taskgrid.tasks SET task_name = ?, task_description = ?, task_status = ?, user_id = ?, task_time = ?, story_points = ? WHERE task_id = ?";
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(EDITTASK_QUERY);
@@ -124,6 +126,7 @@ public class TaskRepository {
             preparedStatement.setInt(3, task.getTaskStatus());
             preparedStatement.setInt(4, task.getUserId());
             preparedStatement.setInt(5, task.getTaskTime());
+            preparedStatement.setInt(6, task.getStoryPoints());
             preparedStatement.setInt(6, task.getTaskId());
 
             preparedStatement.executeUpdate();
@@ -167,19 +170,17 @@ public class TaskRepository {
         }
     }
 
-    public List<Task> calculateProjectTaskInfo(int projectId) {
+    public List<Task> calculateBoardTaskTime(int boardId) {
         List<Task> taskInfoList = new ArrayList<>();
 
-        final String CALCTASKINFO_QUERY="SELECT IFNULL(task_status, -1), SUM(task_time) AS sum FROM tasks WHERE project_id = ? GROUP BY task_status WITH ROLLUP";
+        final String CALCTASKINFO_QUERY="SELECT IFNULL(task_status, -1), SUM(task_time) AS sum FROM tasks WHERE board_id = ? GROUP BY task_status WITH ROLLUP";
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL,DB_UID,DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(CALCTASKINFO_QUERY);
-            preparedStatement.setInt(1,projectId);
+            preparedStatement.setInt(1, boardId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int taskStatus = resultSet.getInt(1);
-                System.out.println("tasks incomming");
-                System.out.println(taskStatus);
                 int sumTaskTime = resultSet.getInt(2);
                 Task task = new Task(taskStatus, sumTaskTime);
                 taskInfoList.add(task);
