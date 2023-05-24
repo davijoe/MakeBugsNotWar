@@ -7,8 +7,22 @@
 <body>
 <footer th:fragment="footer" class="footer-fragment">
   <div class="footer">
-    <p>XXX</p>
+        <div class="logo-container">
+            <img th:src="@{/images/bugsnotwar.png}">
+            <p>2023 MakeBugsNotWar, Inc.</p>
+        </div>
+        <div class="privacy">
+            <h1>Legal forms</h1>
+            <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
+            <h1>Privacy Policy</h1>
+            <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
+            <h1>Security</h1>
+        </div>
+        <div class="logo-links-container">
+            <img th:src="@{/images/twitter.png}">
+            <img th:src="@{/images/facebook.png}">
+        </div>
   </div>
-<footer>
+</footer>
 </body>
 </html>

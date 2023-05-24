@@ -140,9 +140,12 @@ html{
     display: flex;
 }
 
+/*------------------------STYLING FOR FOOTER-------------------------*/
+
 .footer{
     position: relative;
     display:flex;
+    flex-direction: row;
     bottom: 100%;
     height: 15vh;
     min-height: 50px;
@@ -156,6 +159,38 @@ html{
     border-color: #A8DADC;
     background-color: #457B9D;
 }
+
+.logo-container{
+    display: flex;
+}
+.logo-container p{
+    font-size: 15px;
+    margin-left: 5%;
+}
+.logo-container img{
+    height: 5vh;
+    width: 2.8vw;
+}
+.logo-links-container{
+    display:flex;
+}
+.privacy{
+    display:flex;
+    flex-direction: row;
+}
+.privacy p{
+    font-size: 15px;
+}
+.privacy h1{
+    font-size: 15px;
+    text-decoration: underline;
+}
+.logo-links-container img{
+    height: 5vh;
+    width: 2.8vw;
+    margin-left: 5%;
+}
+
 .landingpage-body{
     min-height: 78vh;
 }
@@ -542,7 +577,7 @@ html{
     color: red;
 }
 
-/*-----------------------------CSS FOR SIGNUP ----------------------*/
+/*-----------------------------CSS FOR CREATE PROJECT ----------------------*/
 
 .create_body {
     background-color: #fff;
