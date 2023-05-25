@@ -229,6 +229,7 @@ public class MyController {
 
     @GetMapping("/view-project-tasks/{projectId}")
     public String viewProjectTasks(@PathVariable("projectId") int projectId, Model model) {
+        model.addAttribute("project", projectRepository.findProjectById(projectId));
         model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
         return "view-project-tasks";
     }
