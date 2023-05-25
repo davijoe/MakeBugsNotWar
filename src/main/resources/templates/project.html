@@ -36,7 +36,7 @@
         <div th:each="task : ${tasks}" th:if="${task.taskStatus == 1 and task.boardId == board.boardId}" class="task">
             <h3 th:text="${task.taskName}"></h3>
             <p th:text="${task.taskDescription}"></p>
-            <p th:text="'Time:'+${task.taskTime}"></p>
+            <p th:text="'Story Points:'+${task.storyPoints}"></p>
             <div>
 
                 <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
@@ -57,7 +57,7 @@
         <div th:each="task : ${tasks}" th:if="${task.taskStatus == 2 and task.boardId == board.boardId}" class="task">
             <h3 th:text="${task.taskName}"></h3>
             <p th:text="${task.taskDescription}"></p>
-            <p th:text="'Time:'+${task.taskTime}"></p>
+            <p th:text="'Story Points:'+${task.storyPoints}"></p>
             <div>
 
                 <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
@@ -78,7 +78,7 @@
         <div th:each="task : ${tasks}" th:if="${task.taskStatus == 3 and task.boardId == board.boardId}" class="task">
             <h3 th:text="${task.taskName}"></h3>
             <p th:text="${task.taskDescription}"></p>
-            <p th:text="'Time:'+${task.taskTime}"></p>
+            <p th:text="'Story Points:'+${task.storyPoints}"></p>
             <div>
                 <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
                     <button><--</button>
@@ -98,7 +98,7 @@
         <div th:each="task : ${tasks}" th:if="${task.taskStatus == 4 and task.boardId == board.boardId}" class="task">
             <h3 th:text="${task.taskName}"></h3>
             <p th:text="${task.taskDescription}"></p>
-            <p th:text="'Time:'+${task.taskTime}"></p>
+            <p th:text="'Story Points:'+${task.storyPoints}"></p>
             <div>
                 <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
                     <button><--</button>
