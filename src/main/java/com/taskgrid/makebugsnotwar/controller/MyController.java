@@ -261,16 +261,16 @@ public class MyController {
     }
 
 
-    @GetMapping("/create-task/{projectId}")
-    public String showCreateTask(@PathVariable("projectId") int projectId, Model model){
-        model.addAttribute("project-id", projectId);
+    @GetMapping("/create-task/{projectId}/{boardId}")
+    public String showCreateTask(@PathVariable("boardId") int boardId, @PathVariable("projectId") int projectId, Model model){
+        model.addAttribute("board-id", boardId);
         return "create-task";
     }
 
     @PostMapping("/create-task")
     public String createTask(@RequestParam("task-name") String name,
                              @RequestParam("task-status") int status,
-                             @RequestParam("task-time") int time,
+                             @RequestParam("story-points") int storyPoints,
                              @RequestParam("task-description") String description,
                              @RequestParam("board_id") int boardId,
                              @RequestParam("project_id") int projectId,
@@ -281,10 +281,10 @@ public class MyController {
             Task task = new Task();
             task.setTaskName(name);
             task.setTaskStatus(status);
-            task.setTaskTime(time);
+            task.setStoryPoints(storyPoints);
             task.setTaskDescription(description);
             task.setBoardId(boardId);
-            int taskId = taskRepository.addTask(task);
+            taskRepository.addTask(task);
 
             return "redirect:/project/" + projectId;
         } else {

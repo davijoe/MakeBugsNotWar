@@ -35,6 +35,7 @@ public class Task {
         this.userId = userId;
         this.boardId = boardId;
         this.taskTime = taskTime;
+        this.storyPoints = storyPoints;
     }
     public Task(int id, String name, String description, int taskStatus, int userId, int boardId, int storyPoints) {
 
@@ -45,6 +46,7 @@ public class Task {
         this.userId = userId;
         this.boardId = boardId;
         this.taskTime = taskTime;
+        this.storyPoints = storyPoints;
     }
 
     public int getUserId() {
@@ -101,18 +103,18 @@ public class Task {
     }
 
 
-
-    @Override
-    public String toString() {
-        return "Task{" +
-                "id=" + taskId +
-                ", name='" + taskName + '\'' +
-                ", description='" + taskDescription + '\'' +
-                ", taskStatus=" + taskStatus +
-                ", userId=" + userId +
-                ", projectId=" + boardId +
-                ", taskTime=" + taskTime +
-                '}';
-    }
+//
+//    @Override
+//    public String toString() {
+//        return "Task{" +
+//                "id=" + taskId +
+//                ", name='" + taskName + '\'' +
+//                ", description='" + taskDescription + '\'' +
+//                ", taskStatus=" + taskStatus +
+//                ", userId=" + userId +
+//                ", projectId=" + boardId +
+//                ", taskTime=" + taskTime +
+//                '}';
+//    }
 
 }

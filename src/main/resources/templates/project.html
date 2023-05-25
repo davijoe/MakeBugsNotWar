@@ -4,6 +4,7 @@
     <title th:text="${project.projectName}"></title>
     <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 
+
 </head>
 <body>
 <nav th:insert="fragments/topnav"></nav>
@@ -13,105 +14,110 @@
 <h1 th:text="${project.projectName}"></h1>
 
 <div class="board-list" th:each="board: ${boards}">
-    <div class="board">
-        <h3 th:text="${board.boardName}"></h3>
-        <div class="column">
-            <h2>Stories</h2>
-            <div th:each="task : ${tasks}" th:if="${task.taskStatus == 0 and task.boardId == board.boardId}" class="task">
-                <h3 th:text="${task.taskName}"></h3>
-                <p th:text="${task.taskDescription}"></p>
-                <p th:text="'Story Points:'+${task.storyPoints}"></p>
-                <div>
-                    <a th:href="@{'/edit-task/'+${task.taskId}}">Edit</a>
-                    <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
-                        <button>--></button>
-                    </a>
-                    <a th:href="@{'/project/' + ${project.projectId} + '/delete-task/' + ${task.taskId}}">Delete task</a>
-                </div>
+<div class="board">
+    <div class="flex-box">
+    <div class="column">
+        <a th:href="@{'/create-task/' + ${project.projectId} + '/' + ${board.boardId}}">Create task</a>
+    </div>
+    </div>
+    <h3 th:text="${board.boardName}"></h3>
+    <div class="column">
+        <h2>Stories</h2>
+        <div th:each="task : ${tasks}" th:if="${task.taskStatus == 0 and task.boardId == board.boardId}" class="task">
+            <h3 th:text="${task.taskName}"></h3>
+            <p th:text="${task.taskDescription}"></p>
+            <p th:text="'Story Points:'+${task.storyPoints}"></p>
+            <div>
+                <a th:href="@{'/edit-task/'+${task.taskId}}">Edit</a>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
+                    <button>--></button>
+                </a>
+                <a th:href="@{'/project/' + ${project.projectId} + '/delete-task/' + ${task.taskId}}">Delete task</a>
             </div>
         </div>
-        <div class="column">
-            <h2>To-do</h2>
-            <div th:each="task : ${tasks}" th:if="${task.taskStatus == 1 and task.boardId == board.boardId}" class="task">
-                <h3 th:text="${task.taskName}"></h3>
-                <p th:text="${task.taskDescription}"></p>
-                <p th:text="'Story Points:'+${task.storyPoints}"></p>
-                <div>
+    </div>
+    <div class="column">
+        <h2>To-do</h2>
+        <div th:each="task : ${tasks}" th:if="${task.taskStatus == 1 and task.boardId == board.boardId}" class="task">
+            <h3 th:text="${task.taskName}"></h3>
+            <p th:text="${task.taskDescription}"></p>
+            <p th:text="'Story Points: ' + ${task.storyPoints}"></p>
+            <div>
 
-                    <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
-                        <button><--</button>
-                    </a>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
+                    <button><--</button>
+                </a>
 
-                    <a th:href="@{'/edit-task/'+${task.taskId}}">Edit</a>
+                <a th:href="@{'/edit-task/'+${task.taskId}}">Edit</a>
 
-                    <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
-                        <button>--></button>
-                    </a>
-                    <a th:href="@{'/project/' + ${project.projectId} + '/delete-task/' + ${task.taskId}}">Delete task</a>
-                </div>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
+                    <button>--></button>
+                </a>
+                <a th:href="@{'/project/' + ${project.projectId} + '/delete-task/' + ${task.taskId}}">Delete task</a>
             </div>
         </div>
-        <div class="column">
-            <h2>Doing</h2>
-            <div th:each="task : ${tasks}" th:if="${task.taskStatus == 2 and task.boardId == board.boardId}" class="task">
-                <h3 th:text="${task.taskName}"></h3>
-                <p th:text="${task.taskDescription}"></p>
-                <p th:text="'Story Points:'+${task.storyPoints}"></p>
-                <div>
+    </div>
+    <div class="column">
+        <h2>Doing</h2>
+        <div th:each="task : ${tasks}" th:if="${task.taskStatus == 2 and task.boardId == board.boardId}" class="task">
+            <h3 th:text="${task.taskName}"></h3>
+            <p th:text="${task.taskDescription}"></p>
+            <p th:text="'Story Points:'+${task.storyPoints}"></p>
+            <div>
 
-                    <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
-                        <button><--</button>
-                    </a>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
+                    <button><--</button>
+                </a>
 
-                    <a th:href="@{'/edit-task/'+${task.taskId}}">Edit</a>
+                <a th:href="@{'/edit-task/'+${task.taskId}}">Edit</a>
 
-                    <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
-                        <button>--></button>
-                    </a>
-                    <a th:href="@{'/project/' + ${project.projectId} + '/delete-task/' + ${task.taskId}}">Delete task</a>
-                </div>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
+                    <button>--></button>
+                </a>
+                <a th:href="@{'/project/' + ${project.projectId} + '/delete-task/' + ${task.taskId}}">Delete task</a>
             </div>
         </div>
-        <div class="column">
-            <h2>Verifying</h2>
-            <div th:each="task : ${tasks}" th:if="${task.taskStatus == 3 and task.boardId == board.boardId}" class="task">
-                <h3 th:text="${task.taskName}"></h3>
-                <p th:text="${task.taskDescription}"></p>
-                <p th:text="'Story Points:'+${task.storyPoints}"></p>
-                <div>
-                    <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
-                        <button><--</button>
-                    </a>
+    </div>
+    <div class="column">
+        <h2>Verifying</h2>
+        <div th:each="task : ${tasks}" th:if="${task.taskStatus == 3 and task.boardId == board.boardId}" class="task">
+            <h3 th:text="${task.taskName}"></h3>
+            <p th:text="${task.taskDescription}"></p>
+            <p th:text="'Story Points:'+${task.storyPoints}"></p>
+            <div>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
+                    <button><--</button>
+                </a>
 
-                    <a th:href="@{'/edit-task/'+${task.taskId}}">Edit</a>
+                <a th:href="@{'/edit-task/'+${task.taskId}}">Edit</a>
 
-                    <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
-                        <button>--></button>
-                    </a>
-                    <a th:href="@{'/project/' + ${project.projectId} + '/delete-task/' + ${task.taskId}}">Delete task</a>
-                </div>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
+                    <button>--></button>
+                </a>
+                <a th:href="@{'/project/' + ${project.projectId} + '/delete-task/' + ${task.taskId}}">Delete task</a>
             </div>
         </div>
-        <div class="column">
-            <h2>Done</h2>
-            <div th:each="task : ${tasks}" th:if="${task.taskStatus == 4 and task.boardId == board.boardId}" class="task">
-                <h3 th:text="${task.taskName}"></h3>
-                <p th:text="${task.taskDescription}"></p>
-                <p th:text="'Story Points:'+${task.storyPoints}"></p>
-                <div>
-                    <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
-                        <button><--</button>
-                    </a>
+    </div>
+    <div class="column">
+        <h2>Done</h2>
+        <div th:each="task : ${tasks}" th:if="${task.taskStatus == 4 and task.boardId == board.boardId}" class="task">
+            <h3 th:text="${task.taskName}"></h3>
+            <p th:text="${task.taskDescription}"></p>
+            <p th:text="'Story Points:'+${task.storyPoints}"></p>
+            <div>
+                <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">
+                    <button><--</button>
+                </a>
 
-                    <a th:href="@{'/edit-task/'+${task.taskId}}">Edit</a>
-                    <a th:href="@{'/project/' + ${project.projectId} + '/delete-task/' + ${task.taskId}}">Delete task</a>
-                </div>
+                <a th:href="@{'/edit-task/'+${task.taskId}}">Edit</a>
+                <a th:href="@{'/project/' + ${project.projectId} + '/delete-task/' + ${task.taskId}}">Delete task</a>
             </div>
         </div>
     </div>
 </div>
+</div>
 
-<p>test</p>
+
 <footer th:insert="fragments/footer"></footer>
 </body>
 </html>

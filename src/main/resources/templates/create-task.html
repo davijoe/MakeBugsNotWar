@@ -8,11 +8,12 @@
 <body>
 <nav th:insert="fragments/topnav"></nav>
 
-<nav th:insert="fragments/sidenav"></nav>
+<!--<nav th:insert="fragments/sidenav"></nav>-->
 
     <div>
         <form action="/create-task" method="post">
-            <input id="projectId" name="project-id" type="hidden" th:value="${projectId}">
+            <input id="projectId" name="project_id" type="hidden" th:value="${projectId}">
+            <input id="boardId" name="board_id" type="hidden" th:value="${boardId}">
             <div>
                 <label for="name-field">Task name:</label>
                 <input id="name-field" name="task-name" type="text">
@@ -29,8 +30,8 @@
              </div>
             <br>
             <div>
-                <label for="time-field">Task time:</label>
-                <input id="time-field" name="task-time" type="text">
+                <label for="story-points-field">Task story points:</label>
+                <input id="story-points-field" name="story-points" type="text">
              </div>
             <br>
             <input type="submit" value="Create task">
