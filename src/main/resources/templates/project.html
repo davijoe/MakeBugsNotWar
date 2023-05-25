@@ -15,6 +15,11 @@
 
 <div class="board-list" th:each="board: ${boards}">
 <div class="board">
+    <div class="flex-box">
+    <div class="column">
+        <a th:href="@{'/create-task/' + ${project.projectId} + '/' + ${board.boardId}}">Create task</a>
+    </div>
+    </div>
     <h3 th:text="${board.boardName}"></h3>
     <div class="column">
         <h2>Stories</h2>
@@ -36,7 +41,7 @@
         <div th:each="task : ${tasks}" th:if="${task.taskStatus == 1 and task.boardId == board.boardId}" class="task">
             <h3 th:text="${task.taskName}"></h3>
             <p th:text="${task.taskDescription}"></p>
-            <p th:text="'Story Points:'+${task.storyPoints}"></p>
+            <p th:text="'Story Points: ' + ${task.storyPoints}"></p>
             <div>
 
                 <a th:href="@{'/project/'+${project.projectId}+'/move-task-left/'+${task.taskId}}">

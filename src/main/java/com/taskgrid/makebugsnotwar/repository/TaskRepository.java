@@ -104,12 +104,12 @@ public class TaskRepository {
                 int userId = resultSet.getInt("user_id");
                 int taskTime = resultSet.getInt("task_time");
                 int storyPoints = resultSet.getInt("story_points");
+                System.out.println(storyPoints);
                 int boardId = resultSet.getInt("board_id");
 
                 Task task = new Task(id, name, description, taskStatus, userId, boardId, taskTime, storyPoints);
 
                 taskList.add(task);
-                System.out.println(task);
 
             }
 
