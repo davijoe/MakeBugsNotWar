@@ -81,14 +81,18 @@ public class TaskRepository {
         return task;
     }
 
-    public List<Task> retrieveBoardTasks(int boardId){
+    public List<Task> retrieveProjectTasks(int projectId){
         List<Task> taskList = new ArrayList<>();
-        final String QUERY = "SELECT * FROM taskgrid.tasks WHERE board_id = ?";
+        final String QUERY = "SELECT taskgrid.tasks.* "+
+                "FROM tasks "+
+        "JOIN boards ON tasks.board_id = boards.board_id "+
+        "JOIN projects ON boards.project_id = projects.project_id "+
+        "WHERE projects.project_id = ?";
 
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
-            preparedStatement.setInt(1, boardId);
+            preparedStatement.setInt(1, projectId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -100,6 +104,7 @@ public class TaskRepository {
                 int userId = resultSet.getInt("user_id");
                 int taskTime = resultSet.getInt("task_time");
                 int storyPoints = resultSet.getInt("story_points");
+                int boardId = resultSet.getInt("board_id");
 
                 Task task = new Task(id, name, description, taskStatus, userId, boardId, taskTime, storyPoints);
 
