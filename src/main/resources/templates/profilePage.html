@@ -8,49 +8,51 @@
 <body>
 <nav th:insert="fragments/topnav"></nav>
 
-<div class="container">
+<div class="profile-page-container">
     <div class="profile_body">
-    <div th:each="user : ${users}" class="profile_info">
-    <table>
-        <thead>
-            <th>Username</th>
-            <th>Email</th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Job title</th>
-        </thead>
-        <tbody>
-        <tr>
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.firstname}"></td>
-            <td th:text="${user.lastname}"></td>
-            <td th:text="${user.jobtitle}"></td>
-        </tr>
-        </tbody>
-    </table>
-        <a th:href="'/deleteProfile/' + ${user_id}">Delete Profile</a>
-        <a th:href="'/updateProfile/'+${user_id}">Update profile information</a>
-    </div>
-    <div th:each="project : ${projects}">
-        <table>
-            <thead>
-            <th>Project ID</th>
-            <th>Project Name</th>
-            <th>Project Description</th>
-            </thead>
-            <tbody>
-            <tr>
-                <td th:text="${project.projectId}"></td>
-                <td th:text="${project.projectName}"></td>
-                <td th:text="${project.projectDescription}"></td>
-                <a th:href="'/project/' + ${project.projectId}">Link til project</a>
-            </tr>
-            </tbody>
-        </table>
-        <a th:href="@{/create-project}">Create new project</a>
-        <a th:href="@{/project/8}">Link til project 8</a>
-    </div>
+        <div th:each="user : ${users}" class="profile_info">
+            <table>
+                <thead>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Job title</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.firstname}"></td>
+                    <td th:text="${user.lastname}"></td>
+                    <td th:text="${user.jobtitle}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <a th:href="'/deleteProfile/' + ${user_id}">Delete Profile</a>
+            <a th:href="'/updateProfile/'+${user_id}">Update profile information</a>
+        </div>
+
+        <div th:each="project : ${projects}">
+            <table>
+                <thead>
+                <th>Project ID</th>
+                <th>Project Name</th>
+                <th>Project Description</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${project.projectId}"></td>
+                    <td th:text="${project.projectName}"></td>
+                    <td th:text="${project.projectDescription}"></td>
+                    <a th:href="'/project/' + ${project.projectId}">Link til project</a>
+                </tr>
+                </tbody>
+            </table>
+            <a th:href="@{/create-project}">Create new project</a>
+            <a th:href="@{/project/8}">Link til project 8</a>
+        </div>
     </div>
 </div>
 
