@@ -113,6 +113,13 @@ public class MyController {
             return "login";
         }
     }
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        if(session != null){
+            session.removeAttribute("user_id");
+        }
+        return "redirect:/";
+    }
     @GetMapping("/profilePage")
     public String profilePage(HttpSession session, Model model) {
         if (session.getAttribute("user_id") == null) {
