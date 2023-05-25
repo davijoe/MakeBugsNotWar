@@ -64,4 +64,37 @@ public class BoardRepository {
         return boards;
 
     }
+
+    public List<Board> getProjectBoardsWithInfo(int projectId) {
+        final String BOARD_LIST_QUERY = "SELECT board_id, board_name, start_date, end_date, SUM(story_points), SUM(task_time)," +
+                " COUNT(task_id) AS total_tasks FROM taskgrid.boards JOIN taskgrid.tasks USING (board_id) WHERE project_id = ? GROUP BY board_id";
+        List<Board> boards = new ArrayList<>();
+
+        try{
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(BOARD_LIST_QUERY);
+            preparedStatement.setInt(1, projectId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                int id = resultSet.getInt(1);
+                String name = resultSet.getString(2);
+                Date startDate = resultSet.getDate(3);
+                Date endDate = resultSet.getDate(4);
+                int points = resultSet.getInt(5);
+                int taskTime = resultSet.getInt(6);
+                int totalTasks = resultSet.getInt(7);
+                Board newBoard = new Board(id, name, startDate, endDate, points, taskTime, totalTasks);
+                boards.add(newBoard);
+            }
+
+
+        }catch(SQLException e){
+            System.out.println("Could not retrieve any boards for this project");
+            e.printStackTrace();
+        }
+
+        return boards;
+
+    }
 }

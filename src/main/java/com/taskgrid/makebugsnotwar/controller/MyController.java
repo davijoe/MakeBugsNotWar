@@ -199,9 +199,8 @@ public class MyController {
     @GetMapping("/project-details/{id}")
     public String viewProjectDetails(@PathVariable("id") int projectId, Model model){
         model.addAttribute("project", projectRepository.findProjectById(projectId));
-        model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
-        model.addAttribute("taskinfo", taskRepository.calculateBoardTaskTime(projectId));
         model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
+        model.addAttribute("boards", boardRepository.getProjectBoardsWithInfo(projectId));
 
         return "project-details";
     }
