@@ -137,11 +137,7 @@ public class ProjectRepository {
     }
 
     public void deleteProjectById(int id){
-        final String DELETE_QUERY = "DELETE taskgrid.projects, taskgrid.user_project, taskgrid.tasks "+
-        "FROM taskgrid.projects "+
-        "LEFT JOIN taskgrid.tasks ON tasks.project_id = projects.project_id "+
-        "LEFT JOIN taskgrid.user_project ON user_project.project_id = projects.project_id "+
-        "WHERE projects.project_id = ?";
+        final String DELETE_QUERY = "DELETE FROM taskgrid.projects WHERE projects.project_id = ?";
 
         try{
             Connection connection = ConnectionManager.getConnection(DB_UID, DB_UID, DB_PWD);
