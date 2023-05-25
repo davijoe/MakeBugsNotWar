@@ -13,23 +13,23 @@
 </div>
 
 <div class="tasks" th:each="task : ${tasks}">
-    <table>
+    <table class="task-table">
         <thead>
 
         <th>Task Name</th>
         <th>Task Description</th>
         <th>Task Status</th>
-        <th>User ID</th>
-        <th>Board</th>
         <th>Story Points</th>
+        <th>Actions</th>
         </thead>
         <tbody>
         <tr>
             <td th:text="${task.taskName}"></td>
             <td th:text="${task.taskDescription}"></td>
-            <td th:if="${task.taskStatus == 4}"></td>
-            <td th:text="${task.userId}"></td>
-            <td th:text="${task.boardId}"></td>
+            <td >
+                <span th:if="${task.taskStatus == 4}" th:text="'done'"></span>
+                <span th:if="${task.taskStatus < 4}" th:text="'not done'"></span>
+            </td>
             <td th:text="${task.storyPoints}"></td>
             <td><a th:href="'/edit-task/' + ${task.taskId}">Edit task</a></td>
         </tr>
@@ -37,7 +37,6 @@
     </table>
 </div>
 <br>
-<a th:href="@{/profilePage}">Return to my page</a>
 
 <footer th:insert="fragments/footer"></footer>
 </body>
