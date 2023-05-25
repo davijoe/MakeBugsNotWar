@@ -9,31 +9,40 @@
 <nav th:insert="fragments/topnav"></nav>
 
 <div class="container">
+  <div class="update-profile-body">
+    <form action="/updateProfile" method="post">
+      <div class="update_info" th:each="user : ${user}">
+        <input id="userid" name="user_id" type="hidden" th:value="${user_id}">
 
-  <form action="/updateProfile" method="post">
-    <div class="update_info" th:each="user : ${user}">
-    <input id="userid" name="user_id" type="hidden" th:value="${user_id}">
+        <label for="user_name">User name</label>
+        <input id="user_name" name="username" type="text" th:value="${user.username}" required>
 
-    <label for="user_name">User name</label>
-    <input id="user_name" name="username" type="text" th:value="${user.username}">
+        <label for="user_email">Email address</label>
+        <input id="user_email" name="email" type="text" th:value="${user.email}" required>
 
-    <label for="user_email">Email</label>
-    <input id="user_email" name="email" type="text" th:value="${user.email}">
+        <label for="first_name">First name</label>
+        <input id="first_name" name="firstname" type="text" th:value="${user.firstname}" required>
 
-    <label for="first_name">First name</label>
-    <input id="first_name" name="firstname" type="text" th:value="${user.firstname}">
+        <label for="last_name">Last name</label>
+        <input id="last_name" name="lastname" type="text" th:value="${user.lastname}" required>
 
-    <label for="last_name">Last name</label>
-    <input id="last_name" name="lastname" type="text" th:value="${user.lastname}">
-
-    <label for="job_title">Job title</label>
-    <input id="job_title" name="jobtitle" type="text" th:value="${user.jobtitle}">
-    <input type="submit" value="Update profile">
+        <label for="job_title">Job title</label>
+        <input id="job_title" name="jobtitle" type="text" th:value="${user.jobtitle}" required>
+        <input type="submit" value="Update profile">
     </div>
   </form>
-  <a th:href="@{/profilePage}">Back</a>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-right">
+        <h1>Update your profile information</h1>
+        <br>
+        <p>Enter new profile information to change it</p>
+        <a th:href="@{/profilePage}">Go back to profile page</a>
+      </div>
+    </div>
+  </div>
 </div>
-
+</div>
 <footer th:insert="fragments/footer"></footer>
 </body>
 </html>
