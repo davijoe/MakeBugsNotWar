@@ -15,25 +15,23 @@
 <div class="tasks" th:each="task : ${tasks}">
     <table>
         <thead>
-        <th>Task ID</th>
+
         <th>Task Name</th>
         <th>Task Description</th>
         <th>Task Status</th>
         <th>User ID</th>
-        <th>Project ID</th>
-        <th>Task Time</th>
+        <th>Board</th>
+        <th>Story Points</th>
         </thead>
         <tbody>
         <tr>
-            <td th:text="${task.taskId}"></td>
             <td th:text="${task.taskName}"></td>
             <td th:text="${task.taskDescription}"></td>
-            <td th:text="${task.taskStatus}"></td>
+            <td th:if="${task.taskStatus == 4}"></td>
             <td th:text="${task.userId}"></td>
             <td th:text="${task.boardId}"></td>
-            <td th:text="${task.taskTime}"></td>
-            <a th:href="'/edit-task/' + ${task.taskId}">Edit task</a>
-            <a th:href="'/projec'"></a>
+            <td th:text="${task.storyPoints}"></td>
+            <td><a th:href="'/edit-task/' + ${task.taskId}">Edit task</a></td>
         </tr>
         </tbody>
     </table>
