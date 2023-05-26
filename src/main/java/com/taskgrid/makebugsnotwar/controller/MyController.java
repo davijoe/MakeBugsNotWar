@@ -251,12 +251,15 @@ public class MyController {
                            @RequestParam("taskName") String taskName,
                            @RequestParam("taskDescription") String taskDescription,
                            @RequestParam("taskStatus") int taskStatus,
-                           @RequestParam("userId") int userId,
-                           @RequestParam("projectId") int projectId,
+                           @RequestParam("storyPoints") int storyPoints,
+                           @RequestParam("boardId") int boardId,
                            @RequestParam("taskTime") int taskTime) {
 
-        Task task = new Task(taskId, taskName, taskDescription, taskStatus, userId, projectId, taskTime);
+        Task task = new Task(taskId, taskName, taskDescription, taskStatus, boardId, taskTime, storyPoints);
         taskRepository.editTask(task);
+
+        int projectId = taskRepository.getProjectId(boardId);
+
         return "redirect:/project/" + projectId;
 
     }
