@@ -69,7 +69,7 @@ public class MyController {
             return "signup";
         }
         if(controllerServices.checkPassword(password)){
-            testedPassword = password;
+            testedPassword = userRepository.encodePassword(password);
         }
         else{
             model.addAttribute("errorMessagePassword", "Password is not within the length limit");

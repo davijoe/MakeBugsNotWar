@@ -4,6 +4,7 @@ import com.taskgrid.makebugsnotwar.model.User;
 import com.taskgrid.makebugsnotwar.utility.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -40,6 +41,12 @@ public class UserRepository {
             sqle.printStackTrace();
         }
         return false;
+    }
+
+    public String encodePassword(String password)
+    {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10); //The strength affects how long it takes to encrypt and decrypt the password. 10 takes about a second for us, so we will leave it there.
+        return encoder.encode(password);
     }
 
     public int addUserLogin(User user) {
@@ -92,16 +99,16 @@ public class UserRepository {
 
     public int checkLogin(String username, String password) {
         int user_id = 0;
-        final String CHECKLOGIN_QUERY = "SELECT user_id FROM taskgrid.users WHERE username = ? AND user_password = ?";
+        final String CHECKLOGIN_QUERY = "SELECT user_id, user_password FROM taskgrid.users WHERE username = ?";
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL,DB_UID,DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(CHECKLOGIN_QUERY);
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            resultSet.getInt(1);
-            if (!(resultSet.wasNull())) {
+            String storedPassword = resultSet.getString(2);
+            if (encoder.matches(password,storedPassword)) {
                 user_id = resultSet.getInt(1);
             }
         } catch (SQLException sqle) {
