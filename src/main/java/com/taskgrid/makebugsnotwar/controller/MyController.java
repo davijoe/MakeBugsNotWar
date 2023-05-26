@@ -250,12 +250,11 @@ public class MyController {
     public String editTask(@RequestParam("taskId") int taskId,
                            @RequestParam("taskName") String taskName,
                            @RequestParam("taskDescription") String taskDescription,
-                           @RequestParam("taskStatus") int taskStatus,
                            @RequestParam("storyPoints") int storyPoints,
                            @RequestParam("boardId") int boardId,
                            @RequestParam("taskTime") int taskTime) {
 
-        Task task = new Task(taskId, taskName, taskDescription, taskStatus, boardId, taskTime, storyPoints);
+        Task task = new Task(taskId, taskName, boardId, taskTime, storyPoints, taskDescription);
         taskRepository.editTask(task);
 
         int projectId = taskRepository.getProjectId(boardId);
@@ -273,7 +272,6 @@ public class MyController {
 
     @PostMapping("/create-task")
     public String createTask(@RequestParam("task-name") String name,
-                             @RequestParam("task-status") int status,
                              @RequestParam("story-points") int storyPoints,
                              @RequestParam("task-description") String description,
                              @RequestParam("board_id") int boardId,
@@ -284,7 +282,7 @@ public class MyController {
             int userId = (int) session.getAttribute("user_id");
             Task task = new Task();
             task.setTaskName(name);
-            task.setTaskStatus(status);
+            task.setTaskStatus(0);
             task.setStoryPoints(storyPoints);
             task.setTaskDescription(description);
             task.setBoardId(boardId);

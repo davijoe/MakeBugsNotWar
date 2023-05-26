@@ -37,6 +37,16 @@ public class Task {
         this.taskTime = taskTime;
         this.storyPoints = storyPoints;
     }
+    public Task(int id, String name, int boardId, int taskTime, int storyPoints, String description) {
+
+        this.taskId = id;
+        this.taskName = name;
+        this.taskDescription = description;
+        this.userId = userId;
+        this.boardId = boardId;
+        this.taskTime = taskTime;
+        this.storyPoints = storyPoints;
+    }
     public Task(int id, String name, String description, int taskStatus, int userId, int boardId, int storyPoints) {
 
         this.taskId = id;
