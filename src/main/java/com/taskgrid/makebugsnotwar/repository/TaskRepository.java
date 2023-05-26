@@ -19,21 +19,21 @@ public class TaskRepository {
     private String DB_PWD;
 
     public int addTask(Task task) {
-        final String ADD_TASK_QUERY = "INSERT INTO taskgrid.tasks"+
+        final String ADD_TASK_QUERY = "INSERT INTO taskgrid.tasks" +
                 "(task_name, task_status, story_points, task_description, board_id) VALUES (?,?,?,?,?)";
 
         final String LAST_INSERT_QUERY = "SELECT LAST_INSERT_ID()";
 
         int taskId = 0;
 
-        try{
+        try {
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(ADD_TASK_QUERY);
             preparedStatement.setString(1, task.getTaskName());
-            preparedStatement.setInt(2,task.getTaskStatus());
+            preparedStatement.setInt(2, task.getTaskStatus());
             preparedStatement.setInt(3, task.getStoryPoints());
             preparedStatement.setString(4, task.getTaskDescription());
-            preparedStatement.setInt(5,task.getBoardId());
+            preparedStatement.setInt(5, task.getBoardId());
             preparedStatement.executeUpdate();
 
             Statement statement = connection.createStatement();
@@ -41,7 +41,7 @@ public class TaskRepository {
             resultSet.next();
             taskId = resultSet.getInt(1);
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("Could not add task to database");
             e.printStackTrace();
         }
@@ -54,12 +54,12 @@ public class TaskRepository {
         Task task = new Task();
         final String TASK_QUERY = "SELECT * FROM taskgrid.tasks WHERE task_id = ?";
 
-        try{
+        try {
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(TASK_QUERY);
-            preparedStatement.setInt(1,id);
+            preparedStatement.setInt(1, id);
 
-            ResultSet resultSet= preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
 
             String name = resultSet.getString("task_name");
@@ -73,7 +73,7 @@ public class TaskRepository {
             task = new Task(id, name, description, taskStatus, userId, projectId, taskTime, storyPoints);
 
 
-        } catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("Could not retrieve the specified task from the database");
         }
 
@@ -81,22 +81,22 @@ public class TaskRepository {
         return task;
     }
 
-    public List<Task> retrieveProjectTasks(int projectId){
+    public List<Task> retrieveProjectTasks(int projectId) {
         List<Task> taskList = new ArrayList<>();
-        final String QUERY = "SELECT taskgrid.tasks.* "+
-                "FROM tasks "+
-        "JOIN boards ON tasks.board_id = boards.board_id "+
-        "JOIN projects ON boards.project_id = projects.project_id "+
-        "WHERE projects.project_id = ?";
+        final String QUERY = "SELECT taskgrid.tasks.* " +
+                "FROM tasks " +
+                "JOIN boards ON tasks.board_id = boards.board_id " +
+                "JOIN projects ON boards.project_id = projects.project_id " +
+                "WHERE projects.project_id = ?";
 
-        try{
+        try {
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
             preparedStatement.setInt(1, projectId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 int id = resultSet.getInt("task_id");
                 String name = resultSet.getString("task_name");
                 String description = resultSet.getString("task_description");
@@ -113,7 +113,7 @@ public class TaskRepository {
 
             }
 
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("Could not retrieve tasks from the project");
             e.printStackTrace();
         }
@@ -122,16 +122,16 @@ public class TaskRepository {
     }
 
     public void editTask(Task task) {
-        final String EDITTASK_QUERY = "UPDATE taskgrid.tasks SET task_name = ?, task_description = ?, task_status = ?, user_id = ?, task_time = ?, story_points = ? WHERE task_id = ?";
+        final String EDITTASK_QUERY = "UPDATE taskgrid.tasks SET task_name = ?, task_description = ?, task_status = ?, task_time = ?, story_points = ? WHERE task_id = ?";
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(EDITTASK_QUERY);
-            preparedStatement.setString(1,task.getTaskName());
+            preparedStatement.setString(1, task.getTaskName());
             preparedStatement.setString(2, task.getTaskDescription());
             preparedStatement.setInt(3, task.getTaskStatus());
-            preparedStatement.setInt(4, task.getUserId());
-            preparedStatement.setInt(5, task.getTaskTime());
-            preparedStatement.setInt(6, task.getStoryPoints());
+            //  preparedStatement.setInt(4, task.getUserId());
+            preparedStatement.setInt(4, task.getTaskTime());
+            preparedStatement.setInt(5, task.getStoryPoints());
             preparedStatement.setInt(6, task.getTaskId());
 
             preparedStatement.executeUpdate();
@@ -142,10 +142,10 @@ public class TaskRepository {
         }
     }
 
-    public void updateTaskStatus(int taskId, int delta){
+    public void updateTaskStatus(int taskId, int delta) {
         final String UPDATE_QUERY = "UPDATE taskgrid.tasks SET task_status = task_status+? WHERE (task_id = ?)";
 
-        try{
+        try {
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
             preparedStatement.setInt(1, delta);
@@ -153,7 +153,7 @@ public class TaskRepository {
 
             preparedStatement.executeUpdate();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("could not update task status");
             e.printStackTrace();
         }
@@ -164,7 +164,7 @@ public class TaskRepository {
         final String DELETETASK = "DELETE FROM taskgrid.tasks WHERE task_id = ?";
 
         try {
-            Connection connection = ConnectionManager.getConnection(DB_URL,DB_UID,DB_PWD);
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(DELETETASK);
             preparedStatement.setInt(1, taskId);
             preparedStatement.executeUpdate();
@@ -178,9 +178,9 @@ public class TaskRepository {
     public List<Task> calculateBoardTaskTime(int boardId) {
         List<Task> taskInfoList = new ArrayList<>();
 
-        final String CALCTASKINFO_QUERY="SELECT IFNULL(task_status, -1), SUM(task_time) AS sum FROM tasks WHERE board_id = ? GROUP BY task_status WITH ROLLUP";
+        final String CALCTASKINFO_QUERY = "SELECT IFNULL(task_status, -1), SUM(task_time) AS sum FROM tasks WHERE board_id = ? GROUP BY task_status WITH ROLLUP";
         try {
-            Connection connection = ConnectionManager.getConnection(DB_URL,DB_UID,DB_PWD);
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(CALCTASKINFO_QUERY);
             preparedStatement.setInt(1, boardId);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -199,5 +199,27 @@ public class TaskRepository {
         }
 
         return taskInfoList;
+    }
+
+    public int getProjectId(int boardId) {
+        int projectId = 0;
+        final String GETBOARDID_QUERY = "SELECT project_id FROM taskgrid.boards WHERE board_id = ?";
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(GETBOARDID_QUERY);
+            preparedStatement.setInt(1, boardId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                projectId = resultSet.getInt(1);
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println("Could not get task info");
+            e.printStackTrace();
+
+        }
+
+        return projectId;
     }
 }
