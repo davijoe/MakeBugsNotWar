@@ -12,15 +12,15 @@
 <nav th:insert="fragments/sidenav"></nav>
 
 <h1 th:text="${project.projectName}"></h1>
-
+<div class="board-container">
 <div class="board-list" th:each="board: ${boards}">
 <div class="board">
-    <div class="flex-box">
-    <div class="column">
-        <a th:href="@{'/create-task/' + ${project.projectId} + '/' + ${board.boardId}}">Create task</a>
+    <div class="board-header" >
+        <h1 th:text="${board.boardName}"></h1>
+        <a th:href="@{'/create-task/' + ${project.projectId} + '/' + ${board.boardId}}">
+        <button>Create task</button>
+        </a>
     </div>
-    </div>
-    <h3 th:text="${board.boardName}"></h3>
     <div class="column">
         <h2>Stories</h2>
         <div th:each="task : ${tasks}" th:if="${task.taskStatus == 0 and task.boardId == board.boardId}" class="task">
@@ -117,7 +117,7 @@
 </div>
 </div>
 
-
+</div>
 <footer th:insert="fragments/footer"></footer>
 </body>
 </html>
