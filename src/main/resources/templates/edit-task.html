@@ -7,9 +7,10 @@
 </head>
 <body>
 <nav th:insert="fragments/topnav"></nav>
-
-<div>
+<div class="container">
+<div class="create_body">
   <form action="/edit-task" method="post">
+    <div class="form-container-create">
     <input id="task-id" name="taskId" type="hidden" th:value="${tasks.taskId}">
 
     <label for="task-name">Task Name</label>
@@ -27,7 +28,20 @@
     <input id="story-points" name="storyPoints" type="text" th:value="${tasks.storyPoints}">
 
     <input type="submit" value="Edit task">
+    </div>
   </form>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-right">
+        <h1>Task edit</h1>
+        <br>
+        <p>Edit task details</p>
+        <a th:href="@{/profilePage}">Go back to profile page</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
   <a th:href="'/project/' + ${tasks.boardId}">Back</a>
 </div>
 

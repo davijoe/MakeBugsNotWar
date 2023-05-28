@@ -271,7 +271,7 @@ html{
     min-height: 78vh;
     margin-left: 5vw;
     flex-flow: column;
-    justify-content: space-around;
+    gap: 30px;
 
 }
 
@@ -280,6 +280,24 @@ html{
     border-left: transparent;
 }
 
+.create-task-button {
+    background-color: #eeeeee;
+    border: none;
+    color: black;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.create-task-button:hover {
+    transition-duration: 0.3s;
+    box-shadow: 0 12px 16px 0 grey;
+}
 /*------------------------STYLING FOR SEARCH USER-------------------------*/
 
 
@@ -647,6 +665,7 @@ html{
     max-width: 60%;
     min-height: 78vh;
 }
+
 .profile_info {
     background-color: #F1FAEE;
     border: 1px solid #ddd;
@@ -654,9 +673,10 @@ html{
     margin-bottom: 10px;
     border-radius: 5px;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
     justify-content: space-around;
     align-items: center;
+    justify-self: center;
 
 
 }
@@ -665,6 +685,56 @@ html{
     width: 50vw;
 }
 
+.profile-projects {
+    display: flex;
+    background-color: #F1FAEE;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    flex-flow: column wrap;
+    align-items: flex-start;
+
+}
+.profile-projects table {
+    width: 50vw;
+    text-align: left;
+}
+
+.create-project-button {
+    background-color: #eeeeee;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.link-project-button {
+    background-color: #eeeeee;
+    border: none;
+    color: black;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.create-project-button:hover {
+    transition-duration: 0.3s;
+    box-shadow: 0 12px 16px 0 rgb(151, 203, 236),0 17px 50px 0 rgba(183, 213, 210, 0.38);
+}
+
+.link-project-button:hover {
+    transition-duration: 0.3s;
+    box-shadow: 0 12px 16px 0 rgb(151, 203, 236),0 17px 50px 0 rgba(183, 213, 210, 0.38);
+}
 /*-----------------------------CSS FOR UPDATE PROFILE ----------------------*/
 
 .update-profile-body {

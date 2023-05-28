@@ -9,30 +9,43 @@
 <nav th:insert="fragments/topnav"></nav>
 
 <!--<nav th:insert="fragments/sidenav"></nav>-->
-
-    <div>
+<div class="container">
+    <div class="create_body">
         <form action="/create-task" method="post">
+            <div class="form-container-create">
             <input id="projectId" name="project_id" type="hidden" th:value="${projectId}">
             <input id="boardId" name="board_id" type="hidden" th:value="${boardId}">
             <div>
-                <label for="name-field">Task name:</label>
+                <label for="name-field"> Task name:</label>
                 <input id="name-field" name="task-name" type="text">
             </div>
             <br>
              <div>
-                <label for="description-field">Task description:</label>
+                <label for="description-field"> Task description:</label>
                 <input id="description-field" name="task-description" type="text">
              </div>
             <br>
             <br>
             <div>
-                <label for="story-points-field">Task story points:</label>
+                <label for="story-points-field"> Task story points:</label>
                 <input id="story-points-field" name="story-points" type="text">
              </div>
             <br>
             <input type="submit" value="Create task">
+            </div>
         </form>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <h1>Task Creation</h1>
+                    <br>
+                    <p>Enter task details</p>
+                    <a th:href="@{/profilePage}">Go back to profile page</a>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
 <footer th:insert="fragments/footer"></footer>
 </body>
