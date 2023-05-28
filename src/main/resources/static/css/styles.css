@@ -664,7 +664,6 @@ html{
 /*-----------------------------CSS MY PROFILE ----------------------*/
 .profile-page-container {
     display: flex;
-    min-height: 78vh;
     justify-content: center;
 
 }
@@ -677,10 +676,11 @@ html{
     align-self: center;
     flex-flow: column wrap;
     column-gap: 10px;
+    min-height: 78vh;
 }
 
 .profile_info {
-    background-color: #F1FAEE;
+    background-color: #A8DADC;
     border: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 10px;
@@ -700,7 +700,7 @@ html{
 
 .profile-projects {
     display: flex;
-    background-color: #F1FAEE;
+    background-color: #A8DADC;
     border: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 10px;
