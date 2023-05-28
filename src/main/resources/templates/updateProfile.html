@@ -14,16 +14,16 @@
       <div class="update_info" th:each="user : ${user}">
         <input id="userid" name="user_id" type="hidden" th:value="${user_id}">
 
-        <label for="user_name">User name</label>
+        <label for="user_name">First name</label>
         <input id="user_name" name="username" type="text" th:value="${user.username}" required>
 
-        <label for="user_email">Email address</label>
+        <label for="user_email">Last name</label>
         <input id="user_email" name="email" type="text" th:value="${user.email}" required>
 
-        <label for="first_name">First name</label>
+        <label for="first_name">Username</label>
         <input id="first_name" name="firstname" type="text" th:value="${user.firstname}" required>
 
-        <label for="last_name">Last name</label>
+        <label for="last_name">Email address</label>
         <input id="last_name" name="lastname" type="text" th:value="${user.lastname}" required>
 
         <label for="job_title">Job title</label>

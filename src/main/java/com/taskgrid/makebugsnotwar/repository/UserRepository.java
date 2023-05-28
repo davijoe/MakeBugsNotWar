@@ -136,7 +136,7 @@ public class UserRepository {
                 String lastname = resultSet.getString(4);
                 System.out.println(lastname);
                 String job_title = resultSet.getString(5);
-                User user = new User(firstname,lastname,username,email,job_title);
+                User user = new User(username,email,firstname,lastname,job_title);
                 userList.add(user);
             }
         } catch (SQLException e) {
