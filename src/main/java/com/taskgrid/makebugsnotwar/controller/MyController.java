@@ -192,6 +192,25 @@ public class MyController {
 
     }
 
+    @GetMapping("/create-board/{projectId}")
+    public String showCreateBoard(@PathVariable("projectId") int projectId, Model model) {
+        model.addAttribute("project-id", projectId);
+        return "create-board";
+    }
+    @PostMapping("/create-board")
+    public String createBoard(@RequestParam("project-id") int projectId,
+                              @RequestParam("board-name") String boardName,
+                              @RequestParam("start-date") Date startDate,
+                              @RequestParam("end-date") Date endDate) {
+        Board board = new Board();
+        board.setBoardName(boardName);
+        board.setStartDate(startDate);
+        board.setEndDate(endDate);
+        board.setProjectId(projectId);
+        boardRepository.createBoard(board);
+        return "redirect:/project/" + projectId;
+    }
+
     @GetMapping("/project/{id}")
     public String viewProject(@PathVariable("id") int projectId, Model model){
         Project project = projectRepository.findProjectById(projectId);

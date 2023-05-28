@@ -667,7 +667,9 @@ html{
     min-height: 78vh;
     justify-content: center;
 
-
+}
+.profile_info a {
+    display: inline;
 }
 .profile_body {
     display: flex;
