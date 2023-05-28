@@ -29,9 +29,11 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="profile-buttons">
+                <a th:href="'/deleteProfile/' + ${user_id}"><button class="create-task-button">Delete Profile</button></a>
+                <a th:href="'/updateProfile/'+${user_id}"><button class="create-task-button">Update profile information</button></a>
+            </div>
 
-            <a th:href="'/deleteProfile/' + ${user_id}">Delete Profile</a>
-            <a th:href="'/updateProfile/'+${user_id}">Update profile information</a>
         </div>
 
         <div th:each="project : ${projects}" class="profile-projects">
