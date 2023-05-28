@@ -5,7 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="../static/css/mystyles.css" th:href="@{/css/styles.css}">
 </head>
-<body>
+<body class="profile-page-body">
 <nav th:insert="fragments/topnav"></nav>
 
 <div class="profile-page-container">
@@ -13,10 +13,10 @@
         <div th:each="user : ${users}" class="profile_info">
             <table>
                 <thead>
-                    <th>Username</th>
-                    <th>Email</th>
                     <th>First name</th>
                     <th>Last name</th>
+                    <th>Username</th>
+                    <th>Email</th>
                     <th>Job title</th>
                 </thead>
                 <tbody>
@@ -34,7 +34,7 @@
             <a th:href="'/updateProfile/'+${user_id}">Update profile information</a>
         </div>
 
-        <div th:each="project : ${projects}">
+        <div th:each="project : ${projects}" class="profile-projects">
             <table>
                 <thead>
                 <th>Project ID</th>
@@ -46,14 +46,14 @@
                     <td th:text="${project.projectId}"></td>
                     <td th:text="${project.projectName}"></td>
                     <td th:text="${project.projectDescription}"></td>
-                    <a th:href="'/project/' + ${project.projectId}">Link til project</a>
                 </tr>
                 </tbody>
             </table>
-            <a th:href="@{/create-project}">Create new project</a>
-            <a th:href="@{/project/8}">Link til project 8</a>
+            <a th:href="'/project/' + ${project.projectId}"><button class="link-project-button">Link to project</button></a>
         </div>
+        <a th:href="@{/create-project}"><button class="create-project-button">Create new project</button></a>
     </div>
+
 </div>
 
 <a th:href="@{/project/13}">View project test</a>
