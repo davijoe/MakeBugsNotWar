@@ -374,6 +374,7 @@ html{
     justify-content: space-between;
   
 }
+
 /*-----------------------------CSS FOR LOGIN ----------------------*/
 
 .form-container h1 {
@@ -662,8 +663,18 @@ html{
 }
 /*-----------------------------CSS MY PROFILE ----------------------*/
 .profile-page-container {
-    max-width: 60%;
+    display: flex;
     min-height: 78vh;
+    justify-content: center;
+
+
+}
+.profile_body {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    flex-flow: column wrap;
+    column-gap: 10px;
 }
 
 .profile_info {

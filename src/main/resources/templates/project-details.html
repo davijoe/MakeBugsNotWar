@@ -20,8 +20,10 @@
     Edit details
 </a>
 <br>
+<div class="container">
+    <div class="board-container">
 <h1> Boards on this project</h1>
-<div class="flex-box">
+<div class="board-list">
     <div class="column" th:each="board : ${boards}">
         <h1 th:text="'Board name: ' + ${board.boardName}"></h1>
         <p th:text="'Start date: ' + ${board.startDate}"></p>
@@ -33,11 +35,13 @@
 </div>
 </div>
 <h1> Users on this project </h1>
-<div class="flex-box">
+<div class="board-list">
 <div class="column" th:each="user : ${users}">
     <p th:text="'User name: ' + ${user.firstname} + ' ' + ${user.lastname}"></p>
     <p th:text="'User role: ' + ${user.projectRole}"></p>
 
+</div>
+</div>
 </div>
 </div>
 
