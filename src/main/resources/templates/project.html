@@ -21,9 +21,11 @@
         <a th:href="@{'/create-task/' + ${project.projectId} + '/' + ${board.boardId}}">
         <button class="create-task-button">Create task</button>
         </a>
-        <a th:href="@{'/'+${project.projectId} + '/delete-board/' + ${board.boardId}}">
-            <button class="create-task-button">Delete board</button>
-        </a>
+            <form th:action="@{'/'+${project.projectId} + '/delete-board/' + ${board.boardId}}" method="post">
+                <label for="delete">Write 'DELETE' to delete this board and all its content. WARNING: this is permanent</label>
+                <input type="text" id="delete" name="delete"/>
+                <button type="submit">Delete board</button>
+            </form>
     </div>
     <div class="column">
         <h2>Stories</h2>
