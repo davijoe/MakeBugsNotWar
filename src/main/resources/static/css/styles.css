@@ -313,10 +313,16 @@ html{
     padding: 10px;
     border: solid #333333;
 }
-.searched-user-column {
+.searched-user {
     display: flex;
     align-items: flex-start;
-    flex-flow: row;
+    flex-flow: column;
+    background-color: #A8DADC;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 2em;
+    margin: 5px;
+    align-self: flex-start;
 }
 .flex-box {
     display: flex;
@@ -328,17 +334,6 @@ html{
     padding: 20px;
     border-radius: 2em;
 }
-
-.search-user-column {
-    display: flex;
-    background-color: #A8DADC;
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 2em;
-    flex-flow: row wrap;
-    gap: 10px;
-}
-
 
 /*-----------------------------CSS FOR PROJECT DETAILS ----------------------*/
 
@@ -669,11 +664,10 @@ html{
 /*-----------------------------CSS MY PROFILE ----------------------*/
 .profile-page-container {
     display: flex;
+    min-height: 78vh;
     justify-content: center;
 
-}
-.profile_info a {
-    display: inline;
+
 }
 .profile_body {
     display: flex;
@@ -681,11 +675,10 @@ html{
     align-self: center;
     flex-flow: column wrap;
     column-gap: 10px;
-    min-height: 78vh;
 }
 
 .profile_info {
-    background-color: #A8DADC;
+    background-color: #F1FAEE;
     border: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 10px;
@@ -705,7 +698,7 @@ html{
 
 .profile-projects {
     display: flex;
-    background-color: #A8DADC;
+    background-color: #F1FAEE;
     border: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 10px;
