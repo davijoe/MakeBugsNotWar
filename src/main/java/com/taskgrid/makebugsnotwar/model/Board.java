@@ -17,6 +17,11 @@ public class Board {
     private int taskTimePerBoard;
 
     private int totalTasksPerBoard;
+
+
+    private double averageTimeBoard;
+
+    private double averageStoryPointsBoard;
     public Board(){
     }
 
@@ -29,7 +34,7 @@ public class Board {
     }
 
     public Board(int boardId, String boardName, Date startDate, Date endDate, int storyPointsPerBoard, int taskTimePerBoard, int
-                 totalTasksPerBoard) {
+                 totalTasksPerBoard, double averageTimeBoard, double averageStoryPointsBoard) {
         this.boardId = boardId;
         this.boardName = boardName;
         this.startDate = startDate;
@@ -37,6 +42,8 @@ public class Board {
         this.storyPointsPerBoard = storyPointsPerBoard;
         this.taskTimePerBoard = taskTimePerBoard;
         this.totalTasksPerBoard = totalTasksPerBoard;
+        this.averageTimeBoard = averageTimeBoard;
+        this.averageStoryPointsBoard = averageStoryPointsBoard;
     }
 
     public int getBoardId() {
@@ -102,4 +109,20 @@ public class Board {
     public void setTotalTasksPerBoard(int totalTasksPerBoard) {
         this.totalTasksPerBoard = totalTasksPerBoard;
     }
+    public double getAverageTimeBoard() {
+        return averageTimeBoard;
+    }
+
+    public void setAverageTimeBoard(double averageTimeBoard) {
+        this.averageTimeBoard = averageTimeBoard;
+    }
+
+    public double getAverageStoryPointsBoard() {
+        return averageStoryPointsBoard;
+    }
+
+    public void setAverageStoryPointsBoard(double averageStoryPointsBoard) {
+        this.averageStoryPointsBoard = averageStoryPointsBoard;
+    }
+
 }

@@ -46,4 +46,5 @@ public class ControllerServices {
     public boolean checkEmail(String email){
         return email.contains("@") && email.contains(".");
     }
+
 }

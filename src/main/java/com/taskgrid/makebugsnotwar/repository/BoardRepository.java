@@ -67,7 +67,9 @@ public class BoardRepository {
 
     public List<Board> getProjectBoardsWithInfo(int projectId) {
         final String BOARD_LIST_QUERY = "SELECT board_id, board_name, start_date, end_date, SUM(story_points), SUM(task_time)," +
-                " COUNT(task_id) AS total_tasks FROM taskgrid.boards JOIN taskgrid.tasks USING (board_id) WHERE project_id = ? GROUP BY board_id";
+                " COUNT(task_id) AS total_tasks, SUM(story_points) / DATEDIFF(end_date, start_date) AS averageStoryPoints " +
+                ", SUM(task_time) / DATEDIFF(end_date, start_date) AS averageTime FROM taskgrid.boards JOIN taskgrid.tasks " +
+                "USING (board_id) WHERE project_id = ? GROUP BY board_id";
         List<Board> boards = new ArrayList<>();
 
         try{
@@ -84,7 +86,9 @@ public class BoardRepository {
                 int storyPoints = resultSet.getInt(5);
                 int taskTime = resultSet.getInt(6);
                 int totalTasks = resultSet.getInt(7);
-                Board newBoard = new Board(boardId, boardName, startDate, endDate, storyPoints, taskTime, totalTasks);
+                double averageStoryPoints = resultSet.getDouble(8);
+                double averageTime = resultSet.getDouble(9);
+                Board newBoard = new Board(boardId, boardName, startDate, endDate, storyPoints, taskTime, totalTasks, averageTime, averageStoryPoints);
                 boards.add(newBoard);
             }
 
