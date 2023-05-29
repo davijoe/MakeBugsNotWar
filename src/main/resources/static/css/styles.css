@@ -21,7 +21,7 @@ html{
 }
 
 .container{
-    min-height: 78vh;
+    min-height: 88vh;
 }
 /* TOPNAV CSS BLOCK */
 
@@ -147,7 +147,6 @@ html{
 .footer{
     position: absolute;
     display:flex;
-    margin-top: auto;
     flex-direction: row;
     height: 15vh;
     min-height: 50px;
@@ -158,9 +157,8 @@ html{
     text-decoration: none;
     align-items: center;
     font-size: 20px;
-    border-top: solid;
-    border-color: #A8DADC;
     background-color: #457B9D;
+    bottom: 0;
 }
 
 .logo-container{
@@ -656,19 +654,20 @@ html{
     margin: 8px 20px;
     width: 90%;
 }
+
 .form-container-create span{
     font-size: 13px;
     margin-left: 8%;
     color: red;
 }
+
 /*-----------------------------CSS MY PROFILE ----------------------*/
 .profile-page-container {
     display: flex;
     min-height: 78vh;
     justify-content: center;
-
-
 }
+
 .profile_body {
     display: flex;
     align-items: center;
@@ -688,9 +687,8 @@ html{
     justify-content: space-around;
     align-items: center;
     justify-self: center;
-
-
 }
+
 .profile_info table {
     text-align: center;
     width: 50vw;
@@ -705,8 +703,8 @@ html{
     border-radius: 5px;
     flex-flow: column wrap;
     align-items: flex-start;
-
 }
+
 .profile-projects table {
     width: 50vw;
     text-align: left;
@@ -737,6 +735,7 @@ html{
     margin: 4px 2px;
     cursor: pointer;
 }
+
 .create-project-button:hover {
     transition-duration: 0.3s;
     box-shadow: 0 12px 16px 0 rgb(151, 203, 236),0 17px 50px 0 rgba(183, 213, 210, 0.38);
@@ -779,6 +778,7 @@ html{
     margin: 8px 20px;
     width: 90%;
 }
+
 .update_info span{
     font-size: 13px;
     margin-left: 8%;
