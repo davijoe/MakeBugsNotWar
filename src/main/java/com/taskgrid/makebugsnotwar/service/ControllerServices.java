@@ -46,4 +46,11 @@ public class ControllerServices {
     public boolean checkEmail(String email){
         return email.contains("@") && email.contains(".");
     }
+
+    public boolean confirmDelete(String input){
+
+        return input.equals("DELETE");
+    }
 }
+
+

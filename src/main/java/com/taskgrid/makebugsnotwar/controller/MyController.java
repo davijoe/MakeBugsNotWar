@@ -151,12 +151,17 @@ public class MyController {
         userRepository.updateUser(user, userId);
         return "redirect:/profilePage";
     }
-    @GetMapping("/deleteProfile/{user_id}")
-    public String deleteProfile(@PathVariable("user_id") int userId,
+    @PostMapping("/deleteProfile/{user_id}")
+    public String deleteProfile(@RequestParam("delete") String deleteRequest,
+                                @PathVariable("user_id") int userId,
                                 HttpSession session){
+        if(controllerServices.confirmDelete(deleteRequest)){
         userRepository.deleteProfile(userId);
         session.removeAttribute("user_id");
         return "redirect:/";
+        } else {
+            return "profilePage";
+        }
     }
 
     @GetMapping("/create-project")
@@ -211,10 +216,14 @@ public class MyController {
         return "redirect:/project/" + projectId;
     }
 
-    @GetMapping("{project-id}/delete-board/{board-id}")
-    public String deleteBoard(@PathVariable("board-id") int boardId,
+    @PostMapping("{project-id}/delete-board/{board-id}")
+    public String deleteBoard(@RequestParam("delete") String deleteRequest,
+                              @PathVariable("board-id") int boardId,
                               @PathVariable("project-id") int projectId) {
-        boardRepository.deleteBoard(boardId);
+        if(controllerServices.confirmDelete(deleteRequest)){
+            boardRepository.deleteBoard(boardId);
+        }
+
         return "redirect:/project/"+projectId;
     }
 
@@ -376,7 +385,7 @@ public class MyController {
     @PostMapping("/edit-project-details/{project-id}/delete-project")
     public String deleteProject(@PathVariable("project-id") int projectId,
                                 @RequestParam("delete") String deleteRequest){
-        if (deleteRequest.equals("DELETE")){
+        if (controllerServices.confirmDelete(deleteRequest)){
             projectRepository.deleteProjectById(projectId);
         return "redirect:/profilePage";}
         else {

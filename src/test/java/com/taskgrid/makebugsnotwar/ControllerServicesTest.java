@@ -108,4 +108,20 @@ class ControllerServicesTest {
         boolean result = controllerServices.checkEmail(str);
         assertFalse(result, "Test complete.");
     }
+
+    @Test
+    void checkConfirmDeleteTrue(){
+        String str = "DELETE";
+        boolean result = controllerServices.confirmDelete(str);
+        assertTrue(result, "Test complete");
+    }
+
+    @Test
+    void checkConfirmDeleteFalse(){
+        String str = "dELETE";
+        boolean result = controllerServices.confirmDelete(str);
+        assertFalse(result, "Test complete");
+    }
+
+
 }
