@@ -30,7 +30,12 @@
                 </tbody>
             </table>
             <div class="profile-buttons">
-                <a th:href="'/deleteProfile/' + ${user_id}"><button class="create-task-button">Delete Profile</button></a>
+
+                <form th:action="@{'/deleteProfile/' + ${user_id}}" method="post">
+                    <label for="delete">Write 'DELETE' to delete your profile and all its content. WARNING: this is permanent</label>
+                    <input type="text" id="delete" name="delete"/>
+                    <button type="submit">Delete my profile</button>
+                </form>
                 <a th:href="'/updateProfile/'+${user_id}"><button class="create-task-button">Update profile information</button></a>
             </div>
 
