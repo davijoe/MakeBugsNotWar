@@ -8,7 +8,6 @@ body{
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-width: 800px;
     min-height: 78vh;
 }
 body, html{
@@ -21,7 +20,7 @@ html{
 }
 
 .container{
-    min-height: 88vh;
+    min-height: 12vh;
 }
 /* TOPNAV CSS BLOCK */
 
@@ -197,14 +196,12 @@ html{
 }
 .profile_body{
     min-height: 78vh;
+    margin-top: 1%;
 }
 .login_body{
     min-height: 78vh;
 }
-.create_body{
-    min-height: 78vh;
 
-}
 
 /*styling for the taskboard*/
 
