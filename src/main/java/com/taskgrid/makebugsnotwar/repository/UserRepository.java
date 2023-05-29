@@ -29,35 +29,35 @@ public class UserRepository {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                String u_email = resultSet.getString(3);
-                String u_username = resultSet.getString(4);
-                if(u_email != null || u_username != null){
+                String checkEmail = resultSet.getString(3);
+                String checkUsername = resultSet.getString(4);
+                if(checkEmail != null || checkUsername != null){
                     return true;
                 }
             }
 
-        }catch(SQLException sqle){
+        }catch(SQLException e){
             System.out.println("Could not query the database");
-            sqle.printStackTrace();
+            e.printStackTrace();
         }
         return false;
     }
 
     public String encodePassword(String password)
     {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10); //The strength affects how long it takes to encrypt and decrypt the password. 10 takes about a second for us, so we will leave it there.
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
         return encoder.encode(password);
     }
 
     public int addUserLogin(User user) {
-        final String ADDUSER1_QUERY = "INSERT INTO taskgrid.users " +
+        final String ADDUSER_QUERY = "INSERT INTO taskgrid.users " +
                 "(username, user_password, user_email) VALUES (?, ?, ?)";
         final String LASTINSERTED_QUERY = "SELECT LAST_INSERT_ID()";
 
-        int user_id = 0;
+        int userId = 0;
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
-            PreparedStatement preparedStatement = connection.prepareStatement(ADDUSER1_QUERY);
+            PreparedStatement preparedStatement = connection.prepareStatement(ADDUSER_QUERY);
             preparedStatement.setString(1,user.getUsername());
             preparedStatement.setString(2,user.getPassword());
             preparedStatement.setString(3,user.getEmail());
@@ -67,38 +67,38 @@ public class UserRepository {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(LASTINSERTED_QUERY);
             resultSet.next();
-            user_id = resultSet.getInt(1);
+            userId = resultSet.getInt(1);
 
         }catch(SQLException sqle){
             System.out.println("Could not create user login");
             sqle.printStackTrace();
         }
-        return user_id;
+        return userId;
     }
 
-    public void addUserInfo(User user, int user_id) {
-        final String ADDUSER2_QUERY = "INSERT INTO taskgrid.user_info" +
+    public void addUserInfo(User user, int userId) {
+        final String ADDUSERINFO_QUERY = "INSERT INTO taskgrid.user_info" +
                 "(user_id, first_name, last_name, job_title) VALUES (?, ?, ?, ?)";
 
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
-            PreparedStatement preparedStatement = connection.prepareStatement(ADDUSER2_QUERY);
+            PreparedStatement preparedStatement = connection.prepareStatement(ADDUSERINFO_QUERY);
 
-            preparedStatement.setInt(1, user_id);
-            preparedStatement.setString(2, user.getFirstname());
-            preparedStatement.setString(3, user.getLastname());
-            preparedStatement.setString(4, user.getJobtitle());
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setString(2, user.getFirstName());
+            preparedStatement.setString(3, user.getLastName());
+            preparedStatement.setString(4, user.getJobTitle());
 
             preparedStatement.executeUpdate();
-        }catch(SQLException sqle){
+        }catch(SQLException e){
             System.out.println("Could not create userinfo");
-            sqle.printStackTrace();
+            e.printStackTrace();
         }
     }
 
 
     public int checkLogin(String username, String password) {
-        int user_id = 0;
+        int userId = 0;
         final String CHECKLOGIN_QUERY = "SELECT user_id, user_password FROM taskgrid.users WHERE username = ?";
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
         try {
@@ -109,34 +109,34 @@ public class UserRepository {
             resultSet.next();
             String storedPassword = resultSet.getString(2);
             if (encoder.matches(password,storedPassword)) {
-                user_id = resultSet.getInt(1);
+                userId = resultSet.getInt(1);
             }
-        } catch (SQLException sqle) {
+        } catch (SQLException e) {
             System.out.println("Could not login");
-            sqle.printStackTrace();
+            e.printStackTrace();
         }
-        return user_id;
+        return userId;
     }
-    public List<User> getUserInfo(int user_id) {
+    public List<User> getUserInfo(int userId) {
         List<User> userList = new ArrayList<>();
-        final String GETUSER_INFO = "SELECT username, user_email, first_name, last_name, job_title " +
+        final String GETUSERINFO_QUERY = "SELECT username, user_email, first_name, last_name, job_title " +
                 "FROM taskgrid.users JOIN taskgrid.user_info ON users.user_id = user_info.user_id\n" +
                 "WHERE user_info.user_id = ?;";
         try {
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
-            PreparedStatement preparedStatement = connection.prepareStatement(GETUSER_INFO);
-            preparedStatement.setInt(1, user_id);
+            PreparedStatement preparedStatement = connection.prepareStatement(GETUSERINFO_QUERY);
+            preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 String username = resultSet.getString(1);
                 System.out.println(username);
                 String email = resultSet.getString(2);
-                String firstname = resultSet.getString(3);
-                String lastname = resultSet.getString(4);
-                System.out.println(lastname);
-                String job_title = resultSet.getString(5);
-                User user = new User(username,email,firstname,lastname,job_title);
+                String firstName = resultSet.getString(3);
+                String lastName = resultSet.getString(4);
+                System.out.println(lastName);
+                String jobTitle = resultSet.getString(5);
+                User user = new User(username,email,firstName,lastName,jobTitle);
                 userList.add(user);
             }
         } catch (SQLException e) {
@@ -161,14 +161,14 @@ public class UserRepository {
 
             while(resultSet.next()){
                 int userId = resultSet.getInt("user_id");
-                String userName = resultSet.getString("username");
+                String username = resultSet.getString("username");
                 String lastName = resultSet.getString("last_name");
                 String firstName = resultSet.getString("first_name");
                 String projectRole = resultSet.getString("user_position");
                 String jobTitle = resultSet.getString("job_title");
                 String email = resultSet.getString("user_email");
 
-                User user = new User(firstName, lastName, userName, email, jobTitle);
+                User user = new User(firstName, lastName, username, email, jobTitle);
                 user.setUserId(userId);
                 user.setProjectRole(projectRole);
                 projectUsers.add(user);
@@ -183,7 +183,7 @@ public class UserRepository {
     }
 
 
-    public void updateUser(User user, int user_id) {
+    public void updateUser(User user, int userId) {
         final String UPDATEPROFILE_QUERY = "UPDATE taskgrid.users, taskgrid.user_info SET username = ?, user_email = ?, " +
                 "first_name = ?, last_name = ?, job_title = ? WHERE users.user_id = ? AND user_info.user_id = ?;";
         try{
@@ -192,16 +192,16 @@ public class UserRepository {
 
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getEmail());
-            preparedStatement.setString(3, user.getFirstname());
-            preparedStatement.setString(4, user.getLastname());
-            preparedStatement.setString(5, user.getJobtitle());
-            preparedStatement.setInt(6, user_id);
-            preparedStatement.setInt(7, user_id);
+            preparedStatement.setString(3, user.getFirstName());
+            preparedStatement.setString(4, user.getLastName());
+            preparedStatement.setString(5, user.getJobTitle());
+            preparedStatement.setInt(6, userId);
+            preparedStatement.setInt(7, userId);
 
             preparedStatement.executeUpdate();
-        }catch(SQLException sqle){
+        }catch(SQLException e){
             System.out.println("Could not update user");
-            sqle.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -232,11 +232,11 @@ public class UserRepository {
                 int userId = resultSet.getInt("user_id");
                 String username = resultSet.getString("username");
                 String email = resultSet.getString("user_email");
-                String firstname = resultSet.getString("first_name");
-                String lastname = resultSet.getString("last_name");
-                String job_title = resultSet.getString("job_title");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String jobTitle = resultSet.getString("job_title");
 
-                User user = new User(firstname, lastname, username, email, job_title);
+                User user = new User(firstName, lastName, username, email, jobTitle);
                 user.setUserId(userId);
                 resultUsers.add(user);
             }
@@ -247,17 +247,17 @@ public class UserRepository {
         return resultUsers;
     }
 
-    public void deleteProfile(int user_id) {
+    public void deleteProfile(int userId) {
         final String DELETE_PROFILE_QUERY = "DELETE FROM users WHERE users.user_id = ?";
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_PROFILE_QUERY);
-            preparedStatement.setInt(1, user_id);
+            preparedStatement.setInt(1, userId);
             preparedStatement.executeUpdate();
 
-        }catch(SQLException sqle){
+        }catch(SQLException e){
             System.out.println("Could not delete profile.");
-            sqle.printStackTrace();
+            e.printStackTrace();
         }
     }
 

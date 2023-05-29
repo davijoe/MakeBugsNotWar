@@ -21,27 +21,27 @@ class ControllerServicesTest {
     @Test
     void testCapitalLettersOnlyFirstname(){
         String  str = "ABCDEFGH";
-        String result = controllerServices.checkFirstname(str);
+        String result = controllerServices.checkFirstName(str);
         assertEquals("Abcdefgh", result, "Test succesfull.");
     }
     @Test
     void nonCapitalLettersOnlyFirstname(){
         String str = "abcdefgh";
-        String result = controllerServices.checkFirstname(str);
+        String result = controllerServices.checkFirstName(str);
         assertEquals("Abcdefgh", result, "Test complete.");
     }
 
     @Test
     void testCapitalLettersOnlyLastname(){
         String str = "ABCDEFGH";
-        String result = controllerServices.checkFirstname(str);
+        String result = controllerServices.checkFirstName(str);
         assertEquals("Abcdefgh", result, "Test complete.");
     }
 
     @Test
     void nonCapitalLettersOnlyLastname(){
         String str = "abcdefgh";
-        String result = controllerServices.checkFirstname(str);
+        String result = controllerServices.checkFirstName(str);
         assertEquals("Abcdefgh", result, "Test complete.");
     }
 

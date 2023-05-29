@@ -37,7 +37,7 @@
 <h1> Users on this project </h1>
 <div class="board-list">
 <div class="column" th:each="user : ${users}">
-    <p th:text="'User name: ' + ${user.firstname} + ' ' + ${user.lastname}"></p>
+    <p th:text="'User name: ' + ${user.firstName} + ' ' + ${user.lastName}"></p>
     <p th:text="'User role: ' + ${user.projectRole}"></p>
 
 </div>

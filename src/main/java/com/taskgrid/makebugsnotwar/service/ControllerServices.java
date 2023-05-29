@@ -3,29 +3,29 @@ package com.taskgrid.makebugsnotwar.service;
 import org.springframework.stereotype.Service;
 @Service
 public class ControllerServices {
-    public String checkFirstname(String firstname){
-        String checkedName = firstname;
+    public String checkFirstName(String firstName){
+        String checkedName = firstName;
         checkedName = checkedName.substring(0,1).toUpperCase() + checkedName.substring(1).toLowerCase();
         return checkedName;
     }
-    public String checkLastname(String lastname){
-        String checkedName = lastname;
+    public String checkLastName(String lastName){
+        String checkedName = lastName;
         checkedName = checkedName.substring(0,1).toUpperCase() + checkedName.substring(1).toLowerCase();
         return checkedName;
     }
     public boolean checkUsername(String username){
         boolean testUsername = false;
-        String username_output = "";
+        String usernameOutput = "";
 
         while(!testUsername){
-            char[] username_chars = username.toCharArray();
+            char[] usernameChars = username.toCharArray();
             if(username.length() < 20){
-                for(char aChar : username_chars ) {
+                for(char aChar : usernameChars ) {
                     if(Character.isLetter(aChar) || Character.isDigit(aChar)
                             || aChar == 'Æ' || aChar == 'Ø' || aChar == 'Å'
                             || aChar == 'æ' || aChar == 'ø' || aChar == 'å'){
-                        username_output = username_output.concat(Character.toString(aChar));
-                        if(username_output.length() == username.length()){
+                        usernameOutput = usernameOutput.concat(Character.toString(aChar));
+                        if(usernameOutput.length() == username.length()){
                             testUsername = true;
                         }
                     }

@@ -13,22 +13,22 @@
     <div class="create_body">
         <form action="/create-task" method="post">
             <div class="form-container-create">
-            <input id="projectId" name="project_id" type="hidden" th:value="${projectId}">
-            <input id="boardId" name="board_id" type="hidden" th:value="${boardId}">
+            <input id="project_id" name="project-id" type="hidden" th:value="${projectId}">
+            <input id="board_id" name="board-id" type="hidden" th:value="${boardId}">
             <div>
-                <label for="name-field"> Task name:</label>
-                <input id="name-field" name="task-name" type="text">
+                <label for="name_field"> Task name:</label>
+                <input id="name_field" name="task-name" type="text">
             </div>
             <br>
              <div>
-                <label for="description-field"> Task description:</label>
-                <input id="description-field" name="task-description" type="text">
+                <label for="description_field"> Task description:</label>
+                <input id="description_field" name="task-description" type="text">
              </div>
             <br>
             <br>
             <div>
-                <label for="story-points-field"> Task story points:</label>
-                <input id="story-points-field" name="story-points" type="text">
+                <label for="story_points_field"> Task story points:</label>
+                <input id="story_points_field" name="story-points" type="text">
              </div>
             <br>
             <input type="submit" value="Create task">

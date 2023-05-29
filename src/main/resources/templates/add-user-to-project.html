@@ -9,7 +9,7 @@
 
   <form th:action="@{'/project-users/'+${project.projectId}+'/add-user-to-project/'+${userId}}" method="post">
       <label for="role">Select a role:</label>
-      <select id="role" name="role">
+      <select id="role" name="position">
           <option value="Developer">Developer</option>
           <option value="Project Manager">Project Manager</option>
           <option value="Product Owner">Product Owner</option>

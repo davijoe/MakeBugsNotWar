@@ -47,11 +47,11 @@ public class BoardRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
-                int id = resultSet.getInt("board_id");
-                String name = resultSet.getString("board_name");
+                int boardId = resultSet.getInt("board_id");
+                String boardName = resultSet.getString("board_name");
                 Date startDate = resultSet.getDate("start_date");
                 Date endDate = resultSet.getDate("end_date");
-                Board newBoard = new Board(id, projectId, name, startDate, endDate);
+                Board newBoard = new Board(boardId, projectId, boardName, startDate, endDate);
                 boards.add(newBoard);
             }
 
@@ -77,14 +77,14 @@ public class BoardRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
-                int id = resultSet.getInt(1);
-                String name = resultSet.getString(2);
+                int boardId = resultSet.getInt(1);
+                String boardName = resultSet.getString(2);
                 Date startDate = resultSet.getDate(3);
                 Date endDate = resultSet.getDate(4);
-                int points = resultSet.getInt(5);
+                int storyPoints = resultSet.getInt(5);
                 int taskTime = resultSet.getInt(6);
                 int totalTasks = resultSet.getInt(7);
-                Board newBoard = new Board(id, name, startDate, endDate, points, taskTime, totalTasks);
+                Board newBoard = new Board(boardId, boardName, startDate, endDate, storyPoints, taskTime, totalTasks);
                 boards.add(newBoard);
             }
 
@@ -96,5 +96,20 @@ public class BoardRepository {
 
         return boards;
 
+    }
+
+    public void deleteBoard(int boardId) {
+        final String DELETEBOARD_QUERY = "DELETE FROM taskgrid.boards WHERE board_id = ?";
+
+        try {
+            Connection connection = ConnectionManager.getConnection(DB_URL,DB_UID,DB_PWD);
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETEBOARD_QUERY);
+            preparedStatement.setInt(1,boardId);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Could not delete board");
+        }
     }
 }
