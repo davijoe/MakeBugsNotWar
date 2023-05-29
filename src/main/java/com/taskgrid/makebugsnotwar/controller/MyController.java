@@ -45,21 +45,21 @@ public class MyController {
         return "signup";
     }
     @PostMapping("/signup")
-    public String signupData(@RequestParam("u_firstname") String firstname,
-                         @RequestParam("u_lastname") String lastname,
+    public String signupData(@RequestParam("firstName") String firstName,
+                         @RequestParam("lastName") String lastName,
                          @RequestParam("u_username") String username,
                          @RequestParam("u_password") String password,
                          @RequestParam("u_passwordRepeat") String passwordRepeat,
                          @RequestParam("u_email") String email,
-                         @RequestParam("u_jobtitle") String jobtitle,
+                         @RequestParam("jobTitle") String jobTitle,
                          Model model){
 
         String testedUsername;
         String testedPassword;
         String testedEmail;
 
-        String checkedFirstname = controllerServices.checkFirstname(firstname);
-        String checkedLastname = controllerServices.checkLastname(lastname);
+        String checkedFirstName = controllerServices.checkFirstName(firstName);
+        String checkedLastName = controllerServices.checkLastName(lastName);
 
         if(controllerServices.checkUsername(username)){
             testedUsername = username;
@@ -86,7 +86,7 @@ public class MyController {
             return "signup";
         }
         if(!userRepository.checkUserEmail(username, email)){
-            User user = new User(checkedFirstname, checkedLastname, testedUsername, testedPassword, testedEmail, jobtitle);
+            User user = new User(checkedFirstName, checkedLastName, testedUsername, testedPassword, testedEmail, jobTitle);
             int user_id = userRepository.addUserLogin(user);
             userRepository.addUserInfo(user, user_id);
         }
@@ -102,9 +102,9 @@ public class MyController {
     public String enterLoginInfo(@RequestParam("u_username") String username,
                                  @RequestParam("u_password") String password,
                                  HttpSession session, Model model) {
-        int user_id = userRepository.checkLogin(username, password);
-        if (user_id!=0) {
-            session.setAttribute("user_id", user_id);
+        int userId = userRepository.checkLogin(username, password);
+        if (userId!=0) {
+            session.setAttribute("user_id", userId);
             return "redirect:/profilePage";
         }
         else {
@@ -126,35 +126,35 @@ public class MyController {
             System.out.println("user_id null");
             return "redirect:/";
         }
-        int user_id = (int) session.getAttribute("user_id");
+        int userId = (int) session.getAttribute("user_id");
         model.addAttribute("user_id", session.getAttribute("user_id"));
-        model.addAttribute("users", userRepository.getUserInfo(user_id));
-        model.addAttribute("projects", projectRepository.getProjectsForUser(user_id));
-        System.out.println(user_id);
+        model.addAttribute("users", userRepository.getUserInfo(userId));
+        model.addAttribute("projects", projectRepository.getProjectsForUser(userId));
+        System.out.println(userId);
         return "profilePage";
     }
     @GetMapping("/updateProfile/{user_id}")
     public String updateProfilePage(@PathVariable("user_id") int findUser, Model model, HttpSession session){
-        int user_id = (int) session.getAttribute("user_id");
+        int userId = (int) session.getAttribute("user_id");
         model.addAttribute("user_id", session.getAttribute("user_id"));
-        model.addAttribute("user", userRepository.getUserInfo(user_id));
+        model.addAttribute("user", userRepository.getUserInfo(userId));
         return "updateProfile";
     }
     @PostMapping("/updateProfile")
-    public String updateProfilePost(@RequestParam("user_id") int user_id,
+    public String updateProfilePost(@RequestParam("user_id") int userId,
                                     @RequestParam("username") String username,
                                     @RequestParam("email") String email,
-                                    @RequestParam("firstname") String firstname,
-                                    @RequestParam("lastname") String lastname,
-                                    @RequestParam("jobtitle") String jobtitle){
-        User user = new User(username, email, firstname, lastname, jobtitle);
-        userRepository.updateUser(user, user_id);
+                                    @RequestParam("first_name") String firstName,
+                                    @RequestParam("last_name") String lastName,
+                                    @RequestParam("job_title") String jobTitle){
+        User user = new User(username, email, firstName, lastName, jobTitle);
+        userRepository.updateUser(user, userId);
         return "redirect:/profilePage";
     }
     @GetMapping("/deleteProfile/{user_id}")
-    public String deleteProfile(@PathVariable("user_id") int user_id,
+    public String deleteProfile(@PathVariable("user_id") int userId,
                                 HttpSession session){
-        userRepository.deleteProfile(user_id);
+        userRepository.deleteProfile(userId);
         session.removeAttribute("user_id");
         return "redirect:/";
     }
@@ -165,18 +165,18 @@ public class MyController {
     }
 
     @PostMapping("/create-project")
-    public String createProject(@RequestParam("project-name") String name,
-                                @RequestParam("project-description") String description,
-                                @RequestParam("board_name") String boardName,
-                                @RequestParam("start_date") Date startDate,
-                                @RequestParam("end_date") Date endDate,
+    public String createProject(@RequestParam("project-name") String projectName,
+                                @RequestParam("project-description") String projectDescription,
+                                @RequestParam("board-name") String boardName,
+                                @RequestParam("start-date") Date startDate,
+                                @RequestParam("end-date") Date endDate,
                                 HttpSession session){
 
         if (session.getAttribute("user_id") != null) {
             int userId = (int) session.getAttribute("user_id");
             Project project = new Project();
-            project.setProjectName(name);
-            project.setProjectDescription(description);
+            project.setProjectName(projectName);
+            project.setProjectDescription(projectDescription);
             int projectId = projectRepository.addProject(project);
             Board board = new Board();
             board.setBoardName(boardName);
@@ -192,9 +192,9 @@ public class MyController {
 
     }
 
-    @GetMapping("/create-board/{projectId}")
-    public String showCreateBoard(@PathVariable("projectId") int projectId, Model model) {
-        model.addAttribute("project-id", projectId);
+    @GetMapping("/create-board/{project-id}")
+    public String showCreateBoard(@PathVariable("project-id") int projectId, Model model) {
+        model.addAttribute("projectId", projectId);
         return "create-board";
     }
     @PostMapping("/create-board")
@@ -211,8 +211,15 @@ public class MyController {
         return "redirect:/project/" + projectId;
     }
 
-    @GetMapping("/project/{id}")
-    public String viewProject(@PathVariable("id") int projectId, Model model){
+    @GetMapping("{project-id}/delete-board/{board-id}")
+    public String deleteBoard(@PathVariable("board-id") int boardId,
+                              @PathVariable("project-id") int projectId) {
+        boardRepository.deleteBoard(boardId);
+        return "redirect:/project/"+projectId;
+    }
+
+    @GetMapping("/project/{project-id}")
+    public String viewProject(@PathVariable("project-id") int projectId, Model model){
         Project project = projectRepository.findProjectById(projectId);
         model.addAttribute("project", project);
         model.addAttribute("boards", boardRepository.getProjectBoards(projectId));
@@ -222,8 +229,8 @@ public class MyController {
         return "project";
     }
 
-    @GetMapping("/project-details/{id}")
-    public String viewProjectDetails(@PathVariable("id") int projectId, Model model){
+    @GetMapping("/project-details/{project-id}")
+    public String viewProjectDetails(@PathVariable("project-id") int projectId, Model model){
         model.addAttribute("project", projectRepository.findProjectById(projectId));
         model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
         model.addAttribute("boards", boardRepository.getProjectBoardsWithInfo(projectId));
@@ -231,23 +238,22 @@ public class MyController {
         return "project-details";
     }
 
-    @GetMapping("/edit-project-details/{id}")
-    public String showEditProjectDetails(@PathVariable("id") int id, Model model){
-        model.addAttribute("project", projectRepository.findProjectById(id));
+    @GetMapping("/edit-project-details/{project-id}")
+    public String showEditProjectDetails(@PathVariable("project-id") int projectId, Model model){
+        model.addAttribute("project", projectRepository.findProjectById(projectId));
         return "edit-project-details";
     }
-    @PostMapping("/edit-project-details/{id}")
-    public String editProject(@PathVariable("id") int id,
-                              @RequestParam("name") String projectName,
-                              @RequestParam("description") String projectDescription,
-                              Model model){
-        projectRepository.updateProjectDetails(id, projectName,projectDescription);
+    @PostMapping("/edit-project-details/{project-id}")
+    public String editProject(@PathVariable("project-id") int projectId,
+                              @RequestParam("project-name") String projectName,
+                              @RequestParam("project-description") String projectDescription){
+        projectRepository.updateProjectDetails(projectId, projectName,projectDescription);
 
-        return "redirect:/project-details/{id}";
+        return "redirect:/project-details/{project-id}";
     }
 
-    @GetMapping("/view-project-tasks/{projectId}")
-    public String viewProjectTasks(@PathVariable("projectId") int projectId, Model model) {
+    @GetMapping("/view-project-tasks/{project-id}")
+    public String viewProjectTasks(@PathVariable("project-id") int projectId, Model model) {
         model.addAttribute("project", projectRepository.findProjectById(projectId));
         model.addAttribute("tasks", taskRepository.retrieveProjectTasks(projectId));
         return "view-project-tasks";
@@ -259,19 +265,19 @@ public class MyController {
         model.addAttribute("foundUsers");
         return "project-users";
     }
-    @GetMapping("/edit-task/{taskId}")
-    public String showEditTask(@PathVariable("taskId") int taskId, Model model) {
+    @GetMapping("/edit-task/{task-id}")
+    public String showEditTask(@PathVariable("task-id") int taskId, Model model) {
         model.addAttribute("tasks", taskRepository.findById(taskId));
         return "edit-task";
     }
 
     @PostMapping("/edit-task")
-    public String editTask(@RequestParam("taskId") int taskId,
-                           @RequestParam("taskName") String taskName,
-                           @RequestParam("taskDescription") String taskDescription,
-                           @RequestParam("storyPoints") int storyPoints,
-                           @RequestParam("boardId") int boardId,
-                           @RequestParam("taskTime") int taskTime) {
+    public String editTask(@RequestParam("task-id") int taskId,
+                           @RequestParam("task-name") String taskName,
+                           @RequestParam("task-description") String taskDescription,
+                           @RequestParam("story-points") int storyPoints,
+                           @RequestParam("board-id") int boardId,
+                           @RequestParam("task-time") int taskTime) {
 
         Task task = new Task(taskId, taskName, boardId, taskTime, storyPoints, taskDescription);
         taskRepository.editTask(task);
@@ -283,27 +289,26 @@ public class MyController {
     }
 
 
-    @GetMapping("/create-task/{projectId}/{boardId}")
-    public String showCreateTask(@PathVariable("boardId") int boardId, @PathVariable("projectId") int projectId, Model model){
+    @GetMapping("/create-task/{project-id}/{board-id}")
+    public String showCreateTask(@PathVariable("board-id") int boardId, @PathVariable("project-id") int projectId, Model model){
         model.addAttribute("board-id", boardId);
         return "create-task";
     }
 
     @PostMapping("/create-task")
-    public String createTask(@RequestParam("task-name") String name,
+    public String createTask(@RequestParam("task-name") String taskName,
                              @RequestParam("story-points") int storyPoints,
-                             @RequestParam("task-description") String description,
-                             @RequestParam("board_id") int boardId,
-                             @RequestParam("project_id") int projectId,
+                             @RequestParam("task-description") String taskDescription,
+                             @RequestParam("board-id") int boardId,
+                             @RequestParam("project-id") int projectId,
                              HttpSession session){
 
         if (session.getAttribute("user_id") != null) {
-            int userId = (int) session.getAttribute("user_id");
             Task task = new Task();
-            task.setTaskName(name);
+            task.setTaskName(taskName);
             task.setTaskStatus(0);
             task.setStoryPoints(storyPoints);
-            task.setTaskDescription(description);
+            task.setTaskDescription(taskDescription);
             task.setBoardId(boardId);
             taskRepository.addTask(task);
 
@@ -313,32 +318,32 @@ public class MyController {
         }
 
     }
-    @GetMapping("/project/{id}/move-task-right/{task-id}")
+    @GetMapping("/project/{project-id}/move-task-right/{task-id}")
     public String moveTaskRight(@PathVariable("task-id") int taskId,
-                                @PathVariable("id") int projectId){
+                                @PathVariable("project-id") int projectId){
         taskRepository.updateTaskStatus(taskId, 1);
-        return "redirect:/project/{id}";
+        return "redirect:/project/"+projectId;
     }
 
-    @GetMapping("/project/{id}/move-task-left/{task-id}")
+    @GetMapping("/project/{project-id}/move-task-left/{task-id}")
     public String moveTaskLeft(@PathVariable("task-id") int taskId,
-                                @PathVariable("id") int projectId){
+                                @PathVariable("project-id") int projectId){
         taskRepository.updateTaskStatus(taskId, -1);
-        return "redirect:/project/{id}";
+        return "redirect:/project/" + projectId;
     }
 
 
-    @GetMapping("/{id}/search-users")
-    public String searchUsers(@PathVariable("id") int id, @RequestParam("query") String query, Model model, RedirectAttributes attributes) {
+    @GetMapping("/{project-id}/search-users")
+    public String searchUsers(@PathVariable("project-id") int projectId, @RequestParam("query") String query, RedirectAttributes attributes) {
         List<User> foundUsers = userRepository.searchUsers(query);
         attributes.addFlashAttribute("foundUsers", foundUsers);
-        return "redirect:/project-users/{id}";
+        return "redirect:/project-users/" + projectId;
     }
 
-    @GetMapping("/project/{id}/delete-task/{task-id}")
-    public String deleteTask(@PathVariable("id") int projectId, @PathVariable("task-id") int taskId) {
+    @GetMapping("/project/{project-id}/delete-task/{task-id}")
+    public String deleteTask(@PathVariable("project-id") int projectId, @PathVariable("task-id") int taskId) {
         taskRepository.deleteTask(taskId);
-        return "redirect:/project/{id}";
+        return "redirect:/project/" + projectId;
 
     }
 
@@ -352,10 +357,10 @@ public class MyController {
     }
 
     @PostMapping("/project-users/{project-id}/add-user-to-project/{user-id}")
-    public String addUserToProject(@RequestParam("role") String role,
+    public String addUserToProject(@RequestParam("position") String position,
                                    @PathVariable("project-id") int projectId,
                                    @PathVariable("user-id") int userId){
-        projectRepository.addProjectRole(userId, projectId, role);
+        projectRepository.addProjectRole(userId, projectId, position);
 
         return "redirect:/project-users/{project-id}";
     }

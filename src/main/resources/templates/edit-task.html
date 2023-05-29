@@ -11,21 +11,21 @@
 <div class="create_body">
   <form action="/edit-task" method="post">
     <div class="form-container-create">
-    <input id="task-id" name="taskId" type="hidden" th:value="${tasks.taskId}">
+    <input id="task_id" name="task-id" type="hidden" th:value="${tasks.taskId}">
 
-    <label for="task-name">Task Name</label>
-    <input id="task-name" name="taskName" type="text" th:value="${tasks.taskName}">
+    <label for="task_name">Task Name</label>
+    <input id="task_name" name="task-name" type="text" th:value="${tasks.taskName}">
 
-    <label for="task-description">Task Description</label>
-    <input id="task-description" name="taskDescription" type="text" th:value="${tasks.taskDescription}">
+    <label for="task_description">Task Description</label>
+    <input id="task_description" name="task-description" type="text" th:value="${tasks.taskDescription}">
 
-    <input id="board-id" name="boardId" type="hidden" th:value="${tasks.boardId}">
+    <input id="board_id" name="board-id" type="hidden" th:value="${tasks.boardId}">
 
-    <label for="task-time">Task Time</label>
-    <input id="task-time" name="taskTime" type="text" th:value="${tasks.taskTime}">
+    <label for="task_time">Task Time</label>
+    <input id="task_time" name="task-time" type="text" th:value="${tasks.taskTime}">
 
-    <label for="story-points">Story Points</label>
-    <input id="story-points" name="storyPoints" type="text" th:value="${tasks.storyPoints}">
+    <label for="story_points">Story Points</label>
+    <input id="story_points" name="story-points" type="text" th:value="${tasks.storyPoints}">
 
     <input type="submit" value="Edit task">
     </div>

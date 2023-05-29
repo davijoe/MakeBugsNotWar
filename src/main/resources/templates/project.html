@@ -21,6 +21,9 @@
         <a th:href="@{'/create-task/' + ${project.projectId} + '/' + ${board.boardId}}">
         <button class="create-task-button">Create task</button>
         </a>
+        <a th:href="@{'/'+${project.projectId} + '/delete-board/' + ${board.boardId}}">
+            <button class="create-task-button">Delete board</button>
+        </a>
     </div>
     <div class="column">
         <h2>Stories</h2>

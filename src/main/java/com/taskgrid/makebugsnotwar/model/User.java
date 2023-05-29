@@ -3,12 +3,12 @@ package com.taskgrid.makebugsnotwar.model;
 public class User {
 
     private int userId;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String username;
     private String password;
     private String email;
-    private String jobtitle;
+    private String jobTitle;
 
     private String projectRole;
 
@@ -17,47 +17,47 @@ public class User {
 
     }
 
-    public User(int userId, String firstname, String lastname, String username, String password, String email, String jobtitle) {
+    public User(int userId, String firstName, String lastName, String username, String password, String email, String jobTitle) {
         this.userId = userId;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.jobtitle = jobtitle;
+        this.jobTitle = jobTitle;
     }
   
-    public User(String firstname, String lastname, String username, String password, String email, String jobtitle) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public User(String firstName, String lastName, String username, String password, String email, String jobTitle) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.jobtitle = jobtitle;
+        this.jobTitle = jobTitle;
     }
 
-    public User(String firstname, String lastname, String username, String email, String jobtitle) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public User(String firstName, String lastName, String username, String email, String jobTitle) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.email = email;
-        this.jobtitle = jobtitle;
+        this.jobTitle = jobTitle;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getUsername() {
@@ -84,12 +84,12 @@ public class User {
         this.email = email;
     }
 
-    public String getJobtitle() {
-        return jobtitle;
+    public String getJobTitle() {
+        return jobTitle;
     }
 
-    public void setJobtitle(String jobtitle) {
-        this.jobtitle = jobtitle;
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 
     public String getProjectRole() {

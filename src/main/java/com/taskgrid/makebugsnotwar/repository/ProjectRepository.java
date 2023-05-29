@@ -79,11 +79,11 @@ public class ProjectRepository {
 
            resultSet.next();
 
-           String name = resultSet.getString(2);
-           String description = resultSet.getString(3);
+           String projectName = resultSet.getString(2);
+           String projectDescription = resultSet.getString(3);
 
-           project.setProjectName(name);
-           project.setProjectDescription(description);
+           project.setProjectName(projectName);
+           project.setProjectDescription(projectDescription);
 
         } catch (SQLException e){
             System.out.println("Could not retrieve the specified project from the database");
@@ -136,16 +136,16 @@ public class ProjectRepository {
         }
     }
 
-    public void deleteProjectById(int id){
+    public void deleteProjectById(int projectId){
         final String DELETE_QUERY = "DELETE FROM taskgrid.projects WHERE projects.project_id = ?";
 
         try{
             Connection connection = ConnectionManager.getConnection(DB_UID, DB_UID, DB_PWD);
             PreparedStatement statement = connection.prepareStatement(DELETE_QUERY);
-            statement.setInt(1, id);
+            statement.setInt(1, projectId);
 
             statement.executeUpdate();
-        }catch(SQLException e){
+        }catch(SQLException e) {
             System.out.println("Could not delete project");
             e.printStackTrace();
         }

@@ -42,7 +42,6 @@ public class Task {
         this.taskId = id;
         this.taskName = name;
         this.taskDescription = description;
-        this.userId = userId;
         this.boardId = boardId;
         this.taskTime = taskTime;
         this.storyPoints = storyPoints;

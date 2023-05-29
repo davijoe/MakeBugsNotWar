@@ -11,9 +11,9 @@ public class ConnectionManager {
         if (connection == null) {
             try {
                 connection = DriverManager.getConnection(DB_URL, DB_UID, DB_PWD);
-            }catch(SQLException sqle){
+            }catch(SQLException e){
                 System.out.println("Could not connect to database");
-                sqle.printStackTrace();
+                e.printStackTrace();
             }
         }
         return connection;
