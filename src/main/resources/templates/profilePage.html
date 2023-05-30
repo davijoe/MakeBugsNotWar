@@ -44,13 +44,11 @@
         <div th:each="project : ${projects}" class="profile-projects">
             <table>
                 <thead>
-                <th>Project ID</th>
                 <th>Project Name</th>
                 <th>Project Description</th>
                 </thead>
                 <tbody>
                 <tr>
-                    <td th:text="${project.projectId}"></td>
                     <td th:text="${project.projectName}"></td>
                     <td th:text="${project.projectDescription}"></td>
                 </tr>
