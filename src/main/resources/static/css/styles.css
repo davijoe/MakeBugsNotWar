@@ -681,7 +681,6 @@ html{
 }
 
 .profile_info {
-    background-color: #F1FAEE;
     border: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 10px;
@@ -691,6 +690,9 @@ html{
     justify-content: space-around;
     align-items: center;
     justify-self: center;
+    border-bottom: inset #aed2ee;
+    box-shadow: 0 12px 16px 0 rgb(135, 186, 225),0 17px 50px 0 rgba(255, 255, 255, 0.38);
+
 }
 
 .profile_info table {
@@ -700,7 +702,6 @@ html{
 
 .profile-projects {
     display: flex;
-    background-color: #F1FAEE;
     border: 1px solid #ddd;
     padding-top: 10px;
     margin-bottom: 10px;
@@ -708,6 +709,7 @@ html{
     flex-flow: column wrap;
     align-items: flex-start;
     width: 100%;
+    box-shadow: 0 12px 16px 0 rgb(135, 186, 225),0 17px 50px 0 rgba(255, 255, 255, 0.38);
 
 }
 
