@@ -1,11 +1,5 @@
 DROP DATABASE IF EXISTS taskgrid;
     CREATE SCHEMA taskgrid;
-DROP TABLE IF EXISTS taskgrid.users;
-DROP TABLE IF EXISTS taskgrid.user_info;
-DROP TABLE IF EXISTS taskgrid.projects;
-DROP TABLE IF EXISTS taskgrid.user_project;
-DROP TABLE IF EXISTS taskgrid.board;
-DROP TABLE IF EXISTS taskgrid.tasks;
 
 CREATE TABLE taskgrid.users (
                                 `user_id` int(11) NOT NULL AUTO_INCREMENT,

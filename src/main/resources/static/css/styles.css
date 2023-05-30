@@ -343,6 +343,10 @@ html{
     margin: 5px;
     align-self: flex-start;
 }
+
+.search-user-column .user {
+    width: 30%;
+}
 .flex-box {
     display: flex;
     flex-flow: row wrap;
