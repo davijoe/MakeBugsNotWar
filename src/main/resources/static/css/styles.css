@@ -212,6 +212,23 @@ html{
 
 /*styling for the taskboard*/
 
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
 .board {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -369,6 +386,7 @@ html{
     background-color: #F1FAEE;
     border: 1px solid #ddd;
     padding: 10px;
+    margin-top: 1%;
     margin-bottom: 10px;
     border-radius: 5px;
     display: flex;
