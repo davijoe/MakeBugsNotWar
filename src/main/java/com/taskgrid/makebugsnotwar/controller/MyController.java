@@ -297,9 +297,10 @@ public class MyController {
     }
 
 
-    @GetMapping("/create-task/{project-id}/{board-id}")
-    public String showCreateTask(@PathVariable("board-id") int boardId, @PathVariable("project-id") int projectId, Model model){
+    @GetMapping("/create-task/{projectId}/{boardId}")
+    public String showCreateTask(@PathVariable("boardId") int boardId, @PathVariable("projectId") int projectId, Model model){
         model.addAttribute("board-id", boardId);
+        model.addAttribute("project-id", projectId);
         return "create-task";
     }
 
@@ -307,8 +308,8 @@ public class MyController {
     public String createTask(@RequestParam("task-name") String taskName,
                              @RequestParam("story-points") int storyPoints,
                              @RequestParam("task-description") String taskDescription,
-                             @RequestParam("board-id") int boardId,
-                             @RequestParam("project-id") int projectId,
+                             @RequestParam("board_id") int boardId,
+                             @RequestParam("project_id") int projectId,
                              HttpSession session){
 
         if (session.getAttribute("user_id") != null) {

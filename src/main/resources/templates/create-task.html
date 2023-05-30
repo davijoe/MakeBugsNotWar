@@ -13,8 +13,8 @@
     <div class="create_body">
         <form action="/create-task" method="post">
             <div class="form-container-create">
-            <input id="project_id" name="project-id" type="hidden" th:value="${projectId}">
-            <input id="board_id" name="board-id" type="hidden" th:value="${boardId}">
+            <input id="project_id" name="project_id" type="hidden" th:value="${projectId}">
+            <input id="board_id" name="board_id" type="hidden" th:value="${boardId}">
             <div>
                 <label for="name_field"> Task name:</label>
                 <input id="name_field" name="task-name" type="text">
