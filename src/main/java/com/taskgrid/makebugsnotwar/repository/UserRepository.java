@@ -130,11 +130,9 @@ public class UserRepository {
 
             while (resultSet.next()) {
                 String username = resultSet.getString(1);
-                System.out.println(username);
                 String email = resultSet.getString(2);
                 String firstName = resultSet.getString(3);
                 String lastName = resultSet.getString(4);
-                System.out.println(lastName);
                 String jobTitle = resultSet.getString(5);
                 User user = new User(username,email,firstName,lastName,jobTitle);
                 userList.add(user);
@@ -206,7 +204,6 @@ public class UserRepository {
     }
 
     public List<User> searchUsers(String searchText) {
-        System.out.println("test");
         searchText = "%" + searchText + "%";
         List<User> resultUsers = new ArrayList<>();
         final String SEARCH_QUERY = "SELECT *" +

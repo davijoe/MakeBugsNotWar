@@ -130,7 +130,6 @@ public class MyController {
         model.addAttribute("user_id", session.getAttribute("user_id"));
         model.addAttribute("users", userRepository.getUserInfo(userId));
         model.addAttribute("projects", projectRepository.getProjectsForUser(userId));
-        System.out.println(userId);
         return "profilePage";
     }
     @GetMapping("/updateProfile/{user_id}")
