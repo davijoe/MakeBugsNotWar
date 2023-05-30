@@ -41,7 +41,7 @@
     </div>
     <div class="searched-user-column">
         <div class="search-user-column">
-            <div th:unless="${foundUsers == null}" th:each =" user: ${foundUsers}" class="user">
+            <div th:each =" user: ${foundUsers}" th:if="${user.username != null}" class="user">
                 <p th:text="'Username: '+${user.username}"></p>
                 <p th:text="'Name: '+${user.firstName}+' '+${user.lastName}"></p>
                 <p th:text="'Job title: '+${user.jobTitle}"></p>

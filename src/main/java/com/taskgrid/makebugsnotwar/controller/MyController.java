@@ -45,13 +45,13 @@ public class MyController {
         return "signup";
     }
     @PostMapping("/signup")
-    public String signupData(@RequestParam("firstName") String firstName,
-                         @RequestParam("lastName") String lastName,
-                         @RequestParam("u_username") String username,
-                         @RequestParam("u_password") String password,
-                         @RequestParam("u_passwordRepeat") String passwordRepeat,
-                         @RequestParam("u_email") String email,
-                         @RequestParam("jobTitle") String jobTitle,
+    public String signupData(@RequestParam("user-first-name") String firstName,
+                         @RequestParam("user-last-name") String lastName,
+                         @RequestParam("user-username") String username,
+                         @RequestParam("user-password") String password,
+                         @RequestParam("user-password-repeat") String passwordRepeat,
+                         @RequestParam("user-email") String email,
+                         @RequestParam("user-job-title") String jobTitle,
                          Model model){
 
         String testedUsername;
@@ -140,12 +140,12 @@ public class MyController {
         return "updateProfile";
     }
     @PostMapping("/updateProfile")
-    public String updateProfilePost(@RequestParam("user_id") int userId,
+    public String updateProfilePost(@RequestParam("user-id") int userId,
                                     @RequestParam("username") String username,
                                     @RequestParam("email") String email,
-                                    @RequestParam("first_name") String firstName,
-                                    @RequestParam("last_name") String lastName,
-                                    @RequestParam("job_title") String jobTitle){
+                                    @RequestParam("first-name") String firstName,
+                                    @RequestParam("last-name") String lastName,
+                                    @RequestParam("job-title") String jobTitle){
         User user = new User(username, email, firstName, lastName, jobTitle);
         userRepository.updateUser(user, userId);
         return "redirect:/profilePage";
