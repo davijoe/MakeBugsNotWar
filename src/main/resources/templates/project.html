@@ -28,7 +28,7 @@
                 <p th:text="'Story Points:'+${task.storyPoints}"></p>
                 <div>
                     <a th:href="@{'/edit-task/'+${task.taskId}}">
-                        <button>Edit</button>
+                        <button class="board-button">Edit</button>
                     </a>
                     <a th:href="@{'/project/'+${project.projectId}+'/move-task-right/'+${task.taskId}}">
                         <button><p><i class="arrow right"></i></p></button>
