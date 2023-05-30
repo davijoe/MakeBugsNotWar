@@ -141,12 +141,12 @@ public class MyController {
         return "updateProfile";
     }
     @PostMapping("/updateProfile")
-    public String updateProfilePost(@RequestParam("user_id") int userId,
+    public String updateProfilePost(@RequestParam("user-id") int userId,
                                     @RequestParam("username") String username,
                                     @RequestParam("email") String email,
-                                    @RequestParam("first_name") String firstName,
-                                    @RequestParam("last_name") String lastName,
-                                    @RequestParam("job_title") String jobTitle){
+                                    @RequestParam("first-name") String firstName,
+                                    @RequestParam("last-name") String lastName,
+                                    @RequestParam("job-title") String jobTitle){
         User user = new User(username, email, firstName, lastName, jobTitle);
         userRepository.updateUser(user, userId);
         return "redirect:/profilePage";

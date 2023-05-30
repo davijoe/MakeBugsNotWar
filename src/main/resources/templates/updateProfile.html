@@ -12,7 +12,7 @@
   <div class="input-container">
     <form action="/updateProfile" method="post">
       <div class="update_info" th:each="user : ${user}">
-        <input id="userid" name="user_id" type="hidden" th:value="${user_id}">
+        <input id="userid" name="user-id" type="hidden" th:value="${user_id}">
 
         <label for="user_name">First name</label>
         <input id="user_name" name="username" type="text" th:value="${user.username}" required>
@@ -21,13 +21,13 @@
         <input id="user_email" name="email" type="text" th:value="${user.email}" required>
 
         <label for="first_name">Username</label>
-        <input id="first_name" name="firstname" type="text" th:value="${user.firstname}" required>
+        <input id="first_name" name="first-name" type="text" th:value="${user.firstName}" required>
 
         <label for="last_name">Email address</label>
-        <input id="last_name" name="lastname" type="text" th:value="${user.lastname}" required>
+        <input id="last_name" name="last-name" type="text" th:value="${user.lastName}" required>
 
         <label for="job_title">Job title</label>
-        <input id="job_title" name="jobtitle" type="text" th:value="${user.jobtitle}" required>
+        <input id="job_title" name="job-title" type="text" th:value="${user.jobTitle}" required>
         <input type="submit" value="Update profile">
     </div>
   </form>
