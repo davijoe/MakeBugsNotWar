@@ -45,13 +45,13 @@ public class MyController {
         return "signup";
     }
     @PostMapping("/signup")
-    public String signupData(@RequestParam("firstName") String firstName,
-                         @RequestParam("lastName") String lastName,
-                         @RequestParam("u_username") String username,
-                         @RequestParam("u_password") String password,
-                         @RequestParam("u_passwordRepeat") String passwordRepeat,
-                         @RequestParam("u_email") String email,
-                         @RequestParam("jobTitle") String jobTitle,
+    public String signupData(@RequestParam("user-first-name") String firstName,
+                         @RequestParam("user-last-name") String lastName,
+                         @RequestParam("user-username") String username,
+                         @RequestParam("user-password") String password,
+                         @RequestParam("user-password-repeat") String passwordRepeat,
+                         @RequestParam("user-email") String email,
+                         @RequestParam("user-job-title") String jobTitle,
                          Model model){
 
         String testedUsername;

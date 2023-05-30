@@ -9,7 +9,7 @@
 <nav th:insert="fragments/topnav"></nav>
 
 <div class="container">
-  <div class="update-profile-body">
+  <div class="input-container">
     <form action="/updateProfile" method="post">
       <div class="update_info" th:each="user : ${user}">
         <input id="userid" name="user_id" type="hidden" th:value="${user_id}">
