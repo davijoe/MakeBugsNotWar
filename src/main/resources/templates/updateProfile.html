@@ -29,6 +29,13 @@
         <label for="job_title">Job title</label>
         <input id="job_title" name="job-title" type="text" th:value="${user.jobTitle}" required>
         <input type="submit" value="Update profile">
+
+        <form th:action="@{'/deleteProfile/' + ${user_id}}" method="post">
+          <label for="delete"><br><br><br>Write 'DELETE' to delete your profile and all its content. WARNING: this is permanent</label>
+          <input type="text" id="delete" name="delete"/>
+          <button type="submit">Delete my profile</button>
+        </form>
+
     </div>
   </form>
   <div class="overlay-container">

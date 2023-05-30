@@ -4,6 +4,7 @@
     box-sizing: border-box;
     font-family: "Roboto Light", Arial, sans-serif;
 }
+
 body{
     display: flex;
     flex-direction: column;
@@ -11,6 +12,7 @@ body{
     min-width: 800px;
     min-height: 78vh;
 }
+
 body, html{
     width: auto;
 }
@@ -35,6 +37,7 @@ html{
     min-width: 800px;
     font-size: 18px;
     justify-content: space-between;
+    align-items: center;
     background-color: #E63946;
 }
 .top-nav img{
@@ -95,8 +98,9 @@ html{
 .proj_tool_bar{
     position: fixed;
     top: 30%;
-    font-size: 35px;
+    font-size: 1.5em;
     writing-mode: vertical-rl;
+    border-radius: 2em;
 }
 .sidenav-container{
     width: 5vw;
@@ -145,7 +149,7 @@ html{
 /*------------------------STYLING FOR FOOTER-------------------------*/
 
 .footer{
-    position: absolute;
+    position: relative;
     display:flex;
     flex-direction: row;
     height: 15vh;
@@ -673,11 +677,12 @@ html{
     align-items: center;
     align-self: center;
     flex-flow: column wrap;
-    column-gap: 20px;
-    box-shadow: 0 12px 16px 0 rgb(62, 99, 128),0 17px 50px 0 rgba(183, 213, 210, 0.38);
+    column-gap: 10px;
 }
 
 .profile_info {
+    background-color: #F1FAEE;
+    border: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -686,8 +691,6 @@ html{
     justify-content: space-around;
     align-items: center;
     justify-self: center;
-    border-bottom: inset #aed2ee;
-
 }
 
 .profile_info table {
@@ -697,12 +700,15 @@ html{
 
 .profile-projects {
     display: flex;
-    padding: 10px;
+    background-color: #F1FAEE;
+    border: 1px solid #ddd;
+    padding-top: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
     flex-flow: column wrap;
     align-items: flex-start;
-    box-shadow: 0 12px 16px 0 rgb(135, 186, 225),0 17px 50px 0 rgba(255, 255, 255, 0.38);
+    width: 100%;
+
 }
 
 .profile-projects table {
@@ -727,13 +733,15 @@ html{
     background-color: #eeeeee;
     border: none;
     color: black;
-    padding: 10px 10px;
+    padding: 5px 5px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    font-size: 1em;
+    margin-left: 5%;
+    margin-bottom: 5%;
     cursor: pointer;
+    border-radius: 20%;
 }
 
 .create-project-button:hover {

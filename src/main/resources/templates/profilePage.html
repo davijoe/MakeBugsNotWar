@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../static/css/mystyles.css" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 </head>
 <body class="profile-page-body">
 <nav th:insert="fragments/topnav"></nav>
@@ -31,12 +31,8 @@
             </table>
             <div class="profile-buttons">
 
-                <form th:action="@{'/deleteProfile/' + ${user_id}}" method="post">
-                    <label for="delete">Write 'DELETE' to delete your profile and all its content. WARNING: this is permanent</label>
-                    <input type="text" id="delete" name="delete"/>
-                    <button type="submit">Delete my profile</button>
-                </form>
-                <a th:href="'/updateProfile/'+${user_id}"><button class="create-task-button">Update profile information</button></a>
+
+                <a th:href="'/updateProfile/'+${user_id}"><button class="create-task-button">Update / delete profile information</button></a>
             </div>
 
         </div>
