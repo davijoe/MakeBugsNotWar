@@ -19,7 +19,7 @@ public class ProjectRepository {
     @Value("${spring.datasource.password}")
     private String DB_PWD;
 
-    public int addProject(Project project) {
+    public int addProject(Project project) { //Creates a project and then gets the projectID with last_insert()
         final String ADD_PROJECT_QUERY = "INSERT INTO taskgrid.projects"+
                 "(project_name, project_description) VALUES (?,?)";
 
@@ -47,7 +47,7 @@ public class ProjectRepository {
         return projectId;
     }
 
-    public void addProjectRole(int userId, int projectId, String position){
+    public void addProjectRole(int userId, int projectId, String position){ //Assigns a user to a position on a specific project
         final String ADD_USER_POSITION_QUERY = "INSERT INTO taskgrid.user_project"+
         "(user_id, project_id, user_position) VALUES (?,?,?)";
 
@@ -93,7 +93,7 @@ public class ProjectRepository {
         return project;
     }
 
-    public List getProjectsForUser(int userId) {
+    public List getProjectsForUser(int userId) { //Gets every project a user is added to, via the bridge table user_project
         final String PROJECTBYUSERID_QUERY = "SELECT * FROM projects JOIN user_project up on projects.project_id = " +
                 "up.project_id JOIN users u on u.user_id = up.user_id WHERE u.user_id = ?";
         List<Project> projectList = new ArrayList<>();
@@ -136,7 +136,7 @@ public class ProjectRepository {
         }
     }
 
-    public void deleteProjectById(int projectId){
+    public void deleteProjectById(int projectId){ //Deletes a project without having to delete boards and tasks first, because the table is created with ON DELETE CASCADE
         final String DELETE_QUERY = "DELETE FROM taskgrid.projects WHERE projects.project_id = ?";
 
         try{

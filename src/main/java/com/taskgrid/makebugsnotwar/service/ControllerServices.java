@@ -3,7 +3,7 @@ package com.taskgrid.makebugsnotwar.service;
 import org.springframework.stereotype.Service;
 @Service
 public class ControllerServices {
-    public String checkFirstName(String firstName){
+    public String checkFirstName(String firstName){ //Sets every character to lowercase except the first one, which is set to uppercase
         String checkedName = firstName;
         checkedName = checkedName.substring(0,1).toUpperCase() + checkedName.substring(1).toLowerCase();
         return checkedName;
@@ -13,7 +13,7 @@ public class ControllerServices {
         checkedName = checkedName.substring(0,1).toUpperCase() + checkedName.substring(1).toLowerCase();
         return checkedName;
     }
-    public boolean checkUsername(String username){
+    public boolean checkUsername(String username){ //Checks if the username contains less than 20 characters and is made with letters or numbers
         boolean testUsername = false;
         String usernameOutput = "";
 
@@ -40,14 +40,14 @@ public class ControllerServices {
         }
         return true;
     }
-    public boolean checkPassword(String password){
+    public boolean checkPassword(String password){ //Checks the length of the password
         return password.length() < 345 && password.length() > 16;
     }
-    public boolean checkEmail(String email){
+    public boolean checkEmail(String email){ //Checks if the email contains @ or .
         return email.contains("@") && email.contains(".");
     }
 
-    public boolean confirmDelete(String input){
+    public boolean confirmDelete(String input){ //Checks if DELETE is typed when trying to delete a project, board or user
 
         return input.equals("DELETE");
     }

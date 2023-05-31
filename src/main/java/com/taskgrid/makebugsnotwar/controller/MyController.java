@@ -41,13 +41,11 @@ public class MyController {
     public String login(){
         return "login";
     }
-
     @GetMapping("/signup")
     public String signup(){
         return "signup";
     }
-
-    @PostMapping("/signup")
+    @PostMapping("/signup")  //Postmapping for signup that also checks if the inputs are correct given parameters defined by us.
     public String signupData(@RequestParam("user-first-name") String firstName,
                          @RequestParam("user-last-name") String lastName,
                          @RequestParam("user-username") String username,
@@ -88,7 +86,7 @@ public class MyController {
             model.addAttribute("errorMessageEmail", "Invalid email adress");
             return "signup";
         }
-        if(!userRepository.checkUserEmail(username, email)){
+        if(!userRepository.checkUserEmail(username, email)){ //Last step in the signup where the data gets added to the database
             User user = new User(checkedFirstName, checkedLastName, testedUsername, testedPassword, testedEmail, jobTitle);
             int user_id = userRepository.addUserLogin(user);
             userRepository.addUserInfo(user, user_id);
@@ -124,7 +122,7 @@ public class MyController {
         return "redirect:/";
     }
 
-    @GetMapping("/profilePage")
+    @GetMapping("/profilePage") //Profile page checks whether the user is logged in or not by adding userID to the session
     public String profilePage(HttpSession session, Model model) {
         if (session.getAttribute("user_id") == null) {
             System.out.println("user_id null");
@@ -152,12 +150,12 @@ public class MyController {
                                     @RequestParam("first-name") String firstName,
                                     @RequestParam("last-name") String lastName,
                                     @RequestParam("job-title") String jobTitle){
-        User user = new User(username, email, firstName, lastName, jobTitle);
+        User user = new User(firstName,lastName,username,email,jobTitle);
         userRepository.updateUser(user, userId);
         return "redirect:/profilePage";
     }
 
-    @PostMapping("/deleteProfile/{user_id}")
+    @PostMapping("/deleteProfile/{user_id}") //Delete function where you have to specifically type DELETE to delete your profile
     public String deleteProfile(@RequestParam("delete") String deleteRequest,
                                 @PathVariable("user_id") int userId,
                                 HttpSession session){
@@ -175,7 +173,7 @@ public class MyController {
         return "create-project";
     }
 
-    @PostMapping("/create-project")
+    @PostMapping("/create-project") //Takes input parameters for both a project and the first board on said project and adds them to the database.
     public String createProject(@RequestParam("project-name") String projectName,
                                 @RequestParam("project-description") String projectDescription,
                                 @RequestParam("board-name") String boardName,
@@ -203,7 +201,7 @@ public class MyController {
 
     }
 
-    @GetMapping("/create-board/{project-id}")
+    @GetMapping("/create-board/{project-id}") //Creates additional boards for a specific project
     public String showCreateBoard(@PathVariable("project-id") int projectId, Model model) {
         model.addAttribute("projectId", projectId);
         return "create-board";
@@ -234,7 +232,7 @@ public class MyController {
         return "redirect:/project/"+projectId;
     }
 
-    @GetMapping("/project/{project-id}")
+    @GetMapping("/project/{project-id}") //Main page for each project, where boards and tasks are visible
     public String viewProject(@PathVariable("project-id") int projectId, Model model){
         Project project = projectRepository.findProjectById(projectId);
         model.addAttribute("project", project);
@@ -245,7 +243,7 @@ public class MyController {
         return "project";
     }
 
-    @GetMapping("/project-details/{project-id}")
+    @GetMapping("/project-details/{project-id}") //Detailed view over a project with info about each board and which users are added to the project
     public String viewProjectDetails(@PathVariable("project-id") int projectId, Model model){
         model.addAttribute("project", projectRepository.findProjectById(projectId));
         model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
@@ -276,7 +274,7 @@ public class MyController {
         return "view-project-tasks";
     }
 
-    @GetMapping("/project-users/{project-id}")
+    @GetMapping("/project-users/{project-id}") //Page where you can add users to a project. "foundUsers" is a flash attribute that gets added from the searchUsers method
     public String viewProjectUsers(@PathVariable("project-id") int projectId, Model model, @ModelAttribute("foundUsers") User foundUsers) {
         model.addAttribute("project", projectRepository.findProjectById(projectId));
         model.addAttribute("users", userRepository.retrieveProjectUsers(projectId));
@@ -325,7 +323,7 @@ public class MyController {
         if (session.getAttribute("user_id") != null) {
             Task task = new Task();
             task.setTaskName(taskName);
-            task.setTaskStatus(0);
+            task.setTaskStatus(0); //Sets task status to 0 so every task starts in the backlog column of a board
             task.setStoryPoints(storyPoints);
             task.setTaskDescription(taskDescription);
             task.setBoardId(boardId);
@@ -338,21 +336,23 @@ public class MyController {
 
     }
 
-    @GetMapping("/project/{project-id}/move-task-right/{task-id}")
+    @GetMapping("/project/{project-id}/move-task-right/{task-id}") //Moves a task to the next column to the right
     public String moveTaskRight(@PathVariable("task-id") int taskId,
                                 @PathVariable("project-id") int projectId){
         taskRepository.updateTaskStatus(taskId, 1);
         return "redirect:/project/"+projectId;
     }
 
-    @GetMapping("/project/{project-id}/move-task-left/{task-id}")
+    @GetMapping("/project/{project-id}/move-task-left/{task-id}") //Moves a task to the left
     public String moveTaskLeft(@PathVariable("task-id") int taskId,
                                 @PathVariable("project-id") int projectId){
         taskRepository.updateTaskStatus(taskId, -1);
         return "redirect:/project/" + projectId;
     }
 
-    @GetMapping("/{project-id}/search-users")
+
+    @GetMapping("/{project-id}/search-users") //Searches for users to add to a project. RedirectAttributes makes it possible to carry the list of users over to another controller
+                                                //method. FlashAttribute saves it in the session and removes it from session after it is used.
     public String searchUsers(@PathVariable("project-id") int projectId, @RequestParam("query") String query, RedirectAttributes attributes) {
         List<User> foundUsers = userRepository.searchUsers(query);
         attributes.addFlashAttribute("foundUsers", foundUsers);

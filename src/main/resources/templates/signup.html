@@ -19,7 +19,7 @@
             <label for="lastname"></label>
             <input id="lastname" name="user-last-name" type="text" placeholder="Last name" required maxlength="45">
             <label for="username"></label>
-            <input id="username" name="user-username" type="text" placeholder="Username - max 20 characters " required maxlength="45">
+            <input id="username" name="user-username" type="text" placeholder="Username - max 20 characters " required maxlength="20">
             <span th:if="${errorMessageUserName != null}" th:text="${errorMessageUserName}"></span>
             <label for="password"></label>
             <input id="password" name="user-password" type="password" placeholder="Password - min 16 characters" required maxlength="200">

@@ -81,7 +81,7 @@ public class TaskRepository {
         return task;
     }
 
-    public List<Task> retrieveProjectTasks(int projectId) {
+    public List<Task> retrieveProjectTasks(int projectId) { //Gets every task, connected to a project, by joining tasks, boards and projects
         List<Task> taskList = new ArrayList<>();
         final String QUERY = "SELECT taskgrid.tasks.* " +
                 "FROM tasks " +
@@ -139,7 +139,8 @@ public class TaskRepository {
         }
     }
 
-    public void updateTaskStatus(int taskId, int delta) {
+    public void updateTaskStatus(int taskId, int delta) { //Updates a tasks status by adding delta whenever a task is moved left or right on a board
+                                                          //Delta is either +1 or -1 depending on whether it is moved left or right
         final String UPDATE_QUERY = "UPDATE taskgrid.tasks SET task_status = task_status+? WHERE (task_id = ?)";
 
         try {

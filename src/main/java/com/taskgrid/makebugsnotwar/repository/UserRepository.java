@@ -19,7 +19,7 @@ public class UserRepository {
     @Value("${spring.datasource.password}")
     private String DB_PWD;
 
-    public boolean checkUserEmail(String username, String email) {
+    public boolean checkUserEmail(String username, String email) { //Checks whether a user already exists with the username or email in the parameters
         final String SIGNUP_QUERY = "SELECT * FROM taskgrid.users WHERE user_email = ? OR username = ?";
         try{
             Connection connection = ConnectionManager.getConnection(DB_URL, DB_UID, DB_PWD);
@@ -43,7 +43,7 @@ public class UserRepository {
         return false;
     }
 
-    public String encodePassword(String password)
+    public String encodePassword(String password) //Encodes the password on signup
     {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
         return encoder.encode(password);
@@ -97,7 +97,7 @@ public class UserRepository {
     }
 
 
-    public int checkLogin(String username, String password) {
+    public int checkLogin(String username, String password) { //On login checks whether the password matches
         int userId = 0;
         final String CHECKLOGIN_QUERY = "SELECT user_id, user_password FROM taskgrid.users WHERE username = ?";
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
@@ -117,7 +117,7 @@ public class UserRepository {
         }
         return userId;
     }
-    public List<User> getUserInfo(int userId) {
+    public List<User> getUserInfo(int userId) { //Gets all info on a user by joining users and user_info
         List<User> userList = new ArrayList<>();
         final String GETUSERINFO_QUERY = "SELECT username, user_email, first_name, last_name, job_title " +
                 "FROM taskgrid.users JOIN taskgrid.user_info ON users.user_id = user_info.user_id\n" +
@@ -134,7 +134,7 @@ public class UserRepository {
                 String firstName = resultSet.getString(3);
                 String lastName = resultSet.getString(4);
                 String jobTitle = resultSet.getString(5);
-                User user = new User(username,email,firstName,lastName,jobTitle);
+                User user = new User(firstName,lastName,username,email,jobTitle);
                 userList.add(user);
             }
         } catch (SQLException e) {
@@ -144,7 +144,7 @@ public class UserRepository {
         return userList;
     }
 
-    public List<User> retrieveProjectUsers(int projectId){
+    public List<User> retrieveProjectUsers(int projectId){ //Gets all users that are added to a project
         List<User> projectUsers = new ArrayList<>();
         final String PROJECT_USERS_QUERY = "SELECT * FROM taskgrid.users "+
         "JOIN taskgrid.user_info ON users.user_id = user_info.user_id "+
@@ -203,7 +203,7 @@ public class UserRepository {
         }
     }
 
-    public List<User> searchUsers(String searchText) {
+    public List<User> searchUsers(String searchText) { //Gets every user in the database where either username, email, first name, last name or job title contains what is in the searchText
         searchText = "%" + searchText + "%";
         List<User> resultUsers = new ArrayList<>();
         final String SEARCH_QUERY = "SELECT *" +

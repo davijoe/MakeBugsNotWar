@@ -18,7 +18,7 @@ public class BoardRepository {
     @Value("${spring.datasource.password}")
     private String DB_PWD;
 
-    public void createBoard(Board board){
+    public void createBoard(Board board){ //Creates the initial board when a new project is created
         final String ADD_BOARD_ONE_QUERY = "INSERT INTO taskgrid.boards"+
                 "(project_id, board_name, start_date, end_date) VALUES (?,?,?,?)";
         try{
@@ -65,7 +65,7 @@ public class BoardRepository {
 
     }
 
-    public List<Board> getProjectBoardsWithInfo(int projectId) {
+    public List<Board> getProjectBoardsWithInfo(int projectId) { //Gets the record data for each board and sums up the story-points, task_time and number of tasks for each board
         final String BOARD_LIST_QUERY = "SELECT board_id, board_name, start_date, end_date, SUM(story_points), SUM(task_time)," +
                 " COUNT(task_id) AS total_tasks FROM taskgrid.boards JOIN taskgrid.tasks USING (board_id) WHERE project_id = ? GROUP BY board_id";
         List<Board> boards = new ArrayList<>();
