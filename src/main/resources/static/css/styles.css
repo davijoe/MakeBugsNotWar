@@ -828,3 +828,60 @@ board-button {
     margin-left: 8%;
     text-decoration: underline;
 }
+
+
+/*------------------------------CSS FOR EDIT PROJECT DETAILS----------------------*/
+
+.edit-project-container {
+    display: flex;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+    0 10px 10px rgba(0,0,0,0.22);
+    position: relative;
+    overflow: hidden;
+    width: 900px;
+    max-width: 100%;
+    min-height: 20vh;
+    top: 13%;
+    left: 20%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    flex-flow: column;
+    justify-content: space-around;
+
+}
+
+.edit-project-container * {
+    gap: 10px;
+}
+
+/*---------------------------CSS FOR PROJECT DETAILS------------------------------*/
+
+.column-board {
+    background-color: #A8DADC;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 2em;
+}
+
+.board-details-column {
+    background-color: #F1FAEE;
+    border: 1px solid #ddd;
+    margin-top: 1%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
+
+}
+.board-details-container {
+    display: flex;
+    min-height: 78vh;
+    margin-left: 5vw;
+    flex-flow: column;
+    gap: 30px;
+    width: 50%;
+}

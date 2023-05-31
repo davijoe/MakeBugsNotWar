@@ -10,7 +10,7 @@
 <nav th:insert="fragments/sidenav"></nav>
 
 <div class="container">
-
+<div class="edit-project-container">
   <h1 style="margin-top: 1%">Update Project</h1>
   <form th:action="@{'/edit-project-details/'+${project.projectId}}" method="post">
     <input type="hidden" th:name="${project.projectId}" th:value="${project.projectId}" />
@@ -32,7 +32,7 @@
     <button type="submit">Delete project</button>
   </form>
 </div>
-
+</div>
 
 <div class="footer-nav-bar">
   <footer th:insert="fragments/footer"></footer>

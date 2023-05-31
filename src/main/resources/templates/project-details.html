@@ -21,25 +21,28 @@
 <br>
 
 <div class="container">
-    <div class="board-container">
+    <div class="board-details-container">
         <h1> Boards on this project</h1>
         <div class="board-list">
             <div class="column" th:each="board : ${boards}">
+                <div class="board-details-column">
                 <h1 th:text="'Board name: ' + ${board.boardName}"></h1>
                 <p th:text="'Start date: ' + ${board.startDate}"></p>
                 <p th:text="'End date: ' + ${board.endDate}"></p>
                 <p th:text="'Story points for this board: ' + ${board.storyPointsPerBoard}"></p>
                 <p th:text="'Total task-time for this board: ' + ${board.taskTimePerBoard}"></p>
                 <p th:text="'Amount of tasks for this board: ' + ${board.totalTasksPerBoard}"></p>
+                </div>
             </div>
         </div>
 
         <h1> Users on this project </h1>
         <div class="board-list">
             <div class="column" th:each="user : ${users}">
+                <div class="board-details-column">
                 <p th:text="'User name: ' + ${user.firstName} + ' ' + ${user.lastName}"></p>
                 <p th:text="'User role: ' + ${user.projectRole}"></p>
-
+                </div>
             </div>
         </div>
     </div>
