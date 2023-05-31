@@ -57,3 +57,10 @@ CREATE TABLE taskgrid.tasks (
                                 KEY `board_id_idx` (`board_id`),
                                 CONSTRAINT `board_id` FOREIGN KEY (`board_id`) REFERENCES `boards` (`board_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
                                 CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE NO ACTION);
+
+INSERT INTO taskgrid.users (user_id, username, user_email, user_password) VALUES (DEFAULT, "test", "test@kea.dk", 123456789123456789);
+INSERT INTO taskgrid.projects (project_id, project_name, project_description) VALUES (DEFAULT, "test project", "this is a test project");
+INSERT INTO taskgrid.user_project (user_id, project_id, user_position) VALUES ((SELECT user_id FROM taskgrid.users WHERE username = "test"), (SELECT project_id FROM taskgrid.projects WHERE project_name = "test project"), "project creator");
+INSERT INTO taskgrid.boards (board_id, project_id, board_name, start_date, end_date) VALUES (DEFAULT, (SELECT project_id FROM taskgrid.projects WHERE project_name = "test project"), "test board", "2023-06-01", "2023-06-07");
+INSERT INTO taskgrid.tasks (task_id, task_name, task_description, task_status, user_id, board_id, story_points, task_time) VALUES (DEFAULT, "test task", "this is a test task", 0, (SELECT user_id FROM taskgrid.users WHERE username = "test"), (SELECT board_id FROM taskgrid.boards WHERE board_name = "test board"), 5, 0);
+INSERT INTO taskgrid.user_info (user_id, first_name, last_name, job_title) VALUES ((SELECT user_id FROM taskgrid.users WHERE username = "test"), "Tester", "Testersen", "tester");
