@@ -14,10 +14,10 @@
     <input id="task_id" name="task-id" type="hidden" th:value="${tasks.taskId}">
 
     <label for="task_name">Task Name</label>
-    <input id="task_name" name="task-name" type="text" th:value="${tasks.taskName}">
+    <input id="task_name" name="task-name" type="text" th:value="${tasks.taskName}" maxlength="45">
 
     <label for="task_description">Task Description</label>
-    <input id="task_description" name="task-description" type="text" th:value="${tasks.taskDescription}">
+    <input id="task_description" name="task-description" type="text" th:value="${tasks.taskDescription}" maxlength="45">
 
     <input id="board_id" name="board-id" type="hidden" th:value="${tasks.boardId}">
 

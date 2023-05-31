@@ -12,13 +12,13 @@
         <form action="/create-project" method="post">
             <div class="form-container-create">
                 <label for="name_field"></label>
-                <input id="name_field" name="project-name" type="text" placeholder="Enter project name" required>
+                <input id="name_field" name="project-name" type="text" placeholder="Enter project name" required maxlength="45">
 
                 <label for="description_field"></label>
-                <input id="description_field" name="project-description" type="text" placeholder="Enter project description" required>
+                <input id="description_field" name="project-description" type="text" placeholder="Enter project description" required maxlength="150">
 
                 <label for="board_name_field"></label>
-                <input id="board_name_field" name="board-name" type="text" placeholder="Enter first board name" required>
+                <input id="board_name_field" name="board-name" type="text" placeholder="Enter first board name" required maxlength="45">
 
                 <label for="start_date"></label>
                 <input type="date" id="start_date" name="start-date" placeholder="Start date of first board" required>

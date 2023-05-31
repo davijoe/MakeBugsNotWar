@@ -15,23 +15,23 @@
         <div class="form-container-signup">
             <span th:if="${errorMessageEmailUsername != null}" th:text="${errorMessageEmailUsername}"></span>
             <label for="firstname"></label>
-            <input id="firstname" name="user-first-name" type="text" placeholder="First name" required>
+            <input id="firstname" name="user-first-name" type="text" placeholder="First name" required maxlength="45">
             <label for="lastname"></label>
-            <input id="lastname" name="user-last-name" type="text" placeholder="Last name" required>
+            <input id="lastname" name="user-last-name" type="text" placeholder="Last name" required maxlength="45">
             <label for="username"></label>
-            <input id="username" name="user-username" type="text" placeholder="Username - max 20 characters " required>
+            <input id="username" name="user-username" type="text" placeholder="Username - max 20 characters " required maxlength="45">
             <span th:if="${errorMessageUserName != null}" th:text="${errorMessageUserName}"></span>
             <label for="password"></label>
-            <input id="password" name="user-password" type="password" placeholder="Password - min 16 characters" required>
+            <input id="password" name="user-password" type="password" placeholder="Password - min 16 characters" required maxlength="200">
             <span th:if="${errorMessagePassword != null}" th:text="${errorMessagePassword}"></span>
             <label for="password-repeat"></label>
-            <input id="password-repeat" name="user-password-repeat" type="password" placeholder="Repeat your password" required>
+            <input id="password-repeat" name="user-password-repeat" type="password" placeholder="Repeat your password" required maxlength="200">
             <span th:if="${errorMessagePasswordRepeat != null}" th:text="${errorMessagePasswordRepeat}"></span>
             <label for="email"></label>
-            <input id="email" name="user-email" type="text" placeholder="Email address" required>
+            <input id="email" name="user-email" type="text" placeholder="Email address" required maxlength="45">
             <span th:if="${errorMessageEmail != null}" th:text="${errorMessageEmail}"></span>
             <label for="jobtitle"></label>
-            <input id="jobtitle" name="user-job-title" type="text" placeholder="Jobtitle" required>
+            <input id="jobtitle" name="user-job-title" type="text" placeholder="Jobtitle" required maxlength="45">
             <input type="submit" id="signup_button" class="button_signup" value="Create User">
         </div>
     </form>

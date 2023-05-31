@@ -17,18 +17,18 @@
             <input id="board_id" name="board_id" type="hidden" th:value="${boardId}">
             <div>
                 <label for="name_field"> Task name:</label>
-                <input id="name_field" name="task-name" type="text">
+                <input id="name_field" name="task-name" type="text" maxlength="45">
             </div>
             <br>
              <div>
                 <label for="description_field"> Task description:</label>
-                <input id="description_field" name="task-description" type="text">
+                <input id="description_field" name="task-description" type="text" maxlength="45">
              </div>
             <br>
             <br>
             <div>
                 <label for="story_points_field"> Task story points:</label>
-                <input id="story_points_field" name="story-points" type="text">
+                <input id="story_points_field" name="story-points" type="text" >
              </div>
             <br>
             <input type="submit" value="Create task">

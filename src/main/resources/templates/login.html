@@ -14,9 +14,9 @@
     <form action="/login" method="post">
         <h1>Sign in</h1>
         <label for="username"></label>
-        <input id="username" name="u_username" type="text" placeholder="Username" required>
+        <input id="username" name="u_username" type="text" placeholder="Username" required maxlength="45">
         <label for="password"></label>
-        <input id="password" name="u_password" type="password" placeholder="Password" required>
+        <input id="password" name="u_password" type="password" placeholder="Password" required maxlength="45">
         <input type="submit" value="Login" class="button">
         <br>
         <span th:if="${loginErrorMessage} != null") th:text="${loginErrorMessage}"></span>
