@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,10 +8,9 @@
 <body>
 <nav th:insert="fragments/topnav"></nav>
 
-<div class="container">
-    <nav th:insert="fragments/sidenav"></nav>
-</div>
+<nav th:insert="fragments/sidenav"></nav>
 
+<div class="view-project-task-container">
 <div class="tasks" th:each="task : ${tasks}">
     <table class="task-table">
         <thead>
@@ -35,6 +34,7 @@
         </tr>
         </tbody>
     </table>
+</div>
 </div>
 <br>
 

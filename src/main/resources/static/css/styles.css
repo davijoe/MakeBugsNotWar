@@ -896,3 +896,11 @@ board-button {
     gap: 30px;
     width: 50%;
 }
+
+.view-project-task-container {
+    display: flex;
+    min-height: 78vh;
+    margin-left: 5vw;
+    flex-flow: column;
+    gap: 10px;
+}
