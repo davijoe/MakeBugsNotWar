@@ -57,6 +57,3 @@ CREATE TABLE taskgrid.tasks (
                                 KEY `board_id_idx` (`board_id`),
                                 CONSTRAINT `board_id` FOREIGN KEY (`board_id`) REFERENCES `boards` (`board_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
                                 CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE NO ACTION);
-
-
-
