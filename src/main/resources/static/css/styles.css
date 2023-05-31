@@ -163,6 +163,7 @@ html{
     font-size: 20px;
     background-color: #457B9D;
     bottom: 0;
+    margin-bottom: 0;
 }
 
 .logo-container{
