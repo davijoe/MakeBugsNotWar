@@ -22,10 +22,10 @@
     <input id="board_id" name="board-id" type="hidden" th:value="${tasks.boardId}">
 
     <label for="task_time">Task Time</label>
-    <input id="task_time" name="task-time" type="text" th:value="${tasks.taskTime}">
+    <input id="task_time" name="task-time" type="text" th:value="${tasks.taskTime}" maxlength="11">
 
     <label for="story_points">Story Points</label>
-    <input id="story_points" name="story-points" type="text" th:value="${tasks.storyPoints}" required>
+    <input id="story_points" name="story-points" type="text" th:value="${tasks.storyPoints}" required maxlength="11">
 
     <input type="submit" value="Edit task">
     </div>
