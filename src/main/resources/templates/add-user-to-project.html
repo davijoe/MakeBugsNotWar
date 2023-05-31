@@ -1,23 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
     <title>Add user</title>
 </head>
 <body>
+<nav th:insert="fragments/topnav"></nav>
 
-  <form th:action="@{'/project-users/'+${project.projectId}+'/add-user-to-project/'+${userId}}" method="post">
-      <label for="role">Select a role:</label>
-      <select id="role" name="position">
-          <option value="Developer">Developer</option>
-          <option value="Project Manager">Project Manager</option>
-          <option value="Product Owner">Product Owner</option>
-          <option value="SCRUM Master">SCRUM Master</option>
-      </select>
-      <input type="submit" value="Add Role">
-  </form>
+    <div class="container">
+        <div class="add-user-form">
+            <form th:action="@{'/project-users/'+${project.projectId}+'/add-user-to-project/'+${userId}}" method="post">
+                <label for="role">Select a role:</label>
+                  <select id="role" name="position">
+                      <option value="Developer">Developer</option>
+                      <option value="Project Manager">Project Manager</option>
+                      <option value="Product Owner">Product Owner</option>
+                      <option value="SCRUM Master">SCRUM Master</option>
+                  </select>
+                <input type="submit" value="Add Role">
+            </form>
+        </div>
+    </div>
 
-<footer th:insert="fragments/footer"></footer>
+<footer class="footer" th:insert="fragments/footer"></footer>
 </body>
 </html>

@@ -324,6 +324,17 @@ board-button {
 }
 /*------------------------STYLING FOR SEARCH USER-------------------------*/
 
+.add-user-form {
+    display: flex;
+    width: 66%;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    min-height: 50vh;
+    font-size: larger;
+}
+
 
 .search-user-board {
     display: grid;
