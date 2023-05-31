@@ -8,16 +8,16 @@
 <nav th:fragment="navbar" class="navbar-fragment">
     <div class="top-nav">
         <div class="homepage_image">
-            <a class="blankspace_0" th:href="@{/}"><h1>&nbsp Taskgrid - project management tool</h1></a>
+            <a class="nav-bar-link" th:href="@{/}"><h1>&nbsp Taskgrid - project management tool</h1></a>
         </div>
-        <div class="blankspace_one">
-            <a class="blank_space_one" th:href="@{/create-project}"><img th:src="@{/images/taskgridpic.png}">New Project</a>
+        <div class="nav-bar-div">
+            <a class="nav-bar-link" th:href="@{/create-project}"><img th:src="@{/images/taskgridpic.png}">New Project</a>
         </div>
-        <div class="blankspace_two">
-            <a class="blank_space_two" th:href="@{/profilePage}"><img th:src="@{/images/profilepic.png}">My page</a>
+        <div class="nav-bar-div">
+            <a class="nav-bar-link" th:href="@{/profilePage}"><img th:src="@{/images/profilepic.png}">My page</a>
         </div>
-        <div class="blankspace_three">
-            <a class="blank_space_three" th:href="@{https://github.com/davijoe/MakeBugsNotWar/blob/master/README.md}"><img th:src="@{/images/helppic.png}">Help</a>
+        <div class="nav-bar-div">
+            <a class="nav-bar-link" th:href="@{https://github.com/davijoe/MakeBugsNotWar/blob/master/README.md}"><img th:src="@{/images/helppic.png}">Help</a>
         </div>
         <div class="login-link">
             <a class="login" th:href="@{/}"><img th:src="@{/images/logoutpic.png}">Logout</a>
